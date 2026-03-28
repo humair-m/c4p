@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let metaLine = '@idf_update · Maps · ' + formattedDate;
 
     // Avatar
-    const avatarHtml = '<div class="zo-avatar-ring"><img src="/c4p-logo.png" alt="" class="zo-avatar"></div>';
+    const avatarHtml = '<div class="zo-avatar-ring"><img src="/idf-logo.jpeg" alt="IDF Logo" class="zo-avatar" style="background:var(--bg-primary);"></div>';
 
     let html = '<div class="zo-card-layout">';
     html += avatarHtml;
