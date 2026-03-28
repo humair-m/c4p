@@ -57,9 +57,37 @@ body {
 }
 
 .logo h1 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
   letter-spacing: -0.5px;
+  margin: 0;
+  line-height: 1;
+}
+
+.c4p-logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #009736, #000, #e4312b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.c4p-flag {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.c4p-tagline {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 2px;
 }
 
 .nav-menu {
