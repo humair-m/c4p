@@ -1,0 +1,364 @@
+#!/usr/bin/env python3
+"""Deep-scrape incitement data including quotes from each person's detail page."""
+import json
+import re
+import sys
+import time
+from urllib.request import urlopen, Request
+from html.parser import HTMLParser
+from html import unescape
+
+BASE = "https://stopmurderingjournalists.com"
+
+def fetch(path):
+    url = path if path.startswith("http") else f"{BASE}{path}"
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; research bot)"})
+    with urlopen(req, timeout=15) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+# ---- List parsers (same as before) ----
+class PeopleListParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.people = []
+        self._in_li = False
+        self._in_h3 = False
+        self._in_p = False
+        self._cur = {}
+        self._h3 = ""
+        self._p = ""
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        if tag == "li": self._in_li = True; self._cur = {}
+        if self._in_li and tag == "a":
+            href = d.get("href","")
+            if "/incitement/people/" in href:
+                self._cur["url"] = href; self._cur["id"] = href.rstrip("/").split("/")[-1]
+        if self._in_li and tag == "img" and "Image of" in d.get("alt",""):
+            self._cur["image"] = d.get("src","")
+        if self._in_li and tag == "h3": self._in_h3 = True; self._h3 = ""
+        if self._in_li and tag == "p" and "text-gray-600" in d.get("class",""): self._in_p = True; self._p = ""
+    def handle_endtag(self, tag):
+        if tag == "h3" and self._in_h3:
+            self._in_h3 = False
+            m = re.match(r'(.+?)\s*\((\d+)\)', self._h3.strip())
+            if m: self._cur["name"] = m.group(1).strip(); self._cur["incitement_count"] = int(m.group(2))
+            else: self._cur["name"] = self._h3.strip(); self._cur["incitement_count"] = 0
+        if tag == "p" and self._in_p: self._in_p = False; self._cur["role"] = self._p.strip()
+        if tag == "li" and self._in_li:
+            self._in_li = False
+            if self._cur.get("name"): self.people.append(self._cur)
+    def handle_data(self, data):
+        if self._in_h3: self._h3 += data
+        if self._in_p: self._p += data
+
+class OrgsListParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.orgs = []
+        self._in_li = False; self._in_h3 = False; self._in_p = False
+        self._cur = {}; self._h3 = ""; self._p = ""
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        if tag == "li": self._in_li = True; self._cur = {}
+        if self._in_li and tag == "a":
+            href = d.get("href","")
+            if "/incitement/organizations/" in href:
+                self._cur["url"] = href; self._cur["id"] = href.rstrip("/").split("/")[-1]
+        if self._in_li and tag == "img" and "Logo for" in d.get("alt",""):
+            self._cur["image"] = d.get("src","")
+        if self._in_li and tag == "h3": self._in_h3 = True; self._h3 = ""
+        if self._in_li and tag == "p" and "text-gray-600" in d.get("class",""): self._in_p = True; self._p = ""
+    def handle_endtag(self, tag):
+        if tag == "h3" and self._in_h3:
+            self._in_h3 = False
+            m = re.match(r'(.+?)\s*\((\d+)\)', self._h3.strip())
+            if m: self._cur["name"] = m.group(1).strip(); self._cur["incitement_count"] = int(m.group(2))
+            else: self._cur["name"] = self._h3.strip(); self._cur["incitement_count"] = 0
+        if tag == "p" and self._in_p: self._in_p = False; self._cur["type"] = self._p.strip()
+        if tag == "li" and self._in_li:
+            self._in_li = False
+            if self._cur.get("name"): self.orgs.append(self._cur)
+    def handle_data(self, data):
+        if self._in_h3: self._h3 += data
+        if self._in_p: self._p += data
+
+class TargetsListParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = []
+        self._in_li = False; self._cur = {}
+        self._in_main_a = False; self._in_pill_a = False; self._in_strong = False
+        self._a_text = ""; self._strong_text = ""; self._li_text = ""
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        if tag == "li" and "mt-2" in d.get("class",""): self._in_li = True; self._cur = {}; self._li_text = ""
+        if self._in_li and tag == "a":
+            href = d.get("href",""); cls = d.get("class","")
+            if "incitement-target-pill" in cls: self._in_pill_a = True; self._cur["memorial_url"] = href
+            elif "/incitement/targets/" in href: self._in_main_a = True; self._cur["url"] = href; self._cur["id"] = href.rstrip("/").split("/")[-1]; self._a_text = ""
+        if self._in_li and tag == "strong": self._in_strong = True; self._strong_text = ""
+    def handle_endtag(self, tag):
+        if tag == "a" and self._in_main_a: self._in_main_a = False; self._cur["name"] = self._a_text.strip()
+        if tag == "a" and self._in_pill_a: self._in_pill_a = False
+        if tag == "strong" and self._in_strong: self._in_strong = False; self._cur["killed_date"] = self._strong_text.strip()
+        if tag == "li" and self._in_li:
+            self._in_li = False
+            if "Killed by Israel" in self._li_text: self._cur["killed"] = True
+            if self._cur.get("name"): self.targets.append(self._cur)
+    def handle_data(self, data):
+        if self._in_main_a: self._a_text += data
+        if self._in_strong: self._strong_text += data
+        if self._in_li: self._li_text += data
+
+# ---- Detail page parser for individual incitement quotes ----
+class DetailParser(HTMLParser):
+    """Parse a person's or organization's detail page to extract each incitement quote."""
+    def __init__(self):
+        super().__init__()
+        self.incitements = []
+        self._in_li = False
+        self._in_h3 = False
+        self._in_small = False
+        self._in_blockquote = False
+        self._in_bq_p = False
+        self._in_target_pill = False
+        self._in_cite = False
+        self._in_cite_a = False
+        self._h3_text = ""
+        self._small_text = ""
+        self._bq_text = ""
+        self._target_text = ""
+        self._cite_a_text = ""
+        self._cite_a_href = ""
+        self._cur = {}
+        self._depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        if tag == "li" and "mt-4" in d.get("class", ""):
+            self._in_li = True
+            self._cur = {}
+            self._depth += 1
+        if self._in_li:
+            if tag == "h3":
+                self._in_h3 = True; self._h3_text = ""
+            if tag == "small":
+                self._in_small = True; self._small_text = ""
+            if tag == "a" and "incitement-target-pill" in d.get("class", ""):
+                self._in_target_pill = True
+                self._target_text = ""
+                self._cur["target_url"] = d.get("href", "")
+            if tag == "blockquote":
+                self._in_blockquote = True; self._bq_text = ""
+            if self._in_blockquote and tag == "p":
+                self._in_bq_p = True
+            if tag == "cite":
+                self._in_cite = True
+            if self._in_cite and tag == "a":
+                self._in_cite_a = True
+                self._cite_a_href = d.get("href", "")
+                self._cite_a_text = ""
+
+    def handle_endtag(self, tag):
+        if tag == "h3" and self._in_h3:
+            self._in_h3 = False
+            self._cur["date"] = self._h3_text.strip()
+        if tag == "small" and self._in_small:
+            self._in_small = False
+            m = re.search(r'#(\d+)', self._small_text)
+            if m: self._cur["incitement_number"] = int(m.group(1))
+        if tag == "a" and self._in_target_pill:
+            self._in_target_pill = False
+            self._cur.setdefault("targets", []).append(self._target_text.strip())
+        if tag == "p" and self._in_bq_p:
+            self._in_bq_p = False
+        if tag == "blockquote" and self._in_blockquote:
+            self._in_blockquote = False
+            self._cur["quote"] = self._bq_text.strip()
+        if tag == "a" and self._in_cite_a:
+            self._in_cite_a = False
+            txt = self._cite_a_text.strip().lower()
+            if "source" in txt:
+                self._cur["source_url"] = self._cite_a_href
+            elif "screenshot" in txt:
+                href = self._cite_a_href
+                if href.startswith("/"):
+                    href = BASE + href
+                self._cur["screenshot_url"] = href
+        if tag == "cite" and self._in_cite:
+            self._in_cite = False
+        if tag == "li" and self._in_li:
+            self._depth -= 1
+            if self._depth <= 0:
+                self._in_li = False
+                self._depth = 0
+                if self._cur.get("quote"):
+                    self.incitements.append(self._cur)
+
+    def handle_data(self, data):
+        if self._in_h3: self._h3_text += data
+        if self._in_small: self._small_text += data
+        if self._in_target_pill: self._target_text += data
+        if self._in_bq_p or (self._in_blockquote and not self._in_cite):
+            self._bq_text += data
+        if self._in_cite_a: self._cite_a_text += data
+
+    def handle_entityref(self, name):
+        ch = unescape(f"&{name};")
+        if self._in_bq_p: self._bq_text += ch
+        if self._in_cite_a: self._cite_a_text += ch
+
+    def handle_charref(self, name):
+        ch = unescape(f"&#{name};")
+        if self._in_bq_p: self._bq_text += ch
+
+# ---- Detail page parser for individual incitement quotes strictly on target pages ----
+class TargetDetailParser(DetailParser):
+    def __init__(self):
+        super().__init__()
+        self._in_inciter_strong = False
+        self._inciter_text = ""
+        
+    def handle_starttag(self, tag, attrs):
+        super().handle_starttag(tag, attrs)
+        if self._in_cite and tag == "strong":
+            self._in_inciter_strong = True
+            self._inciter_text = ""
+
+    def handle_endtag(self, tag):
+        if tag == "strong" and self._in_inciter_strong:
+            self._in_inciter_strong = False
+            self._cur["inciter_name"] = self._inciter_text.strip()
+        super().handle_endtag(tag)
+
+    def handle_data(self, data):
+        super().handle_data(data)
+        if self._in_inciter_strong:
+            self._inciter_text += data
+
+def main():
+    # 1) Scrape people list
+    print("Scraping inciters list...", flush=True)
+    html = fetch("/incitement/people")
+    pp = PeopleListParser(); pp.feed(html)
+    print(f"  Found {len(pp.people)} people")
+
+    # 2) Deep-scrape each person's quotes
+    for i, person in enumerate(pp.people):
+        pid = person.get("id", "")
+        print(f"  [{i+1}/{len(pp.people)}] Scraping quotes for {person['name']}...", flush=True)
+        try:
+            detail_html = fetch(f"/incitement/people/{pid}")
+            dp = DetailParser()
+            dp.feed(detail_html)
+            person["incitements"] = dp.incitements
+            print(f"    -> {len(dp.incitements)} quotes")
+        except Exception as e:
+            print(f"    [WARN] Failed: {e}", file=sys.stderr)
+            person["incitements"] = []
+        time.sleep(0.3)
+
+    # 3) Scrape organizations list
+    print("Scraping organizations list...", flush=True)
+    html = fetch("/incitement/organizations")
+    op = OrgsListParser(); op.feed(html)
+    print(f"  Found {len(op.orgs)} organizations")
+
+    # 4) Deep-scrape each organization's quotes
+    for i, org in enumerate(op.orgs):
+        oid = org.get("id", "")
+        print(f"  [{i+1}/{len(op.orgs)}] Scraping quotes for {org['name']}...", flush=True)
+        try:
+            detail_html = fetch(f"/incitement/organizations/{oid}")
+            dp = DetailParser()
+            dp.feed(detail_html)
+            org["incitements"] = dp.incitements
+            print(f"    -> {len(dp.incitements)} quotes")
+        except Exception as e:
+            print(f"    [WARN] Failed: {e}", file=sys.stderr)
+            org["incitements"] = []
+        time.sleep(0.3)
+
+    # 4) Scrape targets list
+    print("Scraping targets list...", flush=True)
+    html = fetch("/incitement/targets")
+    tp = TargetsListParser(); tp.feed(html)
+    print(f"  Found {len(tp.targets)} targets")
+
+    # 5) Deep-scrape each target's quotes
+    for i, target in enumerate(tp.targets):
+        tid = target.get("id", "")
+        print(f"  [{i+1}/{len(tp.targets)}] Scraping quotes for {target['name']}...", flush=True)
+        try:
+            detail_html = fetch(f"/incitement/targets/{tid}")
+            dp = TargetDetailParser()
+            dp.feed(detail_html)
+            target["incitements"] = dp.incitements
+            print(f"    -> {len(dp.incitements)} quotes")
+        except Exception as e:
+            print(f"    [WARN] Failed: {e}", file=sys.stderr)
+            target["incitements"] = []
+        time.sleep(0.3)
+
+    data = {
+        "people": pp.people,
+        "organizations": op.orgs,
+        "targets": tp.targets
+    }
+
+    # Collect all incitements as flat list for easy feed rendering using a dict to deduplicate by incitement_number + inciter
+    all_inc_dict = {}
+    
+    for person in pp.people:
+        for inc in person.get("incitements", []):
+            key = f"{inc.get('incitement_number')}_{person['name']}"
+            all_inc_dict[key] = {
+                **inc,
+                "inciter_name": person["name"],
+                "inciter_role": person.get("role", ""),
+                "inciter_image": person.get("image", ""),
+                "inciter_url": person.get("url", ""),
+                "inciter_type": "person"
+            }
+            
+    for org in op.orgs:
+        for inc in org.get("incitements", []):
+            key = f"{inc.get('incitement_number')}_{org['name']}"
+            all_inc_dict[key] = {
+                **inc,
+                "inciter_name": org["name"],
+                "inciter_role": org.get("type", ""),
+                "inciter_image": org.get("image", ""),
+                "inciter_url": org.get("url", ""),
+                "inciter_type": "organization"
+            }
+            
+    # Include any quotes found strictly on target pages (though they should be duplicates)
+    for target in tp.targets:
+        for inc in target.get("incitements", []):
+            key = f"{inc.get('incitement_number')}_{inc.get('inciter_name', 'Unknown')}"
+            if key not in all_inc_dict:
+                all_inc_dict[key] = {
+                    **inc,
+                    "inciter_type": "unknown"
+                }
+
+    all_incitements = list(all_inc_dict.values())
+    # Sort by incitement number descending
+    all_incitements.sort(key=lambda x: x.get("incitement_number", 0), reverse=True)
+    data["all_incitements"] = all_incitements
+
+    out = "/home/humair/c4p/public/incitement.json"
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    total_person_quotes = sum(len(p.get("incitements", [])) for p in pp.people)
+    total_org_quotes = sum(len(o.get("incitements", [])) for o in op.orgs)
+    total_quotes = total_person_quotes + total_org_quotes
+    print(f"\nDone! {len(pp.people)} people ({total_person_quotes} quotes), {len(op.orgs)} orgs ({total_org_quotes} quotes), {len(tp.targets)} targets")
+    print(f"Saved to {out}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Years of Unrelenting Forced Displacement Orders in Gaza - Interactive Data Visualization" />
+    <title>Years of Forced Displacement — Gaza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      /* =================== RESET & BASE =================== */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg-deep: #0a0a0f;
+        --bg-card: #111118;
+        --bg-card-hover: #1a1a24;
+        --bg-surface: #16161f;
+        --border: #1e1e2d;
+        --text-primary: #e8e8f0;
+        --text-secondary: #8888a0;
+        --text-muted: #555570;
+        --accent-red: #e63946;
+        --accent-red-glow: rgba(230, 57, 70, 0.3);
+        --accent-orange: #f77f00;
+        --accent-amber: #fcbf49;
+        --accent-teal: #2ec4b6;
+        --accent-blue: #457b9d;
+        --accent-purple: #7b2cbf;
+        --gradient-fire: linear-gradient(135deg, #e63946, #f77f00, #fcbf49);
+        --gradient-dark: linear-gradient(180deg, #0a0a0f 0%, #111118 100%);
+        --font: 'Inter', -apple-system, system-ui, sans-serif;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: var(--font);
+        background: var(--bg-deep);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* =================== HERO =================== */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(ellipse at 50% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 60%);
+        animation: heroGlow 8s ease-in-out infinite alternate;
+      }
+      @keyframes heroGlow {
+        0% { transform: scale(1); opacity: 0.6; }
+        100% { transform: scale(1.2); opacity: 1; }
+      }
+      .hero-counter {
+        font-size: clamp(80px, 15vw, 200px);
+        font-weight: 900;
+        background: var(--gradient-fire);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1;
+        letter-spacing: -4px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-subtitle {
+        font-size: clamp(18px, 3vw, 32px);
+        font-weight: 300;
+        color: var(--text-secondary);
+        margin-top: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-label {
+        font-size: clamp(14px, 2vw, 20px);
+        color: var(--text-muted);
+        margin-top: 32px;
+        max-width: 700px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-date-range {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+        padding: 12px 28px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 60px;
+        font-size: 14px;
+        color: var(--text-secondary);
+        position: relative;
+        z-index: 1;
+      }
+      .hero-date-range .sep {
+        width: 40px;
+        height: 1px;
+        background: var(--accent-red);
+      }
+      .scroll-hint {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+        color: var(--text-muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        z-index: 1;
+      }
+      .scroll-hint::after {
+        content: '↓';
+        display: block;
+        text-align: center;
+        margin-top: 4px;
+        font-size: 18px;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(8px); }
+      }
+
+      /* =================== SECTION LAYOUT =================== */
+      .section {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+      .section-title {
+        font-size: clamp(24px, 4vw, 44px);
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -1px;
+      }
+      .section-desc {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin-bottom: 48px;
+        max-width: 700px;
+      }
+      .fire-line {
+        width: 80px;
+        height: 3px;
+        background: var(--gradient-fire);
+        border-radius: 2px;
+        margin-bottom: 24px;
+      }
+
+      /* =================== KEY METRICS STRIP =================== */
+      .metrics-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 64px;
+      }
+      .metric-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: center;
+        transition: transform 0.3s, border-color 0.3s;
+      }
+      .metric-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent-red);
+      }
+      .metric-value {
+        font-size: 36px;
+        font-weight: 800;
+        background: var(--gradient-fire);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .metric-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* =================== CHARTS =================== */
+      .chart-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 64px;
+      }
+      @media (max-width: 900px) {
+        .chart-grid { grid-template-columns: 1fr; }
+      }
+      .chart-panel {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        min-height: 320px;
+        position: relative;
+      }
+      .chart-panel.full-width {
+        grid-column: 1 / -1;
+      }
+      .chart-panel h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .chart-panel .chart-subtitle {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 16px;
+      }
+      .chart-wrap {
+        position: relative;
+        height: 260px;
+      }
+      .chart-wrap.tall { height: 380px; }
+
+      /* =================== TIMELINE HEATMAP =================== */
+      .heatmap-container {
+        overflow-x: auto;
+        padding-bottom: 12px;
+      }
+      .heatmap-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: repeat(7, 14px);
+        gap: 3px;
+        width: max-content;
+      }
+      .heatmap-cell {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        background: var(--bg-surface);
+        cursor: pointer;
+        transition: transform 0.15s;
+        position: relative;
+      }
+      .heatmap-cell:hover {
+        transform: scale(1.8);
+        z-index: 10;
+      }
+      .heatmap-cell.level-1 { background: rgba(230, 57, 70, 0.2); }
+      .heatmap-cell.level-2 { background: rgba(230, 57, 70, 0.4); }
+      .heatmap-cell.level-3 { background: rgba(247, 127, 0, 0.6); }
+      .heatmap-cell.level-4 { background: rgba(252, 191, 73, 0.8); }
+      .heatmap-cell.level-5 { background: #e63946; box-shadow: 0 0 8px var(--accent-red-glow); }
+      .heatmap-months {
+        display: flex;
+        gap: 0;
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-top: 6px;
+        width: max-content;
+      }
+      .heatmap-month {
+        min-width: calc(14px * 4 + 3px * 4);
+      }
+      .heatmap-legend {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-top: 12px;
+      }
+      .heatmap-legend-cell {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+      }
+
+      /* =================== SCROLLING TICKER =================== */
+      .ticker-section {
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+        overflow: hidden;
+        margin: 40px 0;
+      }
+      .ticker-track {
+        display: flex;
+        gap: 48px;
+        animation: tickerScroll 60s linear infinite;
+        width: max-content;
+      }
+      @keyframes tickerScroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+      .ticker-item {
+        white-space: nowrap;
+        font-size: 13px;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ticker-item .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-red);
+        flex-shrink: 0;
+      }
+      .ticker-item strong { color: var(--text-primary); }
+
+      /* =================== TIMELINE FEED =================== */
+      .timeline-feed {
+        position: relative;
+        padding-left: 32px;
+      }
+      .timeline-feed::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--accent-red), var(--accent-orange), transparent);
+      }
+      .timeline-event {
+        position: relative;
+        margin-bottom: 16px;
+        padding: 16px 20px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition: border-color 0.3s, background 0.3s;
+        cursor: default;
+      }
+      .timeline-event:hover {
+        border-color: rgba(230, 57, 70, 0.4);
+        background: var(--bg-card-hover);
+      }
+      .timeline-event::before {
+        content: '';
+        position: absolute;
+        left: -28px;
+        top: 22px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent-red);
+        border: 2px solid var(--bg-deep);
+      }
+      .timeline-event.major::before {
+        width: 14px;
+        height: 14px;
+        left: -30px;
+        top: 20px;
+        box-shadow: 0 0 12px var(--accent-red-glow);
+      }
+      .event-date {
+        font-size: 12px;
+        color: var(--accent-amber);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .event-area {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 4px 0;
+      }
+      .event-area span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+      .event-blocks {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .event-bar {
+        height: 4px;
+        border-radius: 2px;
+        margin-top: 8px;
+        background: var(--gradient-fire);
+        transition: width 0.6s ease;
+      }
+      .event-link {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--accent-teal);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .event-link:hover { color: var(--text-primary); }
+
+      /* =================== YEAR SEPARATOR =================== */
+      .year-separator {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 40px 0 24px -32px;
+        padding-left: 32px;
+      }
+      .year-separator .year-label {
+        font-size: 32px;
+        font-weight: 900;
+        background: var(--gradient-fire);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .year-separator .year-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .year-separator .year-count {
+        font-size: 12px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* =================== LOAD MORE =================== */
+      .load-more-btn {
+        display: block;
+        margin: 32px auto;
+        padding: 14px 40px;
+        background: transparent;
+        border: 1px solid var(--accent-red);
+        color: var(--accent-red);
+        border-radius: 60px;
+        font-family: var(--font);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .load-more-btn:hover {
+        background: var(--accent-red);
+        color: #fff;
+        box-shadow: 0 0 30px var(--accent-red-glow);
+      }
+
+      /* =================== FOOTER =================== */
+      .viz-footer {
+        text-align: center;
+        padding: 60px 24px;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+      .viz-footer a {
+        color: var(--accent-teal);
+        text-decoration: none;
+      }
+      .viz-footer a:hover { text-decoration: underline; }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 20px;
+        border: 1px solid var(--border);
+        border-radius: 60px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(12px);
+        transition: border-color 0.3s;
+      }
+      .back-link:hover { border-color: var(--accent-red); }
+
+      /* =================== TOOLTIP =================== */
+      .tooltip {
+        position: fixed;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 12px;
+        color: var(--text-primary);
+        pointer-events: none;
+        z-index: 999;
+        display: none;
+        max-width: 240px;
+      }
+      .tooltip-date { color: var(--accent-amber); font-weight: 600; }
+      .tooltip-area { font-size: 16px; font-weight: 700; margin: 4px 0; }
+
+      /* =================== ANIMATIONS =================== */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease forwards;
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .stagger-1 { animation-delay: 0.1s; }
+      .stagger-2 { animation-delay: 0.2s; }
+      .stagger-3 { animation-delay: 0.3s; }
+      .stagger-4 { animation-delay: 0.4s; }
+      .stagger-5 { animation-delay: 0.5s; }
+
+      /* Animate counter */
+      @keyframes countUp {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .counter-animate {
+        animation: countUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/" class="back-link">← Back to Dashboard</a>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-counter counter-animate" id="hero-count">—</div>
+      <div class="hero-subtitle fade-in stagger-1">Forced Displacement Orders</div>
+      <div class="hero-label fade-in stagger-2">
+        Each number represents an order that uprooted families, shattered communities, and erased neighborhoods across Gaza.
+      </div>
+      <div class="hero-date-range fade-in stagger-3">
+        <span id="date-start">—</span>
+        <span class="sep"></span>
+        <span id="date-end">—</span>
+      </div>
+      <div class="scroll-hint fade-in stagger-5">Scroll to explore</div>
+    </section>
+
+    <!-- SCROLLING TICKER -->
+    <div class="ticker-section" id="ticker"></div>
+
+    <!-- KEY METRICS -->
+    <section class="section">
+      <div class="fire-line"></div>
+      <h2 class="section-title fade-in">The Scale of Displacement</h2>
+      <p class="section-desc fade-in">A summary across all documented forced displacement events sourced from Gaza Maps.</p>
+      <div class="metrics-strip" id="metrics-strip"></div>
+
+      <!-- CHARTS -->
+      <div class="chart-grid">
+        <div class="chart-panel full-width fade-in">
+          <h3>Displacement Orders Over Time</h3>
+          <div class="chart-subtitle">Chronological frequency of displacement events</div>
+          <div class="chart-wrap tall"><canvas id="timelineChart"></canvas></div>
+        </div>
+        <div class="chart-panel fade-in">
+          <h3>Displaced Area per Event</h3>
+          <div class="chart-subtitle">Square kilometers by displacement order</div>
+          <div class="chart-wrap"><canvas id="areaChart"></canvas></div>
+        </div>
+        <div class="chart-panel fade-in">
+          <h3>Monthly Orders Count</h3>
+          <div class="chart-subtitle">Orders issued per month</div>
+          <div class="chart-wrap"><canvas id="monthlyChart"></canvas></div>
+        </div>
+        <div class="chart-panel full-width fade-in">
+          <h3>Cumulative Displacement Area</h3>
+          <div class="chart-subtitle">Running total of sq km designated for displacement</div>
+          <div class="chart-wrap tall"><canvas id="cumulativeChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- GITHUB-STYLE HEATMAP -->
+      <div class="chart-panel full-width fade-in" style="margin-bottom: 64px;">
+        <h3>Displacement Calendar</h3>
+        <div class="chart-subtitle">Activity heatmap • each cell = 1 day</div>
+        <div class="heatmap-container" id="heatmap-container"></div>
+      </div>
+    </section>
+
+    <!-- TIMELINE FEED -->
+    <section class="section">
+      <div class="fire-line"></div>
+      <h2 class="section-title fade-in">Every Single Order</h2>
+      <p class="section-desc fade-in">A chronological record of each forced displacement order, newest first.</p>
+      <div class="timeline-feed" id="timeline-feed"></div>
+      <button class="load-more-btn" id="load-more-btn" style="display:none;">Load More</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="viz-footer">
+      <p>Data sourced from <a href="https://gazamaps.com" target="_blank">GazaMaps.com</a></p>
+      <p style="margin-top:8px;">Each data point represents documented forced displacement orders issued.</p>
+    </footer>
+
+    <script type="module">
+      import { Chart, registerables } from 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/+esm';
+      Chart.register(...registerables);
+
+      // Defaults
+      Chart.defaults.color = '#8888a0';
+      Chart.defaults.font.family = 'Inter';
+      Chart.defaults.plugins.legend.display = false;
+
+      const tooltip = document.getElementById('tooltip');
+
+      // LOAD DATA
+      const res = await fetch('/gaza-maps.jsonl');
+      const rawData = await res.json();
+
+      // Sort chronologically (oldest first) for charts
+      const chrono = [...rawData].sort((a, b) => new Date(a.date) - new Date(b.date));
+      // Newest first for feed
+      const newest = [...rawData].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // ===== HERO =====
+      document.getElementById('hero-count').textContent = rawData.length;
+      const dates = chrono.map(d => new Date(d.date));
+      const fmt = d => d.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+      document.getElementById('date-start').textContent = fmt(dates[0]);
+      document.getElementById('date-end').textContent = fmt(dates[dates.length - 1]);
+
+      // ===== METRICS =====
+      const totalArea = chrono.reduce((s, d) => s + (parseFloat(d.area_sq_km_displacement) || 0), 0);
+      const maxSingleArea = Math.max(...chrono.map(d => parseFloat(d.area_sq_km_displacement) || 0));
+      const uniqueDates = new Set(chrono.map(d => d.date));
+      const totalBlocks = chrono.reduce((s, d) => {
+        if (!d.displacement_blocks) return s;
+        return s + d.displacement_blocks.split(',').filter(b => b.trim()).length;
+      }, 0);
+      const yearsSpan = ((dates[dates.length - 1] - dates[0]) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1);
+
+      const metricsData = [
+        { value: rawData.length, label: 'Total Orders' },
+        { value: totalArea.toFixed(0) + ' km²', label: 'Total Area Displaced' },
+        { value: maxSingleArea.toFixed(1) + ' km²', label: 'Largest Single Order' },
+        { value: uniqueDates.size, label: 'Unique Days' },
+        { value: totalBlocks.toLocaleString(), label: 'Block Designations' },
+        { value: yearsSpan + '+', label: 'Years of Orders' },
+      ];
+      const metricsEl = document.getElementById('metrics-strip');
+      metricsData.forEach((m, i) => {
+        const card = document.createElement('div');
+        card.className = `metric-card fade-in stagger-${(i % 5) + 1}`;
+        card.innerHTML = `<div class="metric-value">${m.value}</div><div class="metric-label">${m.label}</div>`;
+        metricsEl.appendChild(card);
+      });
+
+      // ===== SCROLLING TICKER =====
+      const tickerEl = document.getElementById('ticker');
+      const tickerItems = newest.slice(0, 30).map(d => {
+        const area = parseFloat(d.area_sq_km_displacement) || 0;
+        const blocks = d.displacement_blocks ? d.displacement_blocks.split(',').length : 0;
+        return `<div class="ticker-item"><span class="dot"></span><strong>${d.date}</strong> — ${area} sq km displaced across ${blocks} blocks</div>`;
+      });
+      // Double it for seamless loop
+      tickerEl.innerHTML = `<div class="ticker-track">${tickerItems.join('')}${tickerItems.join('')}</div>`;
+
+      // ===== CHART: TIMELINE BAR =====
+      // Group by month
+      const monthBuckets = {};
+      chrono.forEach(d => {
+        const key = d.date.substring(0, 7); // YYYY-MM
+        if (!monthBuckets[key]) monthBuckets[key] = { count: 0, area: 0 };
+        monthBuckets[key].count++;
+        monthBuckets[key].area += parseFloat(d.area_sq_km_displacement) || 0;
+      });
+      const monthKeys = Object.keys(monthBuckets).sort();
+      const monthCounts = monthKeys.map(k => monthBuckets[k].count);
+      const monthAreas = monthKeys.map(k => monthBuckets[k].area);
+
+      // Timeline chart (orders per month as bar)
+      new Chart(document.getElementById('timelineChart'), {
+        type: 'bar',
+        data: {
+          labels: monthKeys.map(k => {
+            const [y, m] = k.split('-');
+            return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+          }),
+          datasets: [{
+            data: monthCounts,
+            backgroundColor: monthCounts.map(c => {
+              if (c >= 10) return 'rgba(230, 57, 70, 0.9)';
+              if (c >= 5) return 'rgba(247, 127, 0, 0.8)';
+              return 'rgba(252, 191, 73, 0.6)';
+            }),
+            borderRadius: 4,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              titleColor: '#fcbf49',
+              bodyColor: '#e8e8f0',
+              displayColors: false,
+              callbacks: {
+                label: (ctx) => `${ctx.raw} displacement orders`
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxRotation: 45, font: { size: 10 } } },
+            y: { grid: { color: '#1e1e2d' }, beginAtZero: true, ticks: { stepSize: 2 } }
+          }
+        }
+      });
+
+      // ===== CHART: AREA PER EVENT =====
+      const allAreas = chrono.map(d => parseFloat(d.area_sq_km_displacement) || 0);
+      new Chart(document.getElementById('areaChart'), {
+        type: 'bar',
+        data: {
+          labels: chrono.map(d => d.date),
+          datasets: [{
+            data: allAreas,
+            backgroundColor: allAreas.map(a => {
+              if (a >= 100) return 'rgba(230, 57, 70, 0.9)';
+              if (a >= 20) return 'rgba(247, 127, 0, 0.7)';
+              if (a >= 5) return 'rgba(252, 191, 73, 0.5)';
+              return 'rgba(136, 136, 160, 0.3)';
+            }),
+            borderRadius: 2,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              callbacks: {
+                label: (ctx) => `${ctx.raw.toFixed(1)} sq km displaced`
+              }
+            }
+          },
+          scales: {
+            x: { display: false },
+            y: { grid: { color: '#1e1e2d' }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ===== CHART: MONTHLY ORDERS =====
+      new Chart(document.getElementById('monthlyChart'), {
+        type: 'line',
+        data: {
+          labels: monthKeys.map(k => {
+            const [y, m] = k.split('-');
+            return new Date(y, m - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+          }),
+          datasets: [{
+            data: monthCounts,
+            borderColor: '#e63946',
+            backgroundColor: 'rgba(230, 57, 70, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3,
+            pointBackgroundColor: '#e63946',
+            pointBorderColor: '#0a0a0f',
+            pointBorderWidth: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              callbacks: { label: ctx => `${ctx.raw} orders` }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxRotation: 45, font: { size: 10 } } },
+            y: { grid: { color: '#1e1e2d' }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ===== CHART: CUMULATIVE =====
+      let cumSum = 0;
+      const cumulative = chrono.map(d => {
+        cumSum += parseFloat(d.area_sq_km_displacement) || 0;
+        return cumSum;
+      });
+      new Chart(document.getElementById('cumulativeChart'), {
+        type: 'line',
+        data: {
+          labels: chrono.map(d => d.date),
+          datasets: [{
+            data: cumulative,
+            borderColor: '#f77f00',
+            backgroundColor: (ctx) => {
+              const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, ctx.chart.height);
+              gradient.addColorStop(0, 'rgba(247, 127, 0, 0.3)');
+              gradient.addColorStop(1, 'rgba(230, 57, 70, 0.02)');
+              return gradient;
+            },
+            fill: true,
+            tension: 0.3,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            borderWidth: 2.5,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(0,0,0,0.9)',
+              titleColor: '#fcbf49',
+              callbacks: { label: ctx => `${ctx.raw.toFixed(0)} sq km total` }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { maxTicksLimit: 12, font: { size: 10 } } },
+            y: { grid: { color: '#1e1e2d' }, beginAtZero: true }
+          }
+        }
+      });
+
+      // ===== HEATMAP =====
+      buildHeatmap(chrono);
+      function buildHeatmap(data) {
+        const eventsByDate = {};
+        data.forEach(d => {
+          if (!eventsByDate[d.date]) eventsByDate[d.date] = { count: 0, area: 0 };
+          eventsByDate[d.date].count++;
+          eventsByDate[d.date].area += parseFloat(d.area_sq_km_displacement) || 0;
+        });
+
+        const start = new Date(data[0].date);
+        const end = new Date(data[data.length - 1].date);
+
+        // Align start to Sunday
+        const dayOfWeek = start.getDay();
+        const gridStart = new Date(start);
+        gridStart.setDate(gridStart.getDate() - dayOfWeek);
+
+        const gridEnd = new Date(end);
+        gridEnd.setDate(gridEnd.getDate() + (6 - gridEnd.getDay()));
+
+        const container = document.getElementById('heatmap-container');
+        const grid = document.createElement('div');
+        grid.className = 'heatmap-grid';
+
+        const monthLabels = document.createElement('div');
+        monthLabels.className = 'heatmap-months';
+
+        let currentDate = new Date(gridStart);
+        let lastMonth = -1;
+
+        while (currentDate <= gridEnd) {
+          const dateStr = currentDate.toISOString().split('T')[0];
+          const info = eventsByDate[dateStr];
+          const cell = document.createElement('div');
+          cell.className = 'heatmap-cell';
+
+          if (info) {
+            const level = info.area >= 100 ? 5 : info.area >= 20 ? 4 : info.area >= 5 ? 3 : info.count >= 2 ? 2 : 1;
+            cell.classList.add(`level-${level}`);
+          }
+
+          // Tooltip
+          cell.addEventListener('mouseenter', (e) => {
+            const ttDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const ttInfo = eventsByDate[dateStr];
+            tooltip.innerHTML = `
+              <div class="tooltip-date">${dateStr}</div>
+              <div class="tooltip-area">${ttInfo ? ttInfo.count + ' orders' : 'No orders'}</div>
+              ${ttInfo ? `<div>${ttInfo.area.toFixed(1)} sq km</div>` : ''}
+            `;
+            tooltip.style.display = 'block';
+          });
+          cell.addEventListener('mousemove', (e) => {
+            tooltip.style.left = (e.clientX + 14) + 'px';
+            tooltip.style.top = (e.clientY - 10) + 'px';
+          });
+          cell.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+
+          grid.appendChild(cell);
+
+          // Track months for labels
+          const month = currentDate.getMonth();
+          if (currentDate.getDay() === 0 && month !== lastMonth) {
+            const label = document.createElement('span');
+            label.className = 'heatmap-month';
+            label.textContent = currentDate.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+            monthLabels.appendChild(label);
+            lastMonth = month;
+          }
+
+          currentDate = new Date(currentDate);
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        container.appendChild(grid);
+        container.appendChild(monthLabels);
+
+        // Legend
+        const legend = document.createElement('div');
+        legend.className = 'heatmap-legend';
+        legend.innerHTML = `
+          <span>Less</span>
+          <div class="heatmap-legend-cell" style="background:var(--bg-surface)"></div>
+          <div class="heatmap-legend-cell" style="background:rgba(230,57,70,0.2)"></div>
+          <div class="heatmap-legend-cell" style="background:rgba(230,57,70,0.4)"></div>
+          <div class="heatmap-legend-cell" style="background:rgba(247,127,0,0.6)"></div>
+          <div class="heatmap-legend-cell" style="background:rgba(252,191,73,0.8)"></div>
+          <div class="heatmap-legend-cell" style="background:#e63946"></div>
+          <span>More</span>
+        `;
+        container.appendChild(legend);
+      }
+
+      // ===== TIMELINE FEED =====
+      const PAGE_SIZE = 25;
+      let currentPage = 0;
+      const feedEl = document.getElementById('timeline-feed');
+      const loadMoreBtn = document.getElementById('load-more-btn');
+
+      function renderFeedPage() {
+        const start = currentPage * PAGE_SIZE;
+        const end = Math.min(start + PAGE_SIZE, newest.length);
+        const slice = newest.slice(start, end);
+
+        let lastYear = null;
+        if (start > 0) {
+          const prevItem = newest[start - 1];
+          lastYear = new Date(prevItem.date).getFullYear();
+        }
+
+        slice.forEach((item, i) => {
+          const eventDate = new Date(item.date);
+          const year = eventDate.getFullYear();
+
+          // Year separator
+          if (year !== lastYear) {
+            const yearCount = newest.filter(d => new Date(d.date).getFullYear() === year).length;
+            const sep = document.createElement('div');
+            sep.className = 'year-separator';
+            sep.innerHTML = `
+              <span class="year-label">${year}</span>
+              <span class="year-line"></span>
+              <span class="year-count">${yearCount} orders</span>
+            `;
+            feedEl.appendChild(sep);
+            lastYear = year;
+          }
+
+          const area = parseFloat(item.area_sq_km_displacement) || 0;
+          const blocks = item.displacement_blocks ? item.displacement_blocks.split(',').filter(b => b.trim()).length : 0;
+          const barWidth = Math.min(100, (area / maxSingleArea) * 100);
+          const isMajor = area >= 50;
+
+          const div = document.createElement('div');
+          div.className = `timeline-event fade-in${isMajor ? ' major' : ''}`;
+          div.style.animationDelay = `${(i % 10) * 0.05}s`;
+          div.innerHTML = `
+            <div class="event-date">${eventDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</div>
+            <div class="event-area">${area.toFixed(1)} <span>sq km displaced</span></div>
+            <div class="event-blocks">${blocks} block${blocks !== 1 ? 's' : ''} designated</div>
+            <div class="event-bar" style="width: ${barWidth}%"></div>
+            <a href="${item.link}" target="_blank" class="event-link">View on GazaMaps →</a>
+          `;
+          feedEl.appendChild(div);
+        });
+
+        currentPage++;
+        if (end >= newest.length) {
+          loadMoreBtn.style.display = 'none';
+        } else {
+          loadMoreBtn.style.display = 'block';
+        }
+      }
+
+      renderFeedPage();
+      loadMoreBtn.addEventListener('click', renderFeedPage);
+
+      // ===== INTERSECTION OBSERVER for fade-in =====
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

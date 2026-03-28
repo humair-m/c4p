@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Scrape IDF Leaflets from idfleaflets.com (pages 1-102) and save as JSON."""
+import json
+import time
+import re
+import sys
+from urllib.request import urlopen, Request
+from html.parser import HTMLParser
+
+class LeafletParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.result = {}
+        self._in_h2 = False
+        self._in_first_seen = False
+        self._in_flag_link = False
+        self._flags = []
+        self._h2_text = ""
+        self._first_seen_text = ""
+        self._current_flag = ""
+        self._img_src = None
+        self._og_image = None
+
+    def handle_starttag(self, tag, attrs):
+        attrs_dict = dict(attrs)
+        if tag == "h2":
+            self._in_h2 = True
+            self._h2_text = ""
+        if tag == "p" and "pointer-events-none" in attrs_dict.get("class", ""):
+            self._in_first_seen = True
+            self._first_seen_text = ""
+        if tag == "a" and attrs_dict.get("href", "").startswith("/flag/"):
+            self._in_flag_link = True
+            self._current_flag = ""
+        if tag == "img":
+            src = attrs_dict.get("src", "")
+            alt = attrs_dict.get("alt", "")
+            if "leaflet" in alt.lower() or "storage/leaflets" in src:
+                self._img_src = src
+        if tag == "meta":
+            prop = attrs_dict.get("property", "")
+            if prop == "og:image":
+                self._og_image = attrs_dict.get("content", "")
+
+    def handle_endtag(self, tag):
+        if tag == "h2" and self._in_h2:
+            self._in_h2 = False
+        if tag == "p" and self._in_first_seen:
+            self._in_first_seen = False
+        if tag == "a" and self._in_flag_link:
+            self._in_flag_link = False
+            if self._current_flag.strip():
+                self._flags.append(self._current_flag.strip())
+
+    def handle_data(self, data):
+        if self._in_h2:
+            self._h2_text += data
+        if self._in_first_seen:
+            self._first_seen_text += data
+        if self._in_flag_link:
+            self._current_flag += data
+
+    def get_result(self):
+        # Extract date from first_seen_text
+        date_match = re.search(r'\d{1,2}\s+\w+\s+\d{4}', self._first_seen_text)
+        date_str = date_match.group(0) if date_match else ""
+        
+        # Extract leaflet number from h2
+        num_match = re.search(r'#\s*(\d+)', self._h2_text)
+        leaflet_num = int(num_match.group(1)) if num_match else None
+
+        img = self._img_src or self._og_image or ""
+
+        return {
+            "id": leaflet_num,
+            "title": self._h2_text.strip(),
+            "date_display": date_str,
+            "flags": self._flags,
+            "image": img,
+            "url": f"https://idfleaflets.com/{leaflet_num}" if leaflet_num else ""
+        }
+
+
+def scrape_leaflet(page_id):
+    url = f"https://idfleaflets.com/{page_id}"
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; research bot)"})
+    try:
+        with urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+        parser = LeafletParser()
+        parser.feed(html)
+        result = parser.get_result()
+        result["id"] = page_id  # ensure id is set
+        return result
+    except Exception as e:
+        print(f"  [WARN] Failed to scrape page {page_id}: {e}", file=sys.stderr)
+        return None
+
+
+def main():
+    leaflets = []
+    for i in range(1, 103):
+        print(f"Scraping leaflet {i}/102...", flush=True)
+        result = scrape_leaflet(i)
+        if result:
+            leaflets.append(result)
+        time.sleep(0.3)  # be polite
+
+    out_path = "/home/humair/c4p/public/idf-leaflets.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(leaflets, f, indent=2, ensure_ascii=False)
+
+    print(f"\nDone! Saved {len(leaflets)} leaflets to {out_path}")
+
+
+if __name__ == "__main__":
+    main()

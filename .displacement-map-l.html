@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaza Forced Displacement — Animated Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08080d;
+      --bg-panel: rgba(12, 12, 18, 0.92);
+      --bg-card: rgba(20, 20, 30, 0.95);
+      --border: rgba(255,255,255,0.06);
+      --text: #e8e8f0;
+      --text-sec: #8888a0;
+      --text-muted: #555570;
+      --red: #e63946;
+      --red-glow: rgba(230, 57, 70, 0.35);
+      --orange: #f77f00;
+      --amber: #fcbf49;
+      --teal: #2ec4b6;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== MAP ===== */
+    #map {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* darken leaflet tiles */
+    .leaflet-tile-pane { filter: saturate(0.25) brightness(0.35); }
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { display: none !important; }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .top-bar .title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .top-bar .back-btn {
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      transition: border-color 0.3s;
+    }
+    .top-bar .back-btn:hover { border-color: var(--red); }
+    .top-bar h1 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .top-bar h1 span {
+      font-weight: 300;
+      color: var(--text-sec);
+      margin-left: 8px;
+    }
+    .live-counters {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .counter-box {
+      text-align: center;
+    }
+    .counter-box .c-val {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--red), var(--orange), var(--amber));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .counter-box .c-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    /* ===== SIDE PANEL ===== */
+    .side-panel {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 380px;
+      bottom: 100px;
+      z-index: 800;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.1) transparent;
+    }
+    .side-panel::-webkit-scrollbar { width: 4px; }
+    .side-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+    .current-event {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      background: var(--bg-card);
+      margin-bottom: 16px;
+      transition: border-color 0.4s;
+    }
+    .current-event.active { border-color: var(--red); }
+    .event-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .event-badge.displacement {
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--red);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+    }
+    .event-badge.safe {
+      background: rgba(46, 196, 182, 0.15);
+      color: var(--teal);
+      border: 1px solid rgba(46, 196, 182, 0.3);
+    }
+    .event-date-display {
+      font-size: 13px;
+      color: var(--amber);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .event-area-display {
+      font-size: 34px;
+      font-weight: 900;
+      margin: 4px 0;
+      line-height: 1.1;
+    }
+    .event-area-display .unit {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-sec);
+    }
+    .event-blocks-display {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .event-progress-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .event-progress-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .event-progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--amber));
+      transition: width 0.6s ease;
+    }
+    .event-map-thumb {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin-top: 8px;
+    }
+    .event-map-thumb:hover { transform: scale(1.02); }
+    .event-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .event-link:hover { text-decoration: underline; }
+
+    /* Event log (mini timeline in sidebar) */
+    .event-log-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      margin-top: 8px;
+    }
+    .event-log {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.06) transparent;
+    }
+    .log-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-sec);
+      transition: background 0.2s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .log-item:hover { background: rgba(255,255,255,0.04); }
+    .log-item.active { background: rgba(230, 57, 70, 0.1); color: var(--text); }
+    .log-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .log-item.active .log-dot { background: var(--red); box-shadow: 0 0 6px var(--red-glow); }
+    .log-area {
+      margin-left: auto;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+    .log-item.active .log-area { color: var(--amber); }
+
+    /* ===== BOTTOM CONTROLS ===== */
+    .controls-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 24px 16px;
+    }
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .timeline-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      outline: none;
+      cursor: pointer;
+    }
+    .timeline-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red-glow);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .timeline-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+    .timeline-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--red);
+      border: none;
+      cursor: pointer;
+    }
+    .timeline-date-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--amber);
+      min-width: 140px;
+    }
+    .timeline-index {
+      font-size: 12px;
+      color: var(--text-muted);
+      min-width: 70px;
+      text-align: right;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .ctrl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover { border-color: var(--red); background: rgba(230, 57, 70, 0.1); }
+    .ctrl-btn.primary {
+      width: 52px;
+      height: 52px;
+      background: var(--red);
+      border-color: var(--red);
+      font-size: 20px;
+    }
+    .ctrl-btn.primary:hover {
+      background: #c62f3a;
+      box-shadow: 0 0 30px var(--red-glow);
+    }
+    .speed-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: 16px;
+    }
+    .speed-btn {
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-sec);
+      font-family: var(--font);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .speed-btn:hover, .speed-btn.active {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* ===== MAP SHADOWS & OVERLAYS ===== */
+    .map-vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at center, transparent 40%, rgba(8,8,13,0.7) 100%);
+    }
+    .map-grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ===== PULSE ANIMATION ON MAP ===== */
+    @keyframes pulseRing {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+    @keyframes markerPop {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .displacement-marker {
+      animation: markerPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      animation: pulseRing 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    /* ===== IMAGE MODAL ===== */
+    .img-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .img-modal.open { opacity: 1; pointer-events: auto; }
+    .img-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    }
+    .img-modal .close-modal {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    /* ===== CINEMATIC INTRO ===== */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 1s ease;
+    }
+    .intro-overlay.hidden { opacity: 0; pointer-events: none; }
+    .intro-count {
+      font-size: clamp(60px, 12vw, 160px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--red), var(--orange), var(--amber));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      animation: introScale 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes introScale {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .intro-text {
+      font-size: clamp(16px, 2.5vw, 24px);
+      font-weight: 300;
+      color: var(--text-sec);
+      margin-top: 16px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: introFade 2s 0.5s ease forwards;
+      opacity: 0;
+    }
+    .intro-subtext {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 40px;
+      animation: introFade 2s 1.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes introFade {
+      to { opacity: 1; }
+    }
+    .intro-start-btn {
+      margin-top: 40px;
+      padding: 14px 48px;
+      border: 1px solid var(--red);
+      background: transparent;
+      color: var(--red);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: introFade 2s 2s ease forwards;
+      opacity: 0;
+    }
+    .intro-start-btn:hover {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 0 40px var(--red-glow);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .side-panel { display: none; }
+      .top-bar { padding: 10px 14px; }
+      .live-counters { gap: 12px; }
+      .counter-box .c-val { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CINEMATIC INTRO -->
+  <div class="intro-overlay" id="intro">
+    <div class="intro-count" id="intro-count">—</div>
+    <div class="intro-text">Forced Displacement Orders</div>
+    <div class="intro-subtext">An animated chronicle across the map of Gaza</div>
+    <button class="intro-start-btn" id="intro-start">Begin →</button>
+  </div>
+
+  <!-- MAP -->
+  <div id="map"></div>
+  <div class="map-vignette"></div>
+  <div class="map-grid-overlay"></div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="title-group">
+      <a href="/" class="back-btn">← Dashboard</a>
+      <h1>Forced Displacement<span>Animated Map</span></h1>
+    </div>
+    <div class="live-counters">
+      <div class="counter-box">
+        <div class="c-val" id="ctr-orders">0</div>
+        <div class="c-label">Orders</div>
+      </div>
+      <div class="counter-box">
+        <div class="c-val" id="ctr-area">0</div>
+        <div class="c-label">Sq Km Total</div>
+      </div>
+      <div class="counter-box">
+        <div class="c-val" id="ctr-blocks">0</div>
+        <div class="c-label">Blocks</div>
+      </div>
+      <div class="counter-box">
+        <div class="c-val" id="ctr-days">0</div>
+        <div class="c-label">Days</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDE PANEL -->
+  <aside class="side-panel" id="side-panel">
+    <div class="current-event" id="current-event">
+      <div class="event-badge displacement">Displacement Order</div>
+      <div class="event-date-display" id="ev-date">—</div>
+      <div class="event-area-display"><span id="ev-area">—</span> <span class="unit">sq km</span></div>
+      <div class="event-blocks-display" id="ev-blocks">— blocks designated</div>
+      <div class="event-progress-label">Relative scale of this order</div>
+      <div class="event-progress-bar"><div class="event-progress-fill" id="ev-bar" style="width:0%"></div></div>
+      <img id="ev-map-img" class="event-map-thumb" style="display:none" alt="Displacement map" />
+      <a id="ev-link" href="#" target="_blank" class="event-link" style="display:none">View on GazaMaps →</a>
+    </div>
+    <div class="event-log-title">Event Log</div>
+    <div class="event-log" id="event-log"></div>
+  </aside>
+
+  <!-- BOTTOM CONTROLS -->
+  <div class="controls-bar">
+    <div class="timeline-row">
+      <span class="timeline-date-label" id="tl-date">—</span>
+      <input type="range" class="timeline-slider" id="timeline-slider" min="0" max="1" value="0" step="1">
+      <span class="timeline-index" id="tl-index">0 / 0</span>
+    </div>
+    <div class="btn-row">
+      <button class="ctrl-btn" id="btn-prev" title="Previous">⏮</button>
+      <button class="ctrl-btn primary" id="btn-play" title="Play / Pause">▶</button>
+      <button class="ctrl-btn" id="btn-next" title="Next">⏭</button>
+      <span class="speed-label">Speed</span>
+      <button class="speed-btn" data-speed="3000">0.5×</button>
+      <button class="speed-btn active" data-speed="1500">1×</button>
+      <button class="speed-btn" data-speed="700">2×</button>
+      <button class="speed-btn" data-speed="300">5×</button>
+      <button class="speed-btn" data-speed="80">10×</button>
+    </div>
+  </div>
+
+  <!-- IMAGE MODAL -->
+  <div class="img-modal" id="img-modal">
+    <span class="close-modal" id="close-img-modal">×</span>
+    <img id="modal-img" src="" alt="Full map">
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    /* ===========================================================================
+       BLOCK-TO-COORDINATE MAPPING
+       Gaza Strip spans roughly:
+         North: 31.59°N  South: 31.22°N  West: 34.22°E  East: 34.56°E
+       Block numbering from Gaza Maps data follows a rough geographic pattern:
+         - 1-87:      North Gaza (Beit Hanoun, Jabalia, north Gaza City)
+         - 88-139:    Gaza City / Beach area / Rimal
+         - 212-260:   Wadi / central-west Gaza City to Nuseirat
+         - 321:       Deir al-Balah corridor
+         - 568-660:   Central Gaza (Nuseirat, Bureij, Maghazi, Deir al-Balah)
+         - 662-789:   Khan Yunis, east Khan Yunis
+         - 823-984:   Rafah, south / border zones
+         - 1122-1126: Border pockets
+         - 1738-1820: Mawasi / coastal margin (Khan Yunis to Rafah)
+         - 2200-2376: North-east / Beit Lahia / deep north
+         - 3261: Isolated reference
+         - 8801+: Far-border zone
+       We map block ranges to lat/lng region centroids and scatter randomly.
+    =========================================================================== */
+
+    // Gaza bounding box
+    const GAZA_BOUNDS = {
+      north: 31.597,
+      south: 31.217,
+      west: 34.217,
+      east: 34.560
+    };
+
+    // Named regions with bounding boxes for block ranges
+    const BLOCK_REGIONS = [
+      { min: 1, max: 87,     name: 'North Gaza',            n: 31.57, s: 31.49, w: 34.44, e: 34.55 },
+      { min: 88, max: 139,   name: 'Gaza City',             n: 31.54, s: 31.48, w: 34.39, e: 34.48 },
+      { min: 212, max: 270,  name: 'Central-West Gaza',     n: 31.48, s: 31.42, w: 34.33, e: 34.42 },
+      { min: 321, max: 321,  name: 'Deir al-Balah corridor',n: 31.42, s: 31.40, w: 34.34, e: 34.37 },
+      { min: 568, max: 660,  name: 'Central Gaza',          n: 31.43, s: 31.35, w: 34.30, e: 34.40 },
+      { min: 662, max: 789,  name: 'Khan Yunis',            n: 31.37, s: 31.31, w: 34.28, e: 34.38 },
+      { min: 823, max: 984,  name: 'Rafah',                 n: 31.32, s: 31.22, w: 34.22, e: 34.32 },
+      { min: 1122, max: 1126,name: 'Border zone',           n: 31.27, s: 31.23, w: 34.24, e: 34.28 },
+      { min: 1738, max: 1820,name: 'Mawasi Coastal',        n: 31.36, s: 31.26, w: 34.22, e: 34.30 },
+      { min: 2200, max: 2376,name: 'Beit Lahia / NE',       n: 31.58, s: 31.52, w: 34.46, e: 34.56 },
+      { min: 2351, max: 2376,name: 'Far North',             n: 31.59, s: 31.54, w: 34.48, e: 34.56 },
+      { min: 3261, max: 3261,name: 'Isolated North',        n: 31.55, s: 31.53, w: 34.50, e: 34.54 },
+      { min: 8801, max: 9999,name: 'Far Border',            n: 31.24, s: 31.22, w: 34.24, e: 34.30 },
+    ];
+
+    function blockToRegion(blockStr) {
+      const num = parseFloat(blockStr);
+      if (isNaN(num)) return null;
+      for (const r of BLOCK_REGIONS) {
+        if (num >= r.min && num <= r.max) return r;
+      }
+      // Fallback: center of Gaza
+      return { name: 'Gaza', n: 31.45, s: 31.35, w: 34.30, e: 34.42 };
+    }
+
+    function randomInRegion(region) {
+      const lat = region.s + Math.random() * (region.n - region.s);
+      const lng = region.w + Math.random() * (region.e - region.w);
+      return [lat, lng];
+    }
+
+    // ====== INIT MAP ======
+    const map = L.map('map', {
+      center: [31.40, 34.38],
+      zoom: 11,
+      zoomControl: false,
+      attributionControl: false,
+      preferCanvas: true
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Gaza outline (approximate polygon)
+    const gazaOutline = L.polygon([
+      [31.593, 34.488], [31.584, 34.557], [31.522, 34.557],
+      [31.505, 34.498], [31.458, 34.468], [31.408, 34.398],
+      [31.375, 34.358], [31.342, 34.318], [31.292, 34.268],
+      [31.227, 34.218], [31.217, 34.242], [31.242, 34.278],
+      [31.278, 34.308], [31.317, 34.338], [31.355, 34.348],
+      [31.398, 34.368], [31.438, 34.398], [31.478, 34.428],
+      [31.518, 34.458], [31.558, 34.478], [31.593, 34.488]
+    ], {
+      color: 'rgba(230, 57, 70, 0.3)',
+      fillColor: 'rgba(230, 57, 70, 0.05)',
+      weight: 1,
+      dashArray: '5,5'
+    }).addTo(map);
+
+    // Region labels
+    const regionLabels = [
+      { name: 'Beit Lahia', lat: 31.555, lng: 34.51 },
+      { name: 'Jabalia', lat: 31.535, lng: 34.50 },
+      { name: 'Gaza City', lat: 31.505, lng: 34.465 },
+      { name: 'Deir al-Balah', lat: 31.415, lng: 34.35 },
+      { name: 'Khan Yunis', lat: 31.345, lng: 34.31 },
+      { name: 'Rafah', lat: 31.275, lng: 34.255 },
+    ];
+    regionLabels.forEach(r => {
+      L.marker([r.lat, r.lng], {
+        icon: L.divIcon({
+          className: '',
+          html: `<div style="color:rgba(255,255,255,0.25);font-size:11px;font-family:Inter;font-weight:600;text-transform:uppercase;letter-spacing:2px;white-space:nowrap;text-shadow:0 0 8px rgba(0,0,0,0.8);">${r.name}</div>`,
+          iconSize: [100, 20],
+          iconAnchor: [50, 10]
+        })
+      }).addTo(map);
+    });
+
+    // ====== DATA + STATE ======
+    let allData = [];
+    let chrono = [];
+    let currentIndex = -1;
+    let isPlaying = false;
+    let playInterval = null;
+    let speed = 1500;
+    let maxArea = 0;
+    let cumulativeArea = 0;
+    let cumulativeBlocks = 0;
+
+    // All map markers grouped by event index
+    const markersByEvent = {};
+    // Cumulative layer group
+    const allMarkersGroup = L.layerGroup().addTo(map);
+
+    // ====== LOAD DATA ======
+    async function init() {
+      const res = await fetch('/gaza-maps.jsonl');
+      allData = await res.json();
+      chrono = [...allData].sort((a, b) => new Date(a.date) - new Date(b.date));
+      maxArea = Math.max(...chrono.map(d => parseFloat(d.area_sq_km_displacement) || 0));
+
+      document.getElementById('intro-count').textContent = allData.length;
+      const slider = document.getElementById('timeline-slider');
+      slider.max = chrono.length - 1;
+      slider.value = 0;
+    }
+
+    init();
+
+    // ====== RENDER EVENT ======
+    function showEvent(index, skipAnimation = false) {
+      if (index < 0 || index >= chrono.length) return;
+      currentIndex = index;
+      const item = chrono[index];
+      const area = parseFloat(item.area_sq_km_displacement) || 0;
+      const blocks = item.displacement_blocks ? item.displacement_blocks.split(',').map(b => b.trim()).filter(Boolean) : [];
+      const blockCount = blocks.length;
+      const eventDate = new Date(item.date);
+      const dateStr = eventDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      const daysSinceStart = Math.floor((eventDate - new Date(chrono[0].date)) / (1000 * 60 * 60 * 24));
+
+      // Update cumulative
+      cumulativeArea = 0;
+      cumulativeBlocks = 0;
+      for (let i = 0; i <= index; i++) {
+        cumulativeArea += parseFloat(chrono[i].area_sq_km_displacement) || 0;
+        if (chrono[i].displacement_blocks) {
+          cumulativeBlocks += chrono[i].displacement_blocks.split(',').filter(b => b.trim()).length;
+        }
+      }
+
+      // Top counters
+      document.getElementById('ctr-orders').textContent = index + 1;
+      document.getElementById('ctr-area').textContent = cumulativeArea.toFixed(0);
+      document.getElementById('ctr-blocks').textContent = cumulativeBlocks.toLocaleString();
+      document.getElementById('ctr-days').textContent = daysSinceStart;
+
+      // Side panel event
+      document.getElementById('ev-date').textContent = dateStr;
+      document.getElementById('ev-area').textContent = area.toFixed(1);
+      document.getElementById('ev-blocks').textContent = `${blockCount} blocks designated`;
+      document.getElementById('ev-bar').style.width = `${Math.min(100, (area / maxArea) * 100)}%`;
+
+      const evCard = document.getElementById('current-event');
+      evCard.classList.add('active');
+      setTimeout(() => evCard.classList.remove('active'), 600);
+
+      // Map image
+      const mapImg = document.getElementById('ev-map-img');
+      if (item.map_full) {
+        mapImg.src = item.map_full;
+        mapImg.style.display = 'block';
+        mapImg.onclick = () => openImageModal(item.map_full);
+      } else {
+        mapImg.style.display = 'none';
+      }
+      // Link
+      const evLink = document.getElementById('ev-link');
+      if (item.link) {
+        evLink.href = item.link;
+        evLink.style.display = 'inline-block';
+      } else {
+        evLink.style.display = 'none';
+      }
+
+      // Timeline controls
+      document.getElementById('tl-date').textContent = dateStr;
+      document.getElementById('tl-index').textContent = `${index + 1} / ${chrono.length}`;
+      document.getElementById('timeline-slider').value = index;
+
+      // === MAP MARKERS ===
+      if (!markersByEvent[index]) {
+        markersByEvent[index] = [];
+        const markerRadius = Math.max(3, Math.min(14, Math.sqrt(area) * 1.8));
+        const opacity = Math.min(0.8, 0.25 + area / 100);
+
+        blocks.forEach(block => {
+          const region = blockToRegion(block);
+          if (!region) return;
+          const [lat, lng] = randomInRegion(region);
+
+          const circ = L.circleMarker([lat, lng], {
+            radius: markerRadius,
+            fillColor: area >= 100 ? '#e63946' : area >= 20 ? '#f77f00' : area >= 5 ? '#fcbf49' : '#e6394680',
+            fillOpacity: opacity,
+            color: 'rgba(230, 57, 70, 0.6)',
+            weight: 1,
+            className: 'displacement-marker'
+          });
+
+          circ.bindTooltip(`
+            <div style="font-family:Inter;font-size:12px;">
+              <strong style="color:#fcbf49">${item.date}</strong><br>
+              Block ${block}<br>
+              ${area.toFixed(1)} sq km
+            </div>
+          `, { direction: 'top', offset: [0, -8] });
+
+          markersByEvent[index].push(circ);
+          allMarkersGroup.addLayer(circ);
+        });
+      }
+
+      // Add pulse effect on current event markers
+      if (!skipAnimation && markersByEvent[index] && markersByEvent[index].length > 0) {
+        // Focus map on the markers of this event (smoothly)
+        const eventLatLngs = markersByEvent[index].map(m => m.getLatLng());
+        if (eventLatLngs.length > 0) {
+          const group = L.featureGroup(markersByEvent[index]);
+          map.flyToBounds(group.getBounds().pad(0.5), { duration: 0.8, maxZoom: 13 });
+        }
+      }
+
+      // Update event log
+      updateEventLog(index);
+    }
+
+    // ====== EVENT LOG ======
+    function updateEventLog(currentIdx) {
+      const log = document.getElementById('event-log');
+      log.innerHTML = '';
+
+      // Show last 20 events up to currentIdx
+      const start = Math.max(0, currentIdx - 19);
+      for (let i = start; i <= currentIdx; i++) {
+        const d = chrono[i];
+        const area = parseFloat(d.area_sq_km_displacement) || 0;
+        const div = document.createElement('div');
+        div.className = `log-item${i === currentIdx ? ' active' : ''}`;
+        div.innerHTML = `
+          <span class="log-dot"></span>
+          <span>${d.date}</span>
+          <span class="log-area">${area.toFixed(1)} km²</span>
+        `;
+        div.onclick = () => {
+          if (isPlaying) togglePlay();
+          showEvent(i);
+        };
+        log.appendChild(div);
+      }
+      // Scroll to bottom
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // ====== PLAYBACK ======
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('btn-play');
+      btn.textContent = isPlaying ? '⏸' : '▶';
+
+      if (isPlaying) {
+        if (currentIndex >= chrono.length - 1) {
+          // Reset
+          resetMap();
+          currentIndex = -1;
+        }
+        playInterval = setInterval(() => {
+          if (currentIndex < chrono.length - 1) {
+            showEvent(currentIndex + 1);
+          } else {
+            togglePlay(); // stop
+          }
+        }, speed);
+      } else {
+        clearInterval(playInterval);
+      }
+    }
+
+    function resetMap() {
+      allMarkersGroup.clearLayers();
+      Object.keys(markersByEvent).forEach(k => delete markersByEvent[k]);
+      cumulativeArea = 0;
+      cumulativeBlocks = 0;
+      currentIndex = -1;
+      map.flyTo([31.40, 34.38], 11, { duration: 0.6 });
+    }
+
+    // ====== CONTROLS ======
+    document.getElementById('btn-play').onclick = togglePlay;
+    document.getElementById('btn-next').onclick = () => {
+      if (currentIndex < chrono.length - 1) showEvent(currentIndex + 1);
+    };
+    document.getElementById('btn-prev').onclick = () => {
+      if (currentIndex > 0) {
+        // Remove markers for current event
+        if (markersByEvent[currentIndex]) {
+          markersByEvent[currentIndex].forEach(m => allMarkersGroup.removeLayer(m));
+          delete markersByEvent[currentIndex];
+        }
+        // Recalculate cumulative
+        showEvent(currentIndex - 1);
+      }
+    };
+
+    document.getElementById('timeline-slider').addEventListener('input', (e) => {
+      const target = parseInt(e.target.value);
+      if (isPlaying) togglePlay();
+      // Need to rebuild from scratch to this index
+      resetMap();
+      for (let i = 0; i <= target; i++) {
+        showEvent(i, true);
+      }
+      // Animate last one
+      showEvent(target);
+    });
+
+    // Speed buttons
+    document.querySelectorAll('.speed-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        speed = parseInt(btn.dataset.speed);
+        if (isPlaying) {
+          clearInterval(playInterval);
+          playInterval = setInterval(() => {
+            if (currentIndex < chrono.length - 1) {
+              showEvent(currentIndex + 1);
+            } else {
+              togglePlay();
+            }
+          }, speed);
+        }
+      });
+    });
+
+    // ====== IMAGE MODAL ======
+    function openImageModal(src) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('img-modal').classList.add('open');
+    }
+    document.getElementById('close-img-modal').onclick = () => {
+      document.getElementById('img-modal').classList.remove('open');
+    };
+    document.getElementById('img-modal').onclick = (e) => {
+      if (e.target === document.getElementById('img-modal')) {
+        document.getElementById('img-modal').classList.remove('open');
+      }
+    };
+
+    // ====== INTRO ======
+    document.getElementById('intro-start').addEventListener('click', () => {
+      document.getElementById('intro').classList.add('hidden');
+      setTimeout(() => {
+        document.getElementById('intro').style.display = 'none';
+      }, 1000);
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+      if (e.code === 'ArrowRight') { if (currentIndex < chrono.length - 1) showEvent(currentIndex + 1); }
+      if (e.code === 'ArrowLeft') {
+        if (currentIndex > 0) {
+          if (markersByEvent[currentIndex]) {
+            markersByEvent[currentIndex].forEach(m => allMarkersGroup.removeLayer(m));
+            delete markersByEvent[currentIndex];
+          }
+          showEvent(currentIndex - 1);
+        }
+      }
+      if (e.code === 'Escape') {
+        document.getElementById('img-modal').classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

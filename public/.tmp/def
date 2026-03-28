@@ -1,0 +1,306 @@
+#!/usr/bin/env python3
+"""Scraper for zionism.observer quotes database."""
+
+import json
+import time
+import re
+from urllib.request import urlopen, Request
+from html.parser import HTMLParser
+
+
+BASE = "https://zionism.observer"
+
+
+class PeopleListParser(HTMLParser):
+    """Parse the /database page to extract people links, names, roles, images, quote counts."""
+
+    def __init__(self):
+        super().__init__()
+        self.people = []
+        self.in_people_cards = False
+        self.in_li = False
+        self.current = {}
+        self.capture_text = ""
+        self.in_figcaption = False
+        self.in_small = False
+        self.in_a = False
+        self.current_href = ""
+        self.depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        if tag == "ul" and d.get("id") == "people-cards":
+            self.in_people_cards = True
+        if not self.in_people_cards:
+            return
+
+        if tag == "li":
+            self.in_li = True
+            self.current = {}
+
+        if tag == "a":
+            href = d.get("href", "")
+            if href and href.startswith("https://zionism.observer/") and "/database" not in href:
+                self.current_href = href
+                self.in_a = True
+
+        if tag == "img" and self.in_li:
+            src = d.get("src", "")
+            if src and "storage/genocide-quotes" in src:
+                if src.startswith("/"):
+                    src = BASE + src
+                self.current["image"] = src
+
+        if tag == "figcaption":
+            self.in_figcaption = True
+            self.capture_text = ""
+
+        if tag == "small":
+            self.in_small = True
+            self.capture_text = ""
+
+    def handle_data(self, data):
+        if not self.in_people_cards or not self.in_li:
+            return
+        if self.in_small:
+            self.capture_text += data
+        elif self.in_a and not self.in_figcaption:
+            # We're looking for text like "Achihon, Rotem" and "(1)"
+            stripped = data.strip()
+            if stripped and not stripped.startswith("("):
+                if "name_display" not in self.current:
+                    self.current["name_display"] = stripped
+            if stripped.startswith("("):
+                count_match = re.search(r'\((\d+)\)', stripped)
+                if count_match:
+                    self.current["quote_count"] = int(count_match.group(1))
+
+    def handle_endtag(self, tag):
+        if not self.in_people_cards:
+            return
+        if tag == "figcaption":
+            self.in_figcaption = False
+        if tag == "small":
+            self.in_small = False
+            role = self.capture_text.strip()
+            if role:
+                self.current["role"] = role
+        if tag == "a":
+            if self.in_a and self.current_href:
+                self.current["url"] = self.current_href
+                slug = self.current_href.replace(BASE + "/", "")
+                self.current["slug"] = slug
+            self.in_a = False
+        if tag == "li" and self.in_li:
+            self.in_li = False
+            if self.current.get("url"):
+                self.people.append(self.current)
+            self.current = {}
+        if tag == "ul":
+            self.in_people_cards = False
+
+
+class PersonQuotesParser(HTMLParser):
+    """Parse a person's page to extract all their quotes."""
+
+    def __init__(self):
+        super().__init__()
+        self.quotes = []
+        self.in_blockquote = False
+        self.in_quote_text = False
+        self.in_label = False
+        self.in_value = False
+        self.in_categories = False
+        self.in_cat_a = False
+        self.current_quote = {}
+        self.capture_text = ""
+        self.current_label = ""
+        self.current_cite_href = ""
+
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+
+        if tag == "blockquote":
+            self.in_blockquote = True
+            self.current_quote = {"categories": []}
+            self.current_cite_href = d.get("cite", "")
+            if self.current_cite_href:
+                self.current_quote["source_url"] = self.current_cite_href
+
+        if not self.in_blockquote:
+            return
+
+        if tag == "p" and "genocidal-intent-quote" in d.get("class", ""):
+            self.in_quote_text = True
+            self.capture_text = ""
+
+        if tag == "span":
+            cls = d.get("class", "")
+            if cls == "label":
+                self.in_label = True
+                self.capture_text = ""
+            elif cls == "value":
+                self.in_value = True
+                self.capture_text = ""
+
+        if tag == "li" and "categories" in d.get("class", ""):
+            self.in_categories = True
+
+        if tag == "a" and self.in_categories:
+            self.in_cat_a = True
+            self.capture_text = ""
+
+        if tag == "a" and self.in_value and not self.in_categories:
+            href = d.get("href", "")
+            if href:
+                self.current_quote["source_link"] = href
+
+        if tag == "a" and d.get("id") == "permalink-potentially-genocidal-israeli-quote":
+            href = d.get("href", "")
+            if href:
+                if href.startswith("/"):
+                    href = BASE + href
+                self.current_quote["permalink"] = href
+
+    def handle_data(self, data):
+        if not self.in_blockquote:
+            return
+        if self.in_quote_text:
+            self.capture_text += data
+        elif self.in_label:
+            self.capture_text += data
+        elif self.in_value:
+            self.capture_text += data
+        elif self.in_cat_a:
+            self.capture_text += data
+
+    def handle_endtag(self, tag):
+        if not self.in_blockquote:
+            return
+
+        if tag == "p" and self.in_quote_text:
+            self.in_quote_text = False
+            self.current_quote["quote"] = self.capture_text.strip()
+
+        if tag == "span" and self.in_label:
+            self.in_label = False
+            self.current_label = self.capture_text.strip().rstrip(":")
+
+        if tag == "span" and self.in_value:
+            self.in_value = False
+            val = self.capture_text.strip()
+            if self.current_label == "Date":
+                self.current_quote["date"] = val
+            elif self.current_label == "Source":
+                if val:
+                    self.current_quote["source_name"] = val
+            elif self.current_label == "Hat tip":
+                self.current_quote["hat_tip"] = val
+
+        if tag == "a" and self.in_cat_a:
+            self.in_cat_a = False
+            cat = self.capture_text.strip()
+            if cat:
+                self.current_quote["categories"].append(cat)
+
+        if tag == "li" and self.in_categories:
+            self.in_categories = False
+
+        if tag == "blockquote":
+            self.in_blockquote = False
+            if self.current_quote.get("quote"):
+                self.quotes.append(self.current_quote)
+            self.current_quote = {}
+
+
+def fetch(url):
+    """Fetch a URL and return the HTML."""
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0 (research bot)"})
+    with urlopen(req, timeout=30) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def main():
+    print("=== Scraping zionism.observer database ===")
+
+    # Step 1: Get list of people
+    print("[1/2] Fetching people list...")
+    html = fetch(BASE + "/database")
+    parser = PeopleListParser()
+    parser.feed(html)
+    people = parser.people
+
+    # Deduplicate by slug
+    seen_slugs = set()
+    unique_people = []
+    for p in people:
+        slug = p.get("slug", "")
+        if slug and slug not in seen_slugs:
+            seen_slugs.add(slug)
+            unique_people.append(p)
+    people = unique_people
+
+    print(f"   Found {len(people)} unique people")
+
+    # Step 2: Scrape each person's quotes
+    print("[2/2] Scraping individual quotes...")
+    all_quotes = []
+    for i, person in enumerate(people):
+        url = person.get("url", "")
+        name = person.get("name_display", person.get("slug", "???"))
+        if not url:
+            continue
+        try:
+            html = fetch(url)
+            qparser = PersonQuotesParser()
+            qparser.feed(html)
+            person["quotes"] = qparser.quotes
+            for q in qparser.quotes:
+                q["person_name"] = name
+                q["person_slug"] = person.get("slug", "")
+                q["person_image"] = person.get("image", "")
+                q["person_role"] = person.get("role", "")
+                all_quotes.append(q)
+            print(f"   [{i+1}/{len(people)}] {name}: {len(qparser.quotes)} quotes")
+        except Exception as e:
+            print(f"   [{i+1}/{len(people)}] ERROR {name}: {e}")
+            person["quotes"] = []
+        time.sleep(0.3)  # Polite delay
+
+    # Build output
+    output = {
+        "source": "zionism.observer",
+        "scraped_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "total_people": len(people),
+        "total_quotes": len(all_quotes),
+        "people": [],
+        "all_quotes": all_quotes,
+    }
+
+    for p in people:
+        output["people"].append({
+            "name": p.get("name_display", ""),
+            "slug": p.get("slug", ""),
+            "role": p.get("role", ""),
+            "image": p.get("image", ""),
+            "url": p.get("url", ""),
+            "quote_count": len(p.get("quotes", [])),
+        })
+
+    # Compute category stats
+    cat_counts = {}
+    for q in all_quotes:
+        for c in q.get("categories", []):
+            cat_counts[c] = cat_counts.get(c, 0) + 1
+    output["categories"] = dict(sorted(cat_counts.items(), key=lambda x: -x[1]))
+
+    out_path = "/home/humair/c4p/public/zionism-quotes.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+
+    print(f"\n✅ Done! Saved {len(all_quotes)} quotes from {len(people)} people to {out_path}")
+    print(f"   Categories: {output['categories']}")
+
+
+if __name__ == "__main__":
+    main()

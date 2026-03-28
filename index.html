@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gaza Maps - Real-time Visualization of Displacement and Safety Zones" />
+    <title>Gaza Maps - Visualization</title>
+    <!-- Google Fonts for sleek typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Left Sidebar: App Navigation -->
+      <aside class="sidebar-left">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+             <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <h1>Gaza Maps</h1>
+        </div>
+        <nav class="nav-menu">
+          <a href="#" class="nav-link active" id="tab-maps">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            Maps
+          </a>
+          <a href="#" class="nav-link" id="tab-journalists">
+             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+             </svg>
+             Journalists
+          </a>
+          <a href="#" class="nav-link" id="tab-leaflets">
+             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+             </svg>
+             Leaflets
+          </a>
+          <a href="#" class="nav-link" id="tab-incitement">
+             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-1.6-.4-3.2.2-4.1 1.5l5.2 5.2L2.5 16.3c-.6.6-.6 1.7 0 2.3.6.6 1.7.6 2.3 0l3.4-3.4 5.2 5.2c1.3-.9 1.9-2.5 1.5-4.1z"></path>
+             </svg>
+             Incitement
+          </a>
+          <a href="#" class="nav-link" id="tab-quotes">
+             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+             </svg>
+             Quotes
+          </a>
+          <a href="#" class="nav-link" id="tab-explore">
+             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+             </svg>
+             Explore
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Center Feed: Timeline of Maps -->
+      <main class="feed-col">
+        <header class="feed-header">
+          <h2 id="feed-title">Maps Timeline</h2>
+        </header>
+        
+        <!-- Maps Feed -->
+        <div id="feed-container" class="feed">
+          <div class="loading-state">Loading timeline...</div>
+        </div>
+
+        <!-- Journalists Feed -->
+        <div id="journalists-feed-container" class="feed hidden">
+          <div class="loading-state">Loading journalists...</div>
+        </div>
+
+        <!-- Leaflets Feed -->
+        <div id="leaflets-feed-container" class="feed hidden">
+          <div class="loading-state">Loading leaflets...</div>
+        </div>
+
+        <!-- Incitement Feed -->
+        <div id="incitement-feed-container" class="feed hidden">
+          <!-- Sub-navigation for Incitement -->
+          <div class="incitement-nav" style="display:flex; gap:16px; border-bottom:1px solid var(--border-color); margin-bottom:16px; padding-bottom:8px;">
+            <button class="brand-btn active" id="inc-btn-feed">Feed</button>
+            <button class="brand-btn" id="inc-btn-people">People</button>
+            <button class="brand-btn" id="inc-btn-orgs">Organizations</button>
+            <button class="brand-btn" id="inc-btn-targets">Targets</button>
+          </div>
+          <div id="incitement-content-area">
+             <div class="loading-state">Loading incitement data...</div>
+          </div>
+        </div>
+
+        <!-- Quotes Feed -->
+        <div id="quotes-feed-container" class="feed hidden">
+          <div class="incitement-nav" style="display:flex; gap:16px; border-bottom:1px solid var(--border-color); margin-bottom:16px; padding-bottom:8px;">
+            <button class="brand-btn active" id="zo-btn-feed">All Quotes</button>
+            <button class="brand-btn" id="zo-btn-people">People</button>
+            <button class="brand-btn" id="zo-btn-categories">Categories</button>
+          </div>
+          <div id="quotes-content-area">
+             <div class="loading-state">Loading quotes...</div>
+          </div>
+        </div>
+
+        <!-- Explore Feed -->
+        <div id="explore-feed-container" class="feed hidden">
+          <div class="explore-search-wrap">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="#71767b" stroke-width="2" fill="none" class="explore-search-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="explore-search" placeholder="Search journalists, leaflets, maps..." autocomplete="off">
+          </div>
+          <div id="explore-results"></div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar: Interactive Analytics and Charts -->
+      <aside class="sidebar-right">
+        <!-- Maps Stats -->
+        <div class="analytics-card sticky-stats" id="maps-stats-container">
+           <h3>Global Impacts Over Time</h3>
+           <p class="stats-subtitle">Displacement area progression</p>
+           <div class="chart-container">
+              <canvas id="displacementChart"></canvas>
+           </div>
+           
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="total-displacement">--</span>
+               <span class="stat-label">Max Sq Km Displaced</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="total-events">--</span>
+                <span class="stat-label">Recorded Events</span>
+             </div>
+           </div>
+        </div>
+
+        <!-- Journalists Stats -->
+        <div class="analytics-card sticky-stats hidden" id="journalists-stats-container">
+           <h3>Martyred Journalists</h3>
+           <p class="stats-subtitle">Distribution by Method</p>
+           <div class="chart-container">
+              <canvas id="journalistsChart"></canvas>
+           </div>
+           
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="total-journalists">--</span>
+               <span class="stat-label">Total Martyrs</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="most-affected-location">--</span>
+                <span class="stat-label">Most Affected</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="killed-at-home-count">--</span>
+               <span class="stat-label">Killed At Home</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="family-members-killed">--</span>
+                <span class="stat-label">Family Members</span>
+             </div>
+           </div>
+
+           <div class="location-breakdown">
+             <h4>By Location</h4>
+             <table id="location-table">
+               <thead><tr><th>Location</th><th>Killed</th><th>%</th></tr></thead>
+               <tbody></tbody>
+             </table>
+           </div>
+           
+           <div class="data-source-link">
+             <a href="https://stopmurderingjournalists.com" target="_blank" class="tweet-source">Source: stopmurderingjournalists.com</a>
+           </div>
+        </div>
+
+        <!-- Leaflets Stats -->
+        <div class="analytics-card sticky-stats hidden" id="leaflets-stats-container">
+           <h3>IDF Leaflets Archive</h3>
+           <p class="stats-subtitle">Distribution by Flag Type</p>
+           <div class="chart-container">
+              <canvas id="leafletsChart"></canvas>
+           </div>
+           
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="total-leaflets">--</span>
+               <span class="stat-label">Total Leaflets</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="leaflet-date-range">--</span>
+                <span class="stat-label">Date Range</span>
+             </div>
+           </div>
+        </div>
+
+        <!-- Incitement Stats -->
+        <div class="analytics-card sticky-stats hidden" id="incitement-stats-container">
+           <h3>Incitement Overview</h3>
+           <p class="stats-subtitle">Metrics from databasesforpalestine.org</p>
+           
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="inc-total-quotes">--</span>
+               <span class="stat-label">Total Quotes</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="inc-total-people">--</span>
+                <span class="stat-label">Inciters (People)</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="inc-total-orgs">--</span>
+               <span class="stat-label">Organizations</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="inc-total-targets">--</span>
+                <span class="stat-label">Targets</span>
+             </div>
+           </div>
+           
+           <div class="data-source-link" style="margin-top:20px;">
+             <a href="https://stopmurderingjournalists.com/incitement" target="_blank" class="tweet-source">Source: stopmurderingjournalists.com/incitement</a>
+           </div>
+        </div>
+
+        <!-- Quotes Stats -->
+        <div class="analytics-card sticky-stats hidden" id="quotes-stats-container">
+           <h3>Zionism Observer</h3>
+           <p class="stats-subtitle">Quotes database overview</p>
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="zo-total-quotes">--</span>
+               <span class="stat-label">Total Quotes</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="zo-total-people">--</span>
+                <span class="stat-label">People</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="zo-total-categories">--</span>
+               <span class="stat-label">Categories</span>
+             </div>
+           </div>
+           <div class="chart-container" style="margin-top:16px;">
+              <canvas id="quotesChart"></canvas>
+           </div>
+           <div class="data-source-link" style="margin-top:20px;">
+             <a href="https://zionism.observer/database" target="_blank" class="tweet-source">Source: zionism.observer</a>
+           </div>
+        </div>
+
+        <!-- Explore Stats -->
+        <div class="analytics-card sticky-stats hidden" id="explore-stats-container">
+           <h3>Data Overview</h3>
+           <p class="stats-subtitle">All datasets combined</p>
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="explore-total-maps">--</span>
+               <span class="stat-label">Map Events</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="explore-total-journalists">--</span>
+                <span class="stat-label">Journalists</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="explore-total-leaflets">--</span>
+               <span class="stat-label">Leaflets</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="explore-total-incitement">--</span>
+               <span class="stat-label">Incitements</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="explore-total-quotes">--</span>
+               <span class="stat-label">Zionist Quotes</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="explore-search-count">0</span>
+                <span class="stat-label">Results Found</span>
+             </div>
+           </div>
+           <div class="explore-sources">
+             <h4 style="margin-top:16px;margin-bottom:8px;font-size:0.9rem;color:var(--text-secondary)">Data Sources</h4>
+             <a href="https://gazamaps.com" target="_blank" class="tweet-source">gazamaps.com</a><br>
+             <a href="https://stopmurderingjournalists.com" target="_blank" class="tweet-source">stopmurderingjournalists.com</a><br>
+             <a href="https://idfleaflets.com" target="_blank" class="tweet-source">idfleaflets.com</a><br>
+             <a href="https://zionism.observer" target="_blank" class="tweet-source">zionism.observer</a>
+           </div>
+        </div>
+      </aside>
+    </div>
+    
+    <!-- Image Modal for Full View -->
+    <div id="image-modal" class="modal">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="modal-img">
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

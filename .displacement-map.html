@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaza — Forced Displacement Map & Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06060a;
+      --panel: rgba(8, 8, 14, 0.94);
+      --card: rgba(16, 16, 24, 0.96);
+      --border: rgba(255,255,255,0.05);
+      --text: #eaeaf2;
+      --text2: #8c8ca8;
+      --muted: #4a4a66;
+      --red: #dc2626;
+      --red2: #ef4444;
+      --orange: #ea580c;
+      --amber: #f59e0b;
+      --safe: #22c55e;
+      --total: #3b82f6;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    html, body { height: 100%; overflow: hidden; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    #map { position: absolute; inset: 0; z-index: 0; }
+    .leaflet-tile-pane { filter: saturate(0.15) brightness(0.28) contrast(1.1); }
+    .leaflet-control-attribution, .leaflet-control-zoom { display: none !important; }
+
+    /* ===== OVERLAYS ===== */
+    .vignette {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse at 55% 45%, transparent 30%, rgba(6,6,10,0.6) 100%);
+    }
+    .scanlines {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.03;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);
+    }
+
+    /* ===== INTRO ===== */
+    .intro {
+      position: fixed; inset: 0; z-index: 99999; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; transition: opacity 1.2s ease, visibility 1.2s;
+    }
+    .intro.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+    .intro-number {
+      font-size: clamp(72px, 14vw, 180px); font-weight: 900; line-height: 1;
+      background: linear-gradient(135deg, #dc2626 0%, #ea580c 40%, #f59e0b 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      animation: scaleIn 1.2s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes scaleIn { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .intro h2 {
+      font-size: clamp(14px, 2.5vw, 22px); font-weight: 300; color: var(--text2);
+      text-transform: uppercase; letter-spacing: 6px; margin-top: 12px;
+      animation: fadeUp 1s 0.4s ease forwards; opacity: 0;
+    }
+    .intro p {
+      font-size: 14px; color: var(--muted); margin-top: 32px; max-width: 500px; line-height: 1.7;
+      animation: fadeUp 1s 0.8s ease forwards; opacity: 0;
+    }
+    .intro button {
+      margin-top: 36px; padding: 14px 52px; border: 1px solid var(--red);
+      background: transparent; color: var(--red); font-family: var(--font);
+      font-size: 13px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      border-radius: 60px; cursor: pointer; transition: all 0.3s;
+      animation: fadeUp 1s 1.2s ease forwards; opacity: 0;
+    }
+    .intro button:hover { background: var(--red); color: #fff; box-shadow: 0 0 50px rgba(220,38,38,0.4); }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(16px); } }
+
+    /* ===== HUD HEADER ===== */
+    .hud-top {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: 54px;
+      background: var(--panel); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
+    }
+    .hud-left { display: flex; align-items: center; gap: 16px; min-width: 250px; }
+    .hud-back { color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 500;}
+    .hud-back:hover { color: var(--text); }
+    .hud-title { font-size: 14px; font-weight: 700; }
+    .hud-title span { font-weight: 300; color: var(--muted); margin-left: 6px; font-size: 12px; }
+    
+    /* Global Stats Progress Bar (NEW) */
+    .hud-center {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex: 1; max-width: 600px; margin: 0 20px;
+    }
+    .global-bar-wrap {
+      width: 100%; height: 6px; background: rgba(255,255,255,0.06);
+      border-radius: 3px; position: relative; overflow: hidden; margin-top: 2px;
+    }
+    .global-bar-fill {
+      height: 100%; background: var(--red); width: 0%;
+      transition: width 0.3s ease; position: relative;
+    }
+    .global-bar-fill::after {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 4px, transparent 4px, transparent 8px);
+    }
+    .global-stats-text {
+      display: flex; justify-content: space-between; width: 100%;
+      font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums;
+      margin-bottom: 4px; letter-spacing: 0.5px;
+    }
+    .stat-d { color: var(--red2); display: flex; align-items: center; gap: 6px;}
+    .stat-r { color: var(--safe); display: flex; align-items: center; gap: 6px;}
+    .stat-pct { color: #fff; font-size: 12px; font-weight: 800; }
+
+    .hud-counters { display: flex; gap: 28px; min-width: 250px; justify-content: flex-end;}
+    .ctr { text-align: center; }
+    .ctr-val {
+      font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums;
+      background: linear-gradient(135deg, var(--red2), var(--orange));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; align-items: baseline; display: flex; gap: 2px; justify-content: center;
+    }
+    .ctr-val small { font-size: 10px; color: var(--muted); font-weight: 600; -webkit-text-fill-color: initial;}
+    .ctr-lbl { font-size: 8px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+
+    /* ===== LEFT PANEL ===== */
+    .panel-left {
+      position: fixed; top: 54px; left: 0; width: 360px; bottom: 90px; z-index: 700;
+      background: var(--panel); backdrop-filter: blur(24px);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .panel-event {
+      padding: 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .ev-tag {
+      display: inline-block; padding: 2px 8px; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px; border-radius: 4px;
+      background: rgba(220,38,38,0.12); color: var(--red2); border: 1px solid rgba(220,38,38,0.2);
+    }
+    .ev-date { font-size: 12px; color: var(--amber); font-weight: 600; margin-top: 10px; }
+    .ev-area { font-size: 42px; font-weight: 900; line-height: 1; margin: 2px 0 4px; font-variant-numeric: tabular-nums;}
+    .ev-area small { font-size: 14px; font-weight: 400; color: var(--text2); }
+    .ev-detail { font-size: 11px; color: var(--muted); }
+    .ev-bar-wrap { height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; margin-top: 10px; }
+    .ev-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--red), var(--amber)); transition: width 0.5s; }
+
+    /* Map image area */
+    .panel-map-img {
+      flex: 1; overflow: hidden; position: relative; min-height: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border);
+    }
+    .panel-map-img img {
+      max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0;
+      transition: opacity 0.5s; cursor: zoom-in;
+    }
+    .panel-map-img img.loaded { opacity: 1; }
+    .panel-map-img .no-img {
+      font-size: 12px; color: var(--muted);
+    }
+    .ev-source {
+      display: block; padding: 10px 20px; font-size: 11px; color: var(--text2);
+      text-decoration: none; border-bottom: 1px solid var(--border);
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .ev-source:hover { background: rgba(255,255,255,0.03); color: var(--text); }
+
+    /* Event log */
+    .panel-log {
+      flex: 0 0 auto; max-height: 180px; overflow-y: auto; padding: 8px 12px;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.06) transparent;
+    }
+    .panel-log::-webkit-scrollbar { width: 3px; }
+    .panel-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+    .log-hdr { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); padding: 4px 8px; }
+    .log-row {
+      display: flex; align-items: center; gap: 8px; padding: 5px 8px;
+      border-radius: 6px; font-size: 11px; color: var(--text2);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .log-row:hover { background: rgba(255,255,255,0.03); }
+    .log-row.now { background: rgba(220,38,38,0.08); color: var(--text); }
+    .log-pip {
+      width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+      background: var(--muted);
+    }
+    .log-row.now .log-pip { background: var(--red2); box-shadow: 0 0 6px rgba(220,38,38,0.5); }
+    .log-val { margin-left: auto; font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .log-row.now .log-val { color: var(--amber); }
+
+    /* ===== BOTTOM CONTROLS ===== */
+    .hud-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 800; height: 90px;
+      background: var(--panel); backdrop-filter: blur(24px); border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; justify-content: center; padding: 0 20px;
+    }
+    .tl-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .tl-date { font-size: 12px; font-weight: 600; color: var(--amber); min-width: 130px; font-variant-numeric: tabular-nums; }
+    .tl-slider {
+      flex: 1; -webkit-appearance: none; height: 4px; border-radius: 2px;
+      background: rgba(255,255,255,0.06); outline: none; cursor: pointer;
+    }
+    .tl-slider::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; }
+    .tl-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--red2); box-shadow: 0 0 10px rgba(220,38,38,0.5);
+      cursor: pointer; margin-top: -5px;
+    }
+    .tl-slider::-moz-range-thumb {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--red2); border: none; cursor: pointer;
+    }
+    .tl-idx { font-size: 11px; color: var(--muted); min-width: 60px; text-align: right; font-variant-numeric: tabular-nums; }
+    .btn-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+    .cb {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      background: transparent; color: var(--text); cursor: pointer; font-size: 14px;
+      transition: all 0.2s;
+    }
+    .cb:hover { border-color: rgba(220,38,38,0.4); background: rgba(220,38,38,0.06); }
+    .cb.play { width: 48px; height: 48px; background: var(--red); border-color: var(--red); font-size: 18px; }
+    .cb.play:hover { box-shadow: 0 0 30px rgba(220,38,38,0.4); }
+    .spd-group { display: flex; gap: 4px; margin-left: 20px; }
+    .spd {
+      padding: 4px 10px; border-radius: 14px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); font-family: var(--font);
+      font-size: 11px; cursor: pointer; transition: all 0.2s;
+    }
+    .spd:hover, .spd.on { border-color: var(--amber); color: var(--amber); }
+    .spd-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-left: 20px; align-self: center; }
+
+    /* ===== IMAGE MODAL ===== */
+    .img-modal {
+      position: fixed; inset: 0; z-index: 99998;
+      background: rgba(0,0,0,0.93); display: none; align-items: center; justify-content: center;
+    }
+    .img-modal.open { display: flex; }
+    .img-modal img { max-width: 92vw; max-height: 92vh; border-radius: 8px; }
+    .img-modal .x { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 28px; cursor: pointer; }
+
+    /* ===== REGION LABELS (on map) ===== */
+    .region-label {
+      color: rgba(255,255,255,0.18); font-size: 10px; font-family: Inter, sans-serif;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 3px; white-space: nowrap;
+      text-shadow: 0 0 12px rgba(0,0,0,0.9);
+    }
+
+    /* ===== DISPLACEMENT ZONE STYLING ===== */
+    .zone-tooltip {
+      font-family: Inter, sans-serif !important;
+      font-size: 12px !important;
+      background: rgba(8,8,14,0.95) !important;
+      border: 1px solid rgba(220,38,38,0.3) !important;
+      border-radius: 8px !important;
+      color: #eaeaf2 !important;
+      padding: 8px 12px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+    }
+    .zone-tooltip strong { color: #f59e0b; }
+
+    @media (max-width: 960px) {
+      .hud-center { display: none; }
+    }
+    @media (max-width: 840px) {
+      .panel-left { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-number" id="intro-num">—</div>
+  <h2>Forced Displacement Orders</h2>
+  <p>Watch the systematic displacement of Gaza unfold on the map — from the first order on October 8, 2023, through every single directive that followed.</p>
+  <button id="intro-go">Enter the Map</button>
+</div>
+
+<!-- MAP -->
+<div id="map"></div>
+<div class="vignette"></div>
+<div class="scanlines"></div>
+
+<!-- HUD TOP -->
+<header class="hud-top">
+  <div class="hud-left">
+    <a href="/" class="hud-back">← Dashboard</a>
+    <div class="hud-title">Displacement Map<span>Live Analytics</span></div>
+  </div>
+  
+  <div class="hud-center">
+    <div class="global-stats-text">
+      <div class="stat-d">
+        Displaced Area
+        <span class="stat-pct" id="bar-pct">0%</span>
+        <span id="glb-disp">0 km²</span>
+      </div>
+      <div class="stat-r">
+        Remaining
+        <span id="glb-rem">365 km²</span>
+      </div>
+    </div>
+    <div class="global-bar-wrap">
+      <div class="global-bar-fill" id="glb-fill"></div>
+    </div>
+  </div>
+
+  <div class="hud-counters">
+    <div class="ctr"><div class="ctr-val" id="h-orders">0</div><div class="ctr-lbl">Orders</div></div>
+    <div class="ctr"><div class="ctr-val" id="h-area">0<small>km²</small></div><div class="ctr-lbl">Displaced</div></div>
+    <div class="ctr"><div class="ctr-val" id="h-day">0</div><div class="ctr-lbl">Day</div></div>
+  </div>
+</header>
+
+<!-- LEFT PANEL -->
+<aside class="panel-left" id="panel">
+  <div class="panel-event" id="pe">
+    <div class="ev-tag">Displacement Order</div>
+    <div class="ev-date" id="pe-date">—</div>
+    <div class="ev-area" id="pe-area">— <small>sq km</small></div>
+    <div class="ev-detail" id="pe-blocks">— blocks</div>
+    <div class="ev-bar-wrap"><div class="ev-bar-fill" id="pe-bar" style="width:0"></div></div>
+  </div>
+  <div class="panel-map-img" id="pe-img-wrap">
+    <img id="pe-img" alt="IDF displacement map" />
+    <div class="no-img" id="pe-no-img">No map image</div>
+  </div>
+  <a id="pe-link" class="ev-source" href="#" target="_blank">View on GazaMaps.com →</a>
+  <div class="panel-log" id="log">
+    <div class="log-hdr">Event Log</div>
+  </div>
+</aside>
+
+<!-- BOTTOM CONTROLS -->
+<div class="hud-bottom">
+  <div class="tl-row">
+    <span class="tl-date" id="b-date">—</span>
+    <input type="range" class="tl-slider" id="slider" min="0" max="1" value="0">
+    <span class="tl-idx" id="b-idx">0 / 0</span>
+  </div>
+  <div class="btn-row">
+    <button class="cb" id="btn-start" title="Jump to start">⏮</button>
+    <button class="cb" id="btn-prev" title="Previous">◀</button>
+    <button class="cb play" id="btn-play" title="Play / Pause">▶</button>
+    <button class="cb" id="btn-next" title="Next">▶</button>
+    <button class="cb" id="btn-end" title="Jump to end">⏭</button>
+    <span class="spd-lbl">Speed</span>
+    <div class="spd-group">
+      <button class="spd" data-ms="2500">0.5×</button>
+      <button class="spd on" data-ms="1200">1×</button>
+      <button class="spd" data-ms="600">2×</button>
+      <button class="spd" data-ms="250">5×</button>
+      <button class="spd" data-ms="80">10×</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE MODAL -->
+<div class="img-modal" id="modal"><span class="x" id="modal-x">×</span><img id="modal-img" /></div>
+
+<script>
+/* =====================================================================
+   CONSTANTS & ZONES 
+===================================================================== */
+const TOTAL_GAZA_AREA = 365;
+
+const ZONES = [
+  // North Gaza — Beit Lahia, Beit Hanoun
+  { lo:1,    hi:36,   n:31.590, s:31.530, w:34.455, e:34.555, name:'North Gaza' },
+  { lo:37,   hi:87,   n:31.540, s:31.500, w:34.440, e:34.540, name:'Jabalia' },
+  // Gaza City
+  { lo:88,   hi:112,  n:31.530, s:31.490, w:34.410, e:34.480, name:'Gaza City' },
+  { lo:114,  hi:139,  n:31.500, s:31.465, w:34.400, e:34.470, name:'Gaza City South' },
+  // Central-West
+  { lo:212,  hi:256,  n:31.470, s:31.420, w:34.340, e:34.430, name:'Wadi Gaza' },
+  { lo:260,  hi:270,  n:31.440, s:31.415, w:34.330, e:34.400, name:'Central West' },
+  // Deir al-Balah corridor
+  { lo:321,  hi:321,  n:31.430, s:31.405, w:34.340, e:34.380, name:'Deir al-Balah' },
+  // Central Gaza — Nuseirat, Bureij, Maghazi
+  { lo:568,  hi:620,  n:31.425, s:31.360, w:34.310, e:34.410, name:'Nuseirat / Bureij' },
+  { lo:622,  hi:660,  n:31.380, s:31.340, w:34.290, e:34.380, name:'Deir al-Balah South' },
+  // Khan Yunis
+  { lo:662,  hi:700,  n:31.365, s:31.320, w:34.280, e:34.360, name:'Khan Yunis North' },
+  { lo:701,  hi:756,  n:31.340, s:31.300, w:34.260, e:34.350, name:'Khan Yunis' },
+  { lo:760,  hi:789,  n:31.320, s:31.285, w:34.250, e:34.330, name:'Khan Yunis South' },
+  // Rafah and border
+  { lo:823,  hi:868,  n:31.290, s:31.250, w:34.230, e:34.310, name:'Rafah North' },
+  { lo:881,  hi:922,  n:31.265, s:31.230, w:34.220, e:34.295, name:'Rafah' },
+  { lo:951,  hi:984,  n:31.250, s:31.220, w:34.215, e:34.280, name:'Rafah Border' },
+  { lo:1122, hi:1126, n:31.245, s:31.225, w:34.240, e:34.275, name:'Border Pocket' },
+  // Mawasi coastal
+  { lo:1738, hi:1778, n:31.350, s:31.290, w:34.225, e:34.290, name:'Mawasi North' },
+  { lo:1781, hi:1820, n:31.310, s:31.255, w:34.215, e:34.275, name:'Mawasi South' },
+  // Far north / Beit Lahia deep
+  { lo:2200, hi:2250, n:31.585, s:31.545, w:34.470, e:34.545, name:'Beit Lahia East' },
+  { lo:2260, hi:2314, n:31.560, s:31.520, w:34.465, e:34.550, name:'Beit Hanoun' },
+  { lo:2315, hi:2376, n:31.575, s:31.540, w:34.480, e:34.555, name:'Far North' },
+  { lo:3261, hi:3261, n:31.555, s:31.545, w:34.500, e:34.520, name:'Isolated North' },
+  { lo:8801, hi:9999, n:31.240, s:31.220, w:34.235, e:34.270, name:'Far Border' },
+];
+
+function getZone(blockStr) {
+  const n = parseFloat(blockStr);
+  if (isNaN(n)) return null;
+  for (const z of ZONES) { if (n >= z.lo && n <= z.hi) return z; }
+  return null;
+}
+
+/* =====================================================================
+   MAP INIT
+===================================================================== */
+const map = L.map('map', {
+  center: [31.40, 34.38], zoom: 11.4,
+  zoomControl: false, attributionControl: false, preferCanvas: true,
+  maxBounds: [[31.10, 34.05], [31.70, 34.70]],
+  minZoom: 10, maxZoom: 15,
+});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', { maxZoom: 18 }).addTo(map);
+
+// Gaza outline
+L.polygon([
+  [31.593, 34.488],[31.585, 34.555],[31.540, 34.560],[31.520, 34.550],
+  [31.500, 34.520],[31.480, 34.490],[31.460, 34.470],[31.430, 34.440],
+  [31.400, 34.400],[31.370, 34.370],[31.340, 34.340],[31.310, 34.310],
+  [31.280, 34.280],[31.250, 34.250],[31.225, 34.225],[31.218, 34.240],
+  [31.230, 34.260],[31.260, 34.280],[31.290, 34.300],[31.320, 34.310],
+  [31.350, 34.330],[31.380, 34.345],[31.410, 34.370],[31.440, 34.400],
+  [31.470, 34.420],[31.500, 34.445],[31.530, 34.465],[31.560, 34.480],
+  [31.593, 34.488]
+], {
+  color: 'rgba(220,38,38,0.15)', fillColor: 'transparent', weight: 1, dashArray: '6,4'
+}).addTo(map);
+
+// Region labels
+[
+  { name:'Beit Lahia', lat:31.555, lng:34.508 },
+  { name:'Jabalia', lat:31.528, lng:34.498 },
+  { name:'Gaza City', lat:31.508, lng:34.460 },
+  { name:'Deir al-Balah', lat:31.415, lng:34.348 },
+  { name:'Khan Yunis', lat:31.340, lng:34.305 },
+  { name:'Rafah', lat:31.268, lng:34.252 },
+  { name:'Nuseirat', lat:31.398, lng:34.380 },
+  { name:'Mawasi', lat:31.315, lng:34.240 },
+].forEach(r => {
+  L.marker([r.lat, r.lng], {
+    icon: L.divIcon({ className: '', html: `<div class="region-label">${r.name}</div>`, iconSize: [120, 16], iconAnchor: [60, 8] })
+  }).addTo(map);
+});
+
+/* =====================================================================
+   STATE
+===================================================================== */
+let DATA = [], HISTORY = [], idx = -1, playing = false, timer = null, speed = 1200, maxArea = 1;
+// Track which zones are active on map (by zone key)
+const drawnZones = {}; // key → { layer, opacity, hits }
+const heatData = [];   // [lat, lng, intensity]
+let heatLayer = null;
+
+/* =====================================================================
+   LOAD + INIT
+===================================================================== */
+(async () => {
+  const r = await fetch('/gaza-maps.jsonl');
+  const json = await r.json();
+  
+  DATA = json.sort((a, b) => new Date(a.date) - new Date(b.date));
+  maxArea = Math.max(...DATA.map(d => parseFloat(d.area_sq_km_displacement) || 0));
+  
+  // Pre-calculate cumulative history for analytics
+  let cumulativeArea = 0;
+  DATA.forEach(d => {
+    let a = parseFloat(d.area_sq_km_displacement) || 0;
+    let s = parseFloat(d.area_sq_km_labeled_safe) || 0;
+    cumulativeArea += a;
+    cumulativeArea -= s;
+    if(cumulativeArea < 0) cumulativeArea = 0;
+    if(cumulativeArea > TOTAL_GAZA_AREA) cumulativeArea = TOTAL_GAZA_AREA;
+    HISTORY.push(cumulativeArea);
+  });
+
+  document.getElementById('intro-num').textContent = DATA.length;
+  document.getElementById('slider').max = DATA.length - 1;
+
+  // Precompute heat layer
+  heatLayer = L.heatLayer([], {
+    radius: 22, blur: 18, maxZoom: 14,
+    gradient: { 0.2: '#1a1a2e', 0.4: '#dc2626', 0.6: '#ea580c', 0.8: '#f59e0b', 1.0: '#fef3c7' }
+  }).addTo(map);
+})();
+
+/* =====================================================================
+   SHOW EVENT
+===================================================================== */
+function showEvent(i, fast = false) {
+  if (i < 0 || i >= DATA.length) return;
+  idx = i;
+  const d = DATA[i];
+  const area = parseFloat(d.area_sq_km_displacement) || 0;
+  const blocks = d.displacement_blocks ? d.displacement_blocks.split(',').map(b => b.trim()).filter(Boolean) : [];
+  const dt = new Date(d.date);
+  const nice = dt.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+  const day = Math.floor((dt - new Date(DATA[0].date)) / 86400000);
+
+  // Global Analytics State
+  const currentTotalDisplaced = HISTORY[i];
+  const remainingArea = TOTAL_GAZA_AREA - currentTotalDisplaced;
+  const pct = (currentTotalDisplaced / TOTAL_GAZA_AREA) * 100;
+
+  // HUD
+  document.getElementById('h-orders').textContent = i + 1;
+  document.getElementById('h-area').innerHTML = `${currentTotalDisplaced.toFixed(0)}<small>km²</small>`;
+  document.getElementById('h-day').textContent = day;
+
+  // Total Displacement Progress Bar (Top)
+  document.getElementById('bar-pct').textContent = `${pct.toFixed(1)}%`;
+  document.getElementById('glb-fill').style.width = `${pct}%`;
+  document.getElementById('glb-disp').textContent = `${currentTotalDisplaced.toFixed(1)} km²`;
+  document.getElementById('glb-rem').textContent = `${remainingArea.toFixed(1)} km²`;
+
+  // Panel event
+  document.getElementById('pe-date').textContent = nice;
+  document.getElementById('pe-area').innerHTML = `${area.toFixed(1)} <small>sq km</small>`;
+  document.getElementById('pe-blocks').textContent = `${blocks.length} block${blocks.length !== 1 ? 's' : ''} designated`;
+  document.getElementById('pe-bar').style.width = `${Math.min(100, (area / maxArea) * 100)}%`;
+
+  // Map image
+  const img = document.getElementById('pe-img');
+  const noImg = document.getElementById('pe-no-img');
+  if (d.map_full) {
+    img.onload = () => img.classList.add('loaded');
+    img.src = d.map_full;
+    img.onclick = () => openModal(d.map_full);
+    noImg.style.display = 'none';
+    img.style.display = '';
+    img.classList.remove('loaded');
+  } else {
+    img.style.display = 'none';
+    noImg.style.display = '';
+  }
+
+  // Link
+  const link = document.getElementById('pe-link');
+  link.href = d.link || '#';
+
+  // Timeline
+  document.getElementById('b-date').textContent = nice;
+  document.getElementById('b-idx').textContent = `${i + 1} / ${DATA.length}`;
+  document.getElementById('slider').value = i;
+
+  // === MAP: Draw displacement zones as filled rectangles ===
+  const affectedZones = new Set();
+  blocks.forEach(blockStr => {
+    const z = getZone(blockStr);
+    if (!z) return;
+    const key = `${z.lo}-${z.hi}`;
+    affectedZones.add(key);
+
+    // Add heat data
+    const lat = z.s + (z.n - z.s) * 0.5 + (Math.random() - 0.5) * (z.n - z.s) * 0.3;
+    const lng = z.w + (z.e - z.w) * 0.5 + (Math.random() - 0.5) * (z.e - z.w) * 0.3;
+    heatData.push([lat, lng, Math.min(1, area / 50)]);
+
+    if (!drawnZones[key]) {
+      // First time — draw the zone rectangle
+      const bounds = [[z.s, z.w], [z.n, z.e]];
+      const rect = L.rectangle(bounds, {
+        color: 'rgba(220,38,38,0.5)',
+        fillColor: 'rgba(220,38,38,0.12)',
+        weight: 1,
+        fillOpacity: 0.12,
+        className: 'displacement-zone'
+      });
+      rect.bindTooltip(`<strong>${z.name}</strong><br>${d.date} — ${area.toFixed(1)} sq km`, {
+        className: 'zone-tooltip', direction: 'top', sticky: true
+      });
+      rect.addTo(map);
+      drawnZones[key] = { layer: rect, hits: 1 };
+    } else {
+      // Already drawn — intensify
+      drawnZones[key].hits++;
+      const hits = drawnZones[key].hits;
+      const opacity = Math.min(0.55, 0.08 + hits * 0.03);
+      const borderOpacity = Math.min(0.7, 0.2 + hits * 0.04);
+      drawnZones[key].layer.setStyle({
+        fillOpacity: opacity,
+        fillColor: hits > 10 ? '#dc2626' : hits > 5 ? '#ea580c' : 'rgba(220,38,38,0.8)',
+        color: `rgba(220,38,38,${borderOpacity})`,
+        weight: hits > 8 ? 2 : 1,
+      });
+    }
+  });
+
+  // Update heat layer
+  heatLayer.setLatLngs(heatData);
+
+  // Camera: fly to affected zone center (if not too fast)
+  if (!fast && blocks.length > 0) {
+    const zoneCenters = [];
+    affectedZones.forEach(key => {
+      const z = drawnZones[key];
+      if (z) zoneCenters.push(z.layer.getBounds().getCenter());
+    });
+    if (zoneCenters.length > 0) {
+      const avgLat = zoneCenters.reduce((s, c) => s + c.lat, 0) / zoneCenters.length;
+      const avgLng = zoneCenters.reduce((s, c) => s + c.lng, 0) / zoneCenters.length;
+      map.flyTo([avgLat, avgLng], area > 50 ? 11 : 12.5, { duration: 0.7, easeLinearity: 0.5 });
+    }
+  }
+
+  // Update log
+  updateLog(i);
+}
+
+/* =====================================================================
+   EVENT LOG
+===================================================================== */
+function updateLog(ci) {
+  const log = document.getElementById('log');
+  log.innerHTML = '<div class="log-hdr">Event Log</div>';
+  const start = Math.max(0, ci - 14);
+  for (let j = start; j <= ci; j++) {
+    const d = DATA[j];
+    const a = parseFloat(d.area_sq_km_displacement) || 0;
+    const row = document.createElement('div');
+    row.className = `log-row${j === ci ? ' now' : ''}`;
+    row.innerHTML = `<span class="log-pip"></span><span>${d.date}</span><span class="log-val">${a.toFixed(1)} km²</span>`;
+    row.onclick = () => { if (playing) togglePlay(); jumpTo(j); };
+    log.appendChild(row);
+  }
+  log.scrollTop = log.scrollHeight;
+}
+
+/* =====================================================================
+   PLAYBACK
+===================================================================== */
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btn-play').textContent = playing ? '⏸' : '▶';
+  if (playing) {
+    if (idx >= DATA.length - 1) jumpTo(-1);
+    tick();
+  } else {
+    clearTimeout(timer);
+  }
+}
+function tick() {
+  if (!playing) return;
+  if (idx < DATA.length - 1) {
+    showEvent(idx + 1, speed <= 300);
+    timer = setTimeout(tick, speed);
+  } else {
+    playing = false;
+    document.getElementById('btn-play').textContent = '▶';
+  }
+}
+function jumpTo(target) {
+  // Rebuild from scratch
+  Object.values(drawnZones).forEach(z => map.removeLayer(z.layer));
+  Object.keys(drawnZones).forEach(k => delete drawnZones[k]);
+  heatData.length = 0;
+  if (target < 0) {
+    idx = -1;
+    // Reset global analytics UI back to 0
+    document.getElementById('bar-pct').textContent = `0%`;
+    document.getElementById('glb-fill').style.width = `0%`;
+    document.getElementById('glb-disp').textContent = `0 km²`;
+    document.getElementById('glb-rem').textContent = `365 km²`;
+    document.getElementById('h-orders').textContent = "0";
+    document.getElementById('h-area').innerHTML = `0<small>km²</small>`;
+    document.getElementById('h-day').textContent = "0";
+    return;
+  }
+  for (let j = 0; j <= target; j++) showEvent(j, true);
+  showEvent(target);
+  map.flyTo([31.40, 34.38], 11.4, { duration: 0.5 });
+}
+
+/* =====================================================================
+   CONTROLS
+===================================================================== */
+document.getElementById('btn-play').onclick = togglePlay;
+document.getElementById('btn-next').onclick = () => { if (idx < DATA.length - 1) showEvent(idx + 1); };
+document.getElementById('btn-prev').onclick = () => {
+  if (idx > 0) jumpTo(idx - 1);
+};
+document.getElementById('btn-start').onclick = () => { if (playing) togglePlay(); jumpTo(0); };
+document.getElementById('btn-end').onclick = () => { if (playing) togglePlay(); jumpTo(DATA.length - 1); };
+document.getElementById('slider').addEventListener('input', e => {
+  if (playing) togglePlay();
+  jumpTo(parseInt(e.target.value));
+});
+document.querySelectorAll('.spd').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.spd').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    speed = parseInt(b.dataset.ms);
+    if (playing) { clearTimeout(timer); tick(); }
+  };
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowRight') { if (idx < DATA.length - 1) showEvent(idx + 1); }
+  if (e.code === 'ArrowLeft') { if (idx > 0) jumpTo(idx - 1); }
+  if (e.code === 'Escape') document.getElementById('modal').classList.remove('open');
+});
+
+// Modal
+function openModal(src) { document.getElementById('modal-img').src = src; document.getElementById('modal').classList.add('open'); }
+document.getElementById('modal-x').onclick = () => document.getElementById('modal').classList.remove('open');
+document.getElementById('modal').onclick = e => { if (e.target.id === 'modal') document.getElementById('modal').classList.remove('open'); };
+
+// Intro
+document.getElementById('intro-go').onclick = () => document.getElementById('intro').classList.add('gone');
+</script>
+</body>
+</html>

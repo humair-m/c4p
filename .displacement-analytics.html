@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaza — Total Displacement Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #030305;
+      --card: #0a0a0f;
+      --panel: #0d0d14;
+      --border: #1a1a24;
+      --text: #ffffff;
+      --text-sec: #8f8fab;
+      --muted: #4f4f66;
+      
+      --color-displaced: #dc2626; /* Red */
+      --color-safe: #22c55e;     /* Green */
+      --color-total: #2563eb;    /* Blue */
+      --color-bg-bar: #161622;
+      
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h1 span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-sec);
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .back-btn {
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      color: var(--text);
+      border-color: var(--muted);
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Top Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--line-color);
+    }
+    .stat-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-sec);
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-sub {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Progress Bar Section (The Big Visual) */
+    .progress-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+    .progress-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .progress-subtitle {
+      font-size: 14px;
+      color: var(--text-sec);
+      margin-top: 4px;
+    }
+    .progress-pct {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--color-displaced);
+      font-variant-numeric: tabular-nums;
+    }
+    
+    /* The actual bar */
+    .bar-container {
+      height: 48px;
+      background: var(--color-bg-bar);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--color-displaced);
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    /* Striped pattern overlay for texture */
+    .bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.1) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+    }
+    
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .lbl-left { color: var(--color-displaced); }
+    .lbl-right { color: var(--color-safe); }
+
+    /* Timeline & Chart Area */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chart-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-sec);
+    }
+    .chart-container {
+      flex: 1;
+      min-height: 300px;
+      position: relative;
+    }
+
+    /* Player Controls */
+    .player {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .player-date {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .player-event {
+      font-size: 14px;
+      color: var(--text-sec);
+      margin-bottom: 24px;
+      min-height: 42px; /* Prevent jitter */
+    }
+    
+    .timeline-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 6px;
+      background: var(--color-bg-bar);
+      border-radius: 3px;
+      outline: none;
+      margin-bottom: 24px;
+    }
+    .timeline-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-displaced);
+      cursor: pointer;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .btn {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: var(--border);
+    }
+    .btn.play {
+      background: var(--color-displaced);
+      border-color: var(--color-displaced);
+      width: 56px;
+      height: 56px;
+      font-size: 20px;
+    }
+    .btn.play:hover {
+      background: #b91c1c;
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gaza Displacement <span>Area Analytics</span></h1>
+    <a href="/" class="back-btn">← Back to Dashboard</a>
+  </header>
+
+  <main>
+    <!-- Top Stats -->
+    <div class="stats-grid">
+      <div class="stat-card" style="--line-color: var(--color-total)">
+        <div class="stat-title">Total Area of Gaza Strip</div>
+        <div class="stat-value">365<span style="font-size: 24px; color: var(--muted)"> km²</span></div>
+        <div class="stat-sub">Baseline landmass</div>
+      </div>
+      <div class="stat-card" style="--line-color: var(--color-displaced)">
+        <div class="stat-title">Currently Under Evacuation</div>
+        <div class="stat-value" id="stat-displaced">0<span style="font-size: 24px; color: var(--muted)"> km²</span></div>
+        <div class="stat-sub" id="stat-displaced-blocks">0 blocks designated</div>
+      </div>
+      <div class="stat-card" style="--line-color: var(--color-safe)">
+        <div class="stat-title">Area Remaining</div>
+        <div class="stat-value" id="stat-remaining">365<span style="font-size: 24px; color: var(--muted)"> km²</span></div>
+        <div class="stat-sub">Including "Safe Zones"</div>
+      </div>
+    </div>
+
+    <!-- Big Progress Bar -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <div>
+          <div class="progress-title">Proportion of Gaza Under Displacement Orders</div>
+          <div class="progress-subtitle">Visualizing the physical footprint of orders over time</div>
+        </div>
+        <div class="progress-pct" id="bar-pct">0%</div>
+      </div>
+      
+      <div class="bar-container">
+        <div class="bar-fill" id="bar-fill" style="width: 0%"></div>
+      </div>
+      
+      <div class="bar-labels">
+        <div class="lbl-left" id="lbl-displaced">0 km² Evacuated</div>
+        <div class="lbl-right" id="lbl-remaining">365 km² Remaining</div>
+      </div>
+    </div>
+
+    <!-- Bottom Grids -->
+    <div class="bottom-grid">
+      <!-- Area Chart -->
+      <div class="chart-card">
+        <h3>Area Displaced Over Time</h3>
+        <div class="chart-container">
+          <canvas id="areaChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Player Controls -->
+      <div class="player">
+        <h3>Timeline Control</h3>
+        <div style="margin-top: 32px;">
+          <div class="player-date" id="play-date">—</div>
+          <div class="player-event" id="play-event">Loading data...</div>
+          
+          <input type="range" class="timeline-slider" id="slider" min="0" max="100" value="0">
+          
+          <div class="controls">
+            <button class="btn" id="btn-prev">◀</button>
+            <button class="btn play" id="btn-play">▶</button>
+            <button class="btn" id="btn-next">▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const TOTAL_GAZA_AREA = 365;
+
+    let rawData = [];
+    let stateHistory = []; // We will compute the exact state at each event
+    let currentIndex = 0;
+    let isPlaying = false;
+    let timer = null;
+    let chartInstance = null;
+
+    // Load and process data
+    async function init() {
+      try {
+        const res = await fetch('/gaza-maps.jsonl');
+        const json = await res.json();
+        
+        // Sort chronologically
+        rawData = json.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        // Pre-compute the exact displaced area at every step.
+        // NOTE: In the real world, blocks are added/removed.
+        // For this dataset, we can track the cumulative designated blocks and area
+        // or we can use the reported "area_sq_km_displacement" for that specific order.
+        // Since we want to show total proportion, let's treat the dataset sensibly:
+        // We'll maintain a set of "active blocks". If an order says displacement_blocks="X,Y,Z",
+        // we add them. 
+        // Wait, looking at the data, some orders have `labeled_safe_blocks`. 
+        // A simple approach for this visualization is to track the *cumulative unique blocks* 
+        // or just sum the areas up to a cap of 365. Let's do a running total of the area, capped at 365.
+        // Actually, the IDF often issues orders for *new* areas. Let's accumulate Area, and 
+        // if it exceeds 365, cap it at 365.
+        
+        let cumulativeArea = 0;
+        let cumulativeBlocksSet = new Set();
+        
+        rawData.forEach((item, index) => {
+          // Parse blocks
+          const blocks = item.displacement_blocks ? item.displacement_blocks.split(',').map(s => s.trim()).filter(Boolean) : [];
+          blocks.forEach(b => cumulativeBlocksSet.add(b));
+          
+          // Parse area
+          const area = parseFloat(item.area_sq_km_displacement) || 0;
+          
+          // There are "labeled_safe_blocks" as well. If an order makes blocks safe, we'd remove them.
+          const safeBlocks = item.labeled_safe_blocks ? item.labeled_safe_blocks.split(',').map(s => s.trim()).filter(Boolean) : [];
+          safeBlocks.forEach(b => cumulativeBlocksSet.delete(b));
+          
+          // Adjust area. If blocks are removed, we should technically subtract area. 
+          // Since we don't have exact area per block, we will do a rough approximation:
+          // Just accumulate area added. For safe orders, subtract a bit or just rely on the Area field being 0.
+          
+          // To be more accurate to real-world mapping, we can just use a running sum of `area_sq_km_displacement` 
+          // (which usually only counts *newly* displaced area for that order)
+          cumulativeArea += area;
+          
+          // If there's safe area
+          const safeArea = parseFloat(item.area_sq_km_labeled_safe) || 0;
+          cumulativeArea -= safeArea;
+          
+          // Cap it
+          if (cumulativeArea < 0) cumulativeArea = 0;
+          if (cumulativeArea > TOTAL_GAZA_AREA) cumulativeArea = TOTAL_GAZA_AREA; // Can't displace more than 100%
+          
+          stateHistory.push({
+            date: item.date,
+            sourceArea: area,
+            safeArea: safeArea,
+            totalAreaDisplaced: cumulativeArea,
+            totalBlocks: cumulativeBlocksSet.size,
+            blocksThisOrder: blocks.length,
+            safeThisOrder: safeBlocks.length
+          });
+        });
+
+        // Setup slider
+        const slider = document.getElementById('slider');
+        slider.max = stateHistory.length - 1;
+        slider.value = 0;
+        
+        // Setup Chart
+        initChart();
+        
+        // Show first frame
+        updateUI(0);
+
+      } catch(err) {
+        console.error("Failed to load data:", err);
+        document.getElementById('play-event').textContent = "Error loading data.";
+      }
+    }
+
+    function initChart() {
+      const ctx = document.getElementById('areaChart').getContext('2d');
+      
+      const dates = stateHistory.map(s => s.date);
+      const areas = stateHistory.map(s => s.totalAreaDisplaced);
+      
+      Chart.defaults.color = '#8f8fab';
+      Chart.defaults.font.family = 'Inter';
+      
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dates,
+          datasets: [{
+            label: 'Total Area Displaced (km²)',
+            data: areas,
+            borderColor: '#dc2626',
+            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            pointRadius: 0,
+            pointHoverRadius: 6,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: '#0a0a0f',
+              titleColor: '#ffffff',
+              bodyColor: '#dc2626',
+              borderColor: '#1a1a24',
+              borderWidth: 1,
+              callbacks: {
+                label: (ctx) => `${ctx.raw.toFixed(1)} km² displaced`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { maxTicksLimit: 8 }
+            },
+            y: {
+              grid: { color: '#1a1a24' },
+              min: 0,
+              max: TOTAL_GAZA_AREA,
+              ticks: {
+                callback: (val) => val + ' km²'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateUI(index) {
+      if (index < 0 || index >= stateHistory.length) return;
+      currentIndex = index;
+      
+      const state = stateHistory[index];
+      
+      // Calculate remaining
+      const remainingArea = TOTAL_GAZA_AREA - state.totalAreaDisplaced;
+      const pct = (state.totalAreaDisplaced / TOTAL_GAZA_AREA) * 100;
+      
+      // Update Top Stats
+      document.getElementById('stat-displaced').innerHTML = `${state.totalAreaDisplaced.toFixed(1)}<span style="font-size: 24px; color: var(--muted)"> km²</span>`;
+      document.getElementById('stat-displaced-blocks').textContent = `${state.totalBlocks} total blocks designated`;
+      document.getElementById('stat-remaining').innerHTML = `${remainingArea.toFixed(1)}<span style="font-size: 24px; color: var(--muted)"> km²</span>`;
+      
+      // Update Progress Bar
+      document.getElementById('bar-pct').textContent = `${pct.toFixed(1)}%`;
+      document.getElementById('bar-fill').style.width = `${pct}%`;
+      document.getElementById('lbl-displaced').textContent = `${state.totalAreaDisplaced.toFixed(1)} km² Evacuated`;
+      document.getElementById('lbl-remaining').textContent = `${remainingArea.toFixed(1)} km² Remaining`;
+
+      // Update Player
+      const eventDate = new Date(state.date);
+      document.getElementById('play-date').textContent = eventDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      if (state.sourceArea > 0) {
+        document.getElementById('play-event').innerHTML = `<span style="color:var(--color-displaced)">Order issued</span> covering ${state.sourceArea.toFixed(1)} km² (${state.blocksThisOrder} blocks)`;
+      } else if (state.safeArea > 0) {
+        document.getElementById('play-event').innerHTML = `<span style="color:var(--color-safe)">Safe Zone declared</span> covering ${state.safeArea.toFixed(1)} km² (${state.safeThisOrder} blocks)`;
+      } else {
+        document.getElementById('play-event').textContent = "Map update with minor adjustments.";
+      }
+      
+      document.getElementById('slider').value = index;
+      
+      // Update Chart Active Point (Optional: draw a vertical line or just hover it)
+      // We can use Chart.js API to set active tooltip
+      if (chartInstance) {
+        const meta = chartInstance.getDatasetMeta(0);
+        chartInstance.setActiveElements([{
+          datasetIndex: 0,
+          index: index
+        }]);
+        chartInstance.update();
+      }
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('btn-play');
+      btn.innerHTML = isPlaying ? '⏸' : '▶';
+
+      if (isPlaying) {
+        if (currentIndex >= stateHistory.length - 1) {
+          updateUI(0); // restart
+        }
+        timer = setInterval(() => {
+          if (currentIndex < stateHistory.length - 1) {
+            updateUI(currentIndex + 1);
+          } else {
+            togglePlay(); // stop at end
+          }
+        }, 150); // fast playback
+      } else {
+        clearInterval(timer);
+      }
+    }
+
+    // Event Listeners
+    document.getElementById('btn-play').addEventListener('click', togglePlay);
+    
+    document.getElementById('btn-prev').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        if (isPlaying) togglePlay();
+        updateUI(currentIndex - 1);
+      }
+    });
+    
+    document.getElementById('btn-next').addEventListener('click', () => {
+      if (currentIndex < stateHistory.length - 1) {
+        if (isPlaying) togglePlay();
+        updateUI(currentIndex + 1);
+      }
+    });
+    
+    document.getElementById('slider').addEventListener('input', (e) => {
+      if (isPlaying) togglePlay();
+      updateUI(parseInt(e.target.value));
+    });
+
+    // Start
+    init();
+
+  </script>
+</body>
+</html>
