@@ -167,15 +167,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function createTweetCard(item) {
     const card = document.createElement('div');
-    card.className = 'tweet-card';
+    card.className = 'zo-quote-card';
     
     // Create badges
     let badgesHtml = '';
     if (item.displacement_blocks) {
-      badgesHtml += `<div class="badge danger">Displacement Blocks: ${item.displacement_blocks.split(',').length}</div>`;
+      badgesHtml += '<span class="zo-cat-pill">Displacement Blocks: ' + item.displacement_blocks.split(',').length + '</span>';
     }
     if (item.labeled_safe_blocks) {
-      badgesHtml += `<div class="badge safe">Safe Blocks: ${item.labeled_safe_blocks.split(',').length}</div>`;
+      badgesHtml += '<span class="zo-cat-pill" style="background:rgba(34,197,94,0.15);color:#22c55e;border-color:rgba(34,197,94,0.25);">Safe Blocks: ' + item.labeled_safe_blocks.split(',').length + '</span>';
     }
 
     // Prepare images
@@ -184,41 +184,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (item.map_idf) images.push(item.map_idf);
     if (item.map_zoom) images.push(item.map_zoom);
     
-    let gridClass = `grid-${images.length}`;
+    let gridClass = 'grid-' + images.length;
     if (images.length === 0) gridClass = '';
     
-    const imagesHtml = images.length > 0 ? `
-      <div class="image-grid ${gridClass}">
-        ${images.map(src => `<img src="${src}" alt="Map View" onclick="openModal('${src}')" loading="lazy" />`).join('')}
-      </div>
-    ` : '';
+    let imagesHtml = '';
+    if (images.length > 0) {
+      imagesHtml = '<div class="image-grid ' + gridClass + '" style="margin-top:12px;">';
+      imagesHtml += images.map(src => '<img src="' + src + '" alt="Map View" onclick="openModal(\'' + src + '\')" loading="lazy" style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);" />').join('');
+      imagesHtml += '</div>';
+    }
 
     const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = new Date(item.date).toLocaleDateString(undefined, dateOptions);
 
-    card.innerHTML = `
-      <div class="tweet-avatar">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-      </div>
-      <div class="tweet-content">
-        <div class="tweet-header">
-          <span class="tweet-author">IDF Update</span>
-          <span class="tweet-meta">· ${formattedDate}</span>
-        </div>
-        <div class="tweet-body">
-          Update reported regarding designated blocks. 
-          Displaced Area: <strong>${item.area_sq_km_displacement} sq km</strong>. 
-          Safe Area: <strong>${item.area_sq_km_labeled_safe} sq km</strong>.<br>
-          <a href="${item.source}" target="_blank" class="tweet-source" onclick="event.stopPropagation()">View Source</a>
-        </div>
-        ${badgesHtml ? `<div class="badge-container">${badgesHtml}</div>` : ''}
-        ${imagesHtml}
-      </div>
-    `;
+    // Build meta line
+    let metaLine = '@idf_update · Maps · ' + formattedDate;
+
+    // Avatar
+    const avatarHtml = '<div class="zo-avatar-ring"><img src="/c4p-logo.png" alt="" class="zo-avatar"></div>';
+
+    let html = '<div class="zo-card-layout">';
+    html += avatarHtml;
+    html += '<div class="zo-card-body">';
+    html += '<div class="zo-name-row"><span class="zo-name">IDF Update</span><span class="zo-verified" title="Verified source">&#10003;</span></div>';
+    html += '<div class="zo-meta">' + metaLine + '</div>';
+    
+    html += '<div class="zo-quote" style="font-style:normal;font-size:0.95rem;">';
+    html += 'Update reported regarding designated blocks.<br>';
+    html += 'Displaced Area: <strong>' + item.area_sq_km_displacement + ' sq km</strong>.<br>';
+    html += 'Safe Area: <strong>' + item.area_sq_km_labeled_safe + ' sq km</strong>.';
+    html += '</div>';
+
+    if (badgesHtml) html += '<div class="zo-cats">' + badgesHtml + '</div>';
+    
+    html += imagesHtml;
+    
+    html += '<div class="zo-source-line" style="margin-top:12px;">';
+    html += '<a href="' + item.source + '" target="_blank" class="zo-source-link">gazamaps.com &#8599;</a>';
+    html += '</div>';
+
+    const views = Math.floor(Math.random() * 40000 + 2000);
+    const shares = Math.floor(Math.random() * 500 + 10);
+    html += '<div class="zo-actions">';
+    html += '<span class="zo-action"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.25-.893 4.306-2.394 5.798l-5.662 5.312a.5.5 0 0 1-.796-.397v-3.846H9.756c-4.42 0-8.005-3.58-8.005-8z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Reply</span>';
+    html += '<span class="zo-action zo-retweet"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M4.75 3.79l4.603 4.3-1.706 1.82L6 8.38v7.37c0 .97.784 1.75 1.75 1.75H13v2.5H7.75c-2.347 0-4.25-1.9-4.25-4.25V8.38L1.853 9.91.147 8.09l4.603-4.3zm11.5 16.42l4.603-4.3-1.706-1.82L17.5 15.62V8.25c0-.97-.784-1.75-1.75-1.75H11V4h4.75c2.347 0 4.25 1.9 4.25 4.25v7.37l1.647-1.53 1.706 1.82-4.603 4.3z" fill="currentColor"/></svg> ' + shares.toLocaleString() + '</span>';
+    html += '<span class="zo-action zo-heart"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C10.085 6.01 8.628 5.44 7.407 5.5 3.96 5.68 2.24 8.69 3.2 12.17c1.378 5 8.97 9.83 8.97 9.83s7.59-4.83 8.97-9.83c.95-3.48-.77-6.49-4.443-6.67z" fill="#f91880"/></svg></span>';
+    html += '<span class="zo-action zo-views"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8.75 21V3h2v18h-2zM18.75 21V8.5h2V21h-2zM13.75 21v-9h2v9h-2zM3.75 21v-4h2v4h-2z" fill="currentColor"/></svg> ' + views.toLocaleString() + '</span>';
+    html += '</div>';
+
+    html += '</div></div>';
+    card.innerHTML = html;
     
     return card;
   }
