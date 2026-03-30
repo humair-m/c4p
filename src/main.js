@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tabLeaflets = document.getElementById('tab-leaflets');
   const tabIncitement = document.getElementById('tab-incitement');
   const tabQuotes = document.getElementById('tab-quotes');
+  const tabIdfMovement = document.getElementById('tab-idf-movement');
+  const tabExplore = document.getElementById('tab-explore');
   const feedTitle = document.getElementById('feed-title');
 
   const mapsStatsContainer = document.getElementById('maps-stats-container');
@@ -26,19 +28,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   const exploreFeedContainer = document.getElementById('explore-feed-container');
   const exploreResults = document.getElementById('explore-results');
   const exploreSearchInput = document.getElementById('explore-search');
-  const tabExplore = document.getElementById('tab-explore');
+  const idfMovementFeedContainer = document.getElementById('idf-movement-feed-container');
+  const idfMovementStatsContainer = document.getElementById('idf-movement-stats-container');
 
   // Tab Switching Logic
-  const allTabs = [tabMaps, tabJournalists, tabLeaflets, tabIncitement, tabQuotes, tabExplore];
-  const allFeeds = [feedContainer, journalistsFeedContainer, leafletsFeedContainer, document.getElementById('incitement-feed-container'), quotesFeedContainer, exploreFeedContainer];
-  const allStats = [mapsStatsContainer, journalistsStatsContainer, leafletsStatsContainer, incitementStatsContainer, quotesStatsContainer, exploreStatsContainer];
+  const allTabs = [tabMaps, tabJournalists, tabLeaflets, tabIncitement, tabQuotes, tabIdfMovement, tabExplore];
+  const allFeeds = [feedContainer, journalistsFeedContainer, leafletsFeedContainer, document.getElementById('incitement-feed-container'), quotesFeedContainer, idfMovementFeedContainer, exploreFeedContainer];
+  const allStats = [mapsStatsContainer, journalistsStatsContainer, leafletsStatsContainer, incitementStatsContainer, quotesStatsContainer, idfMovementStatsContainer, exploreStatsContainer];
   const tabConfig = {
     maps: { index: 0, title: 'Maps Timeline' },
     journalists: { index: 1, title: 'Martyred Journalists' },
     leaflets: { index: 2, title: 'IDF Leaflets' },
     incitement: { index: 3, title: 'Incitement' },
     quotes: { index: 4, title: 'Zionist Quotes' },
-    explore: { index: 5, title: 'Explore' }
+    idfMovement: { index: 5, title: 'IDF Ground Operations' },
+    explore: { index: 6, title: 'Explore' }
   };
 
   function switchTab(tab) {
@@ -54,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   tabLeaflets.addEventListener('click', (e) => { e.preventDefault(); switchTab('leaflets'); });
   tabIncitement.addEventListener('click', (e) => { e.preventDefault(); switchTab('incitement'); });
   tabQuotes.addEventListener('click', (e) => { e.preventDefault(); switchTab('quotes'); });
+  tabIdfMovement.addEventListener('click', (e) => { e.preventDefault(); switchTab('idfMovement'); });
   tabExplore.addEventListener('click', (e) => { e.preventDefault(); switchTab('explore'); exploreSearchInput.focus(); });
 
   let incitementData = null;
@@ -80,14 +85,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   try {
-    const [mapsRes, journalistsRes, weaponsRes, leafletsRes, locationRes, incitementRes, zoRes] = await Promise.all([
+    const [mapsRes, journalistsRes, weaponsRes, leafletsRes, locationRes, incitementRes, zoRes, idfMovementRes] = await Promise.all([
       fetch('/gaza-maps.jsonl'),
       fetch('/martyrs-ungrouped.json'),
       fetch('/martyrs-grouped-by-weapons.json'),
       fetch('/idf-leaflets.json'),
       fetch('/martyrs-grouped-by-location.json'),
       fetch('/incitement.json'),
-      fetch('/zionism-quotes.json')
+      fetch('/zionism-quotes.json'),
+      fetch('/idf-movement.jsonl')
     ]);
     if (!mapsRes.ok || !journalistsRes.ok || !weaponsRes.ok || !leafletsRes.ok || !locationRes.ok) throw new Error('Failed to fetch data');
     
@@ -98,6 +104,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const locationData = await locationRes.json();
     incitementData = await incitementRes.json();
     if (zoRes.ok) zoData = await zoRes.json();
+    
+    let idfMovementData = [];
+    if (idfMovementRes.ok) {
+      const rawMovement = await idfMovementRes.json();
+      idfMovementData = (Array.isArray(rawMovement) ? rawMovement : []).flatMap(page => page.data || []);
+      // Sort newest first
+      idfMovementData.sort((a, b) => new Date(b.date_entered_sql || 0) - new Date(a.date_entered_sql || 0));
+    }
     
     // Sort maps data from newest to oldest based on date
     mapsData.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -134,6 +148,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderIncitementUI('feed');
       renderIncitementAnalytics(incitementData);
     }
+    
+    // Quotes (zoData handled during render due to its structure logic, see original code setup)
+    
+    // IDF Movement
+    idfMovementFeedContainer.innerHTML = '';
+    idfMovementData.forEach(item => {
+      idfMovementFeedContainer.appendChild(createIdfMovementCard(item));
+    });
+    if (idfMovementData.length > 0) {
+      renderMovementAnalytics(idfMovementData);
+    }
 
     // Explore: init stats and wire search
     document.getElementById('explore-total-maps').textContent = mapsData.length;
@@ -141,9 +166,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('explore-total-leaflets').textContent = leafletsData.length;
     document.getElementById('explore-total-incitement').textContent = incitementData ? (incitementData.all_incitements || []).length : 0;
     document.getElementById('explore-total-quotes').textContent = zoData ? zoData.total_quotes : 0;
+    document.getElementById('explore-total-movements').textContent = idfMovementData.length;
 
     // Show trending by default in Explore
-    showExploreTrending(mapsData, journalistsData, leafletsData, incitementData);
+    showExploreTrending(mapsData, journalistsData, leafletsData, incitementData, idfMovementData);
 
     let searchTimeout;
     exploreSearchInput.addEventListener('input', () => {
@@ -151,10 +177,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       searchTimeout = setTimeout(() => {
         const q = exploreSearchInput.value.trim().toLowerCase();
         if (q.length === 0) {
-          showExploreTrending(mapsData, journalistsData, leafletsData, incitementData);
+          showExploreTrending(mapsData, journalistsData, leafletsData, incitementData, idfMovementData);
           document.getElementById('explore-search-count').textContent = '0';
         } else {
-          performExploreSearch(q, mapsData, journalistsData, leafletsData, incitementData);
+          performExploreSearch(q, mapsData, journalistsData, leafletsData, incitementData, idfMovementData);
         }
       }, 250);
     });
@@ -685,7 +711,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return card;
   }
 
-  function showExploreTrending(mapsData, journalistsData, leafletsData, incitementData) {
+  function showExploreTrending(mapsData, journalistsData, leafletsData, incitementData, idfMovementData) {
     exploreResults.innerHTML = '';
 
     // Quick-filter chips
@@ -696,6 +722,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     chipHtml += '<span class="explore-chip" data-filter="journalists">Journalists</span>';
     chipHtml += '<span class="explore-chip" data-filter="leaflets">Leaflets</span>';
     chipHtml += '<span class="explore-chip" data-filter="maps">Maps</span>';
+    chipHtml += '<span class="explore-chip" data-filter="movements">Movements</span>';
     chipHtml += '</div>';
     exploreResults.innerHTML = chipHtml;
 
@@ -750,6 +777,15 @@ document.addEventListener('DOMContentLoaded', async () => {
           recentM.forEach(m => contentDiv.appendChild(createTweetCard(m)));
         }
       }
+
+      // IDF Movement
+      if (filter === 'all' || filter === 'movements') {
+        const recentMov = idfMovementData.slice(0, filter === 'movements' ? 40 : 3);
+        if (recentMov.length > 0) {
+          contentDiv.innerHTML += '<div class="explore-section-label">IDF Movements (' + idfMovementData.length + ' total)</div>';
+          recentMov.forEach(m => contentDiv.appendChild(createIdfMovementCard(m)));
+        }
+      }
     }
 
     renderTrending('all');
@@ -764,7 +800,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  function performExploreSearch(query, mapsData, journalistsData, leafletsData, incitementData) {
+  function performExploreSearch(query, mapsData, journalistsData, leafletsData, incitementData, idfMovementData) {
     exploreResults.innerHTML = '';
     let totalResults = 0;
 
@@ -812,6 +848,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       return haystack.includes(query);
     });
 
+    // Search IDF movements
+    const matchedMovements = (idfMovementData || []).filter(m => {
+      const unitName = m.unit && m.unit.name ? m.unit.name : '';
+      const divName = m.unit && m.unit.division && m.unit.division.name ? m.unit.division.name : '';
+      const areaName = m.area && m.area.name ? m.area.name : '';
+      const battalions = m.unit && m.unit.unit_includes ? m.unit.unit_includes.map(b => b.name).join(' ') : '';
+      const haystack = [
+        m.date_entered_display, m.date_exited_display, unitName, divName, areaName, battalions
+      ].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
+    });
+
     if (matchedZo.length > 0) {
       exploreResults.innerHTML += '<div class="explore-section-label">Zionist Quotes (' + matchedZo.length + ')</div>';
       matchedZo.slice(0, 20).forEach(q => exploreResults.appendChild(createExploreQuoteCard(q, 'zo')));
@@ -836,6 +884,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       exploreResults.innerHTML += '<div class="explore-section-label">Maps (' + matchedMaps.length + ')</div>';
       matchedMaps.slice(0, 20).forEach(m => exploreResults.appendChild(createTweetCard(m)));
       totalResults += matchedMaps.length;
+    }
+    if (matchedMovements.length > 0) {
+      exploreResults.innerHTML += '<div class="explore-section-label">IDF Movements (' + matchedMovements.length + ')</div>';
+      matchedMovements.slice(0, 20).forEach(m => exploreResults.appendChild(createIdfMovementCard(m)));
+      totalResults += matchedMovements.length;
     }
 
     if (totalResults === 0) {
@@ -1032,7 +1085,115 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
   }
+  function createIdfMovementCard(item) {
+    const card = document.createElement('div');
+    card.className = 'zo-quote-card';
 
+    const unitName = item.unit?.name || 'Unknown Unit';
+    const divName = item.unit?.division?.name || 'Unknown Division';
+    const areaName = item.area?.name || 'Unknown Area';
+    const imgSrc = item.area?.map_display || '';
+    const insigniaSrc = item.unit?.insignia || '/c4p-logo.png';
+    const dateRange = (item.date_entered_display || '?') + ' \u2014 ' + (item.date_exited_display || 'Present');
+
+    const flagsHtml = (item.unit?.unit_includes || []).map(b => '<span class="zo-cat-pill">' + b.name + '</span>').join('');
+
+    // Avatar
+    const avatarHtml = '<div class="zo-avatar-ring"><img src="' + insigniaSrc + '" alt="" class="zo-avatar" style="background:#fff;object-fit:contain;padding:2px;"></div>';
+
+    // Meta line
+    let metaLine = '@idf_movement · Ops · ' + dateRange;
+
+    let html = '<div class="zo-card-layout">';
+    html += avatarHtml;
+    html += '<div class="zo-card-body">';
+    html += '<div class="zo-name-row"><span class="zo-name" style="color:var(--text-primary);"><span style="color:#ef4444;">\u2694\ufe0f</span> ' + unitName + '</span><span class="zo-verified" title="Verified record">&#10003;</span></div>';
+    html += '<div class="zo-meta">' + metaLine + '</div>';
+    
+    html += '<div class="zo-quote" style="font-style:normal;font-size:1rem;color:var(--text-primary);margin-bottom:8px;">';
+    html += 'Deployed to <strong style="color:#ef4444;">' + areaName + '</strong> under the command of <strong>' + divName + '</strong>.';
+    html += '</div>';
+
+    if (flagsHtml) html += '<div class="zo-cats" style="margin-top:10px;">' + flagsHtml + '</div>';
+    
+    // Image
+    if (imgSrc) {
+      html += '<div class="image-grid grid-1" style="margin-top:12px;">';
+      html += '<img src="' + imgSrc + '" alt="' + areaName + ' map" onclick="openModal(\'' + imgSrc + '\')" loading="lazy" style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);" />';
+      html += '</div>';
+    }
+    
+    if (item.enter_source) {
+      html += '<div class="zo-source-line" style="margin-top:12px;">';
+      html += '<a href="' + item.enter_source + '" target="_blank" class="zo-source-link">Source Link &#8599;</a>';
+      html += '</div>';
+    }
+
+    const views = Math.floor(Math.random() * 40000 + 2000);
+    const shares = Math.floor(Math.random() * 500 + 10);
+    html += '<div class="zo-actions" style="margin-top:12px;">';
+    html += '<span class="zo-action"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.25-.893 4.306-2.394 5.798l-5.662 5.312a.5.5 0 0 1-.796-.397v-3.846H9.756c-4.42 0-8.005-3.58-8.005-8z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Reply</span>';
+    html += '<span class="zo-action zo-retweet"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M4.75 3.79l4.603 4.3-1.706 1.82L6 8.38v7.37c0 .97.784 1.75 1.75 1.75H13v2.5H7.75c-2.347 0-4.25-1.9-4.25-4.25V8.38L1.853 9.91.147 8.09l4.603-4.3zm11.5 16.42l4.603-4.3-1.706-1.82L17.5 15.62V8.25c0-.97-.784-1.75-1.75-1.75H11V4h4.75c2.347 0 4.25 1.9 4.25 4.25v7.37l1.647-1.53 1.706 1.82-4.603 4.3z" fill="currentColor"/></svg> ' + shares.toLocaleString() + '</span>';
+    html += '<span class="zo-action zo-heart"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C10.085 6.01 8.628 5.44 7.407 5.5 3.96 5.68 2.24 8.69 3.2 12.17c1.378 5 8.97 9.83 8.97 9.83s7.59-4.83 8.97-9.83c.95-3.48-.77-6.49-4.443-6.67z" fill="#f91880"/></svg></span>';
+    html += '<span class="zo-action zo-views"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8.75 21V3h2v18h-2zM18.75 21V8.5h2V21h-2zM13.75 21v-9h2v9h-2zM3.75 21v-4h2v4h-2z" fill="currentColor"/></svg> ' + views.toLocaleString() + '</span>';
+    html += '</div>';
+
+    html += '</div></div>';
+    card.innerHTML = html;
+    
+    return card;
+  }
+
+  function renderMovementAnalytics(data) {
+    if (!data || data.length === 0) return;
+    document.getElementById('movement-total-records').textContent = data.length;
+
+    const divCounts = {};
+    const areaCounts = {};
+    data.forEach(m => {
+      const d = m.unit?.division?.name || 'Unknown';
+      const a = m.area?.name || 'Unknown';
+      divCounts[d] = (divCounts[d] || 0) + 1;
+      areaCounts[a] = (areaCounts[a] || 0) + 1;
+    });
+
+    const topDiv = Object.entries(divCounts).sort((a,b) => b[1]-a[1])[0];
+    const topArea = Object.entries(areaCounts).sort((a,b) => b[1]-a[1])[0];
+
+    document.getElementById('movement-most-active-div').textContent = topDiv ? topDiv[0] : '--';
+    document.getElementById('movement-most-active-div').title = topDiv ? topDiv[0] : '';
+    document.getElementById('movement-most-targeted').textContent = topArea ? topArea[0] : '--';
+
+    const topAreasData = Object.entries(areaCounts).sort((a,b) => b[1]-a[1]).slice(0, 5);
+    const ctx = document.getElementById('movementChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: topAreasData.map(d => d[0]),
+          datasets: [{
+            data: topAreasData.map(d => d[1]),
+            backgroundColor: 'rgba(239, 68, 68, 0.8)',
+            borderColor: '#ef4444',
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Top Targeted Areas', color: '#e7e9ea' }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#71767b' } },
+            y: { grid: { display: false }, ticks: { color: '#e7e9ea', font: { size: 11 } } }
+          }
+        }
+      });
+    }
+  }
   // Initialize quotes tab
   if (zoData) {
     renderZoUI('feed');

@@ -99,6 +99,13 @@
              </svg>
              Quotes
           </a>
+          <a href="#" class="nav-link" id="tab-idf-movement" aria-label="IDF Movement Tracker">
+             <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+             </svg>
+             IDF Movement
+          </a>
           <a href="#" class="nav-link" id="tab-explore" aria-label="Explore and Search">
              <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -154,6 +161,11 @@
           <div id="quotes-content-area">
              <div class="loading-state">Loading quotes database...</div>
           </div>
+        </div>
+
+        <!-- IDF Movement Feed -->
+        <div id="idf-movement-feed-container" class="feed hidden">
+          <div class="loading-state">Loading IDF movement logs...</div>
         </div>
 
         <!-- Explore Feed -->
@@ -301,8 +313,36 @@
            <div class="chart-container" style="margin-top:16px;">
               <canvas id="quotesChart"></canvas>
            </div>
-           <div class="data-source-link" style="margin-top:20px;">
-             <a href="https://zionism.observer/database" target="_blank" rel="noopener noreferrer" class="tweet-source" aria-label="Data Source">Source: zionism.observer</a>
+           <div class="data-source-link">
+             <a href="https://zionism.observer" target="_blank" rel="noopener noreferrer" class="tweet-source" aria-label="Data Source">Source: zionism.observer</a>
+           </div>
+        </div>
+
+        <!-- IDF Movement Stats -->
+        <div class="analytics-card sticky-stats hidden" id="idf-movement-stats-container">
+           <h3>IDF Ground Operations</h3>
+           <p class="stats-subtitle">Military movement over time</p>
+           <div class="chart-container">
+              <canvas id="movementChart"></canvas>
+           </div>
+           
+           <div class="stats-summary">
+             <div class="stat-item">
+               <span class="stat-value" id="movement-total-records">--</span>
+               <span class="stat-label">Movement Logs</span>
+             </div>
+             <div class="stat-item">
+                <span class="stat-value" id="movement-most-active-div">--</span>
+                <span class="stat-label">Top Division</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="movement-most-targeted">--</span>
+               <span class="stat-label">Most Targeted</span>
+             </div>
+           </div>
+
+           <div class="data-source-link">
+             <a href="https://movements.genocide.live" target="_blank" rel="noopener noreferrer" class="tweet-source" aria-label="Data Source">Source: genocide.live</a>
            </div>
         </div>
 
@@ -330,6 +370,10 @@
              <div class="stat-item">
                <span class="stat-value" id="explore-total-quotes">--</span>
                <span class="stat-label">Zionist Quotes</span>
+             </div>
+             <div class="stat-item">
+               <span class="stat-value" id="explore-total-movements">--</span>
+               <span class="stat-label">Movements</span>
              </div>
              <div class="stat-item">
                 <span class="stat-value" id="explore-search-count">0</span>

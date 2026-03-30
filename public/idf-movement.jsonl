@@ -1,0 +1,4302 @@
+[
+  {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 132,
+        "date_entered_display": "19 Oct 2025",
+        "date_entered_sql": "2025-10-19",
+        "date_exited_display": "7 Dec 2025",
+        "date_exited_sql": "2025-10-19",
+        "enter_source": "https://www.facebook.com/763106664/posts/10163265725246665/",
+        "exit_source": "https://www.facebook.com/763106664/posts/10163265725246665/",
+        "unit": {
+          "id": 65,
+          "name": "2 Infantry Brigade - Carmeli (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 68,
+              "name": "221 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 69,
+              "name": "222 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 70,
+              "name": "223 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 71,
+              "name": "224 Reconnaissance Battalion - Carmeli (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 19,
+          "name": "Shujaiya",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cskPF1qSijZhaY4FJ80epcfZYtAwn3zwpsfskZ4q.jpg",
+          "map_name": "Shujaiya"
+        }
+      },
+      {
+        "id": 142,
+        "date_entered_display": "18 Sep 2025",
+        "date_entered_sql": "2025-09-18",
+        "date_exited_display": "9 Nov 2025",
+        "date_exited_sql": "2025-09-18",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 15,
+          "name": "Al-Shati",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/FubaKCAlaJGZ7MRi54A6IJwOKLTX121L19XcqJgj.jpg",
+          "map_name": "Al-Shati"
+        }
+      },
+      {
+        "id": 155,
+        "date_entered_display": "5 Oct 2024",
+        "date_entered_sql": "2024-10-05",
+        "date_exited_display": "3 Nov 2025",
+        "date_exited_sql": "2024-10-05",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 12,
+          "name": "261 Infantry Brigade - Ramon (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/vYBPKbeF6l7A2AEZyPty7XzIe04p2mFc46ypzdtT.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 15,
+              "name": "8167 Infantry Battalion - Geffen"
+            },
+            {
+              "id": 16,
+              "name": "6261 Reconnaissance Battalion (Reserves)"
+            },
+            {
+              "id": 17,
+              "name": "8208 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 18,
+              "name": "8717 Infantry Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 61,
+        "date_entered_display": "30 May 2025",
+        "date_entered_sql": "2025-05-30",
+        "date_exited_display": "12 Oct 2025",
+        "date_exited_sql": "2025-05-30",
+        "enter_source": "https://www.idf.il/297224/",
+        "exit_source": "https://www.idf.il/297224/",
+        "unit": {
+          "id": 115,
+          "name": "900 Infantry Brigade - Kfir",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": [
+            {
+              "id": 129,
+              "name": "90 Infantry Battalion - Nachshon"
+            },
+            {
+              "id": 130,
+              "name": "92 Infantry Battalion - Shimshon"
+            },
+            {
+              "id": 131,
+              "name": "94 Infantry Battalion - Duchifat"
+            },
+            {
+              "id": 132,
+              "name": "97 Infantry Battalion - Netzah Yehuda"
+            },
+            {
+              "id": 133,
+              "name": "93 Reconnaissance Battalion - Haruv"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 151,
+        "date_entered_display": "18 May 2025",
+        "date_entered_sql": "2025-05-18",
+        "date_exited_display": "12 Oct 2025",
+        "date_exited_sql": "2025-05-18",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%92%D7%95%D7%9C%D7%A0%D7%99_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%92%D7%95%D7%9C%D7%A0%D7%99_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 30,
+          "name": "1 Infantry Brigade - Golani",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/xkmw5wzm7QV63uuD8xw1kN2jNCV6QqJHvWWtd907.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 35,
+              "name": "12 Infantry Battalion - Barak"
+            },
+            {
+              "id": 36,
+              "name": "13 Infantry Battalion - Gideon"
+            },
+            {
+              "id": 37,
+              "name": "51 Infantry Battalion - Ha Bok'im"
+            },
+            {
+              "id": 38,
+              "name": "631 Reconnaissance Battalion - Sayeret Golani"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 30,
+        "date_entered_display": "14 Aug 2025",
+        "date_entered_sql": "2025-08-14",
+        "date_exited_display": "9 Oct 2025",
+        "date_exited_sql": "2025-08-14",
+        "enter_source": "https://www.idf.il/305241/",
+        "exit_source": "https://www.idf.il/305241/",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 51,
+        "date_entered_display": "15 Sep 2025",
+        "date_entered_sql": "2025-09-15",
+        "date_exited_display": "9 Oct 2025",
+        "date_exited_sql": "2025-09-15",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 22,
+          "name": "Al Atatrah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/yrMqB7b1lw7xpzudGz46ipBHIiEAsJzpMOJWNUVm.jpg",
+          "map_name": "Al Atatrah"
+        }
+      },
+      {
+        "id": 72,
+        "date_entered_display": "15 Sep 2025",
+        "date_entered_sql": "2025-09-15",
+        "date_exited_display": "9 Oct 2025",
+        "date_exited_sql": "2025-09-15",
+        "enter_source": "https://www.ynet.co.il/news/article/hylj1eislx",
+        "exit_source": "https://www.ynet.co.il/news/article/hylj1eislx",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 4,
+          "name": "Gaza City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/2xjyzW5ufEKW7zcBnSsKCxNG2F7tVwduMxpcbM0f.jpg",
+          "map_name": "Gaza City"
+        }
+      },
+      {
+        "id": 91,
+        "date_entered_display": "15 Sep 2025",
+        "date_entered_sql": "2025-09-15",
+        "date_exited_display": "9 Oct 2025",
+        "date_exited_sql": "2025-09-15",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 4,
+          "name": "Gaza City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/2xjyzW5ufEKW7zcBnSsKCxNG2F7tVwduMxpcbM0f.jpg",
+          "map_name": "Gaza City"
+        }
+      },
+      {
+        "id": 107,
+        "date_entered_display": "26 Aug 2025",
+        "date_entered_sql": "2025-08-26",
+        "date_exited_display": "9 Oct 2025",
+        "date_exited_sql": "2025-08-26",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 33,
+          "name": "Sheikh Radwan",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/Pjb3o4C0TZewQQTW4wWrTYMYLfYUsLjayDd9YnVr.jpg",
+          "map_name": "Sheikh Radwan"
+        }
+      },
+      {
+        "id": 90,
+        "date_entered_display": "3 Sep 2025",
+        "date_entered_sql": "2025-09-03",
+        "date_exited_display": "15 Sep 2025",
+        "date_exited_sql": "2025-09-03",
+        "enter_source": "https://www.ynet.co.il/news/article/bjis00rnqgl",
+        "exit_source": "https://www.ynet.co.il/news/article/bjis00rnqgl",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 50,
+        "date_entered_display": "29 May 2025",
+        "date_entered_sql": "2025-05-29",
+        "date_exited_display": "14 Sep 2025",
+        "date_exited_sql": "2025-05-29",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 71,
+        "date_entered_display": "20 May 2025",
+        "date_entered_sql": "2025-05-20",
+        "date_exited_display": "14 Sep 2025",
+        "date_exited_sql": "2025-05-20",
+        "enter_source": "https://www.idf.il/296191/",
+        "exit_source": "https://www.idf.il/296191/",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 89,
+        "date_entered_display": "14 Aug 2025",
+        "date_entered_sql": "2025-08-14",
+        "date_exited_display": "3 Sep 2025",
+        "date_exited_sql": "2025-08-14",
+        "enter_source": "https://www.idf.il/305241/",
+        "exit_source": "https://www.idf.il/305241/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 119,
+        "date_entered_display": "25 Aug 2024",
+        "date_entered_sql": "2024-08-25",
+        "date_exited_display": "30 Aug 2025",
+        "date_exited_sql": "2024-08-25",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 7,
+          "name": "Deir al-Balah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/FR045kTHwRq84DWkrfmfk1Fi7WMqckcy4r5NnbiR.jpg",
+          "map_name": "Deir al-Balah"
+        }
+      },
+      {
+        "id": 106,
+        "date_entered_display": "1 May 2025",
+        "date_entered_sql": "2025-05-01",
+        "date_exited_display": "25 Aug 2025",
+        "date_exited_sql": "2025-05-01",
+        "enter_source": "https://www.idf.il/296191/",
+        "exit_source": "https://www.idf.il/296191/",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 14,
+        "date_entered_display": "22 May 2025",
+        "date_entered_sql": "2025-05-22",
+        "date_exited_display": "13 Aug 2025",
+        "date_exited_sql": "2025-05-22",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_7_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_7_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 88,
+        "date_entered_display": "1 Jul 2025",
+        "date_entered_sql": "2025-07-01",
+        "date_exited_display": "31 Jul 2025",
+        "date_exited_sql": "2025-07-01",
+        "enter_source": "https://x.com/kann_news/status/1946292123545874448?s=20",
+        "exit_source": "https://x.com/kann_news/status/1946292123545874448?s=20",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 21,
+          "name": "Tuffah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/WT1TuoheYl8feC38k74EmmtpDz5zVsMnl4yT4XUF.jpg",
+          "map_name": "Tuffah"
+        }
+      },
+      {
+        "id": 121,
+        "date_entered_display": "24 Jun 2025",
+        "date_entered_sql": "2025-06-24",
+        "date_exited_display": "20 Jul 2025",
+        "date_exited_sql": "2025-06-24",
+        "enter_source": "https://www.idf.il/299372/",
+        "exit_source": "https://www.idf.il/299372/",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 59,
+        "date_entered_display": "30 Dec 2024",
+        "date_entered_sql": "2024-12-30",
+        "date_exited_display": "8 Jul 2025",
+        "date_exited_sql": "2024-12-30",
+        "enter_source": "https://www.ynet.co.il/news/article/h1gwfuwlke",
+        "exit_source": "https://www.ynet.co.il/news/article/h1gwfuwlke",
+        "unit": {
+          "id": 132,
+          "name": "97 Infantry Battalion - Netzah Yehuda",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": []
+        },
+        "area": {
+          "id": 1,
+          "name": "Beit Hanoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/YjP7WTZ3Z1c9P7UpwJybP7UzJytSfojBiK5BCUoI.jpg",
+          "map_name": "Beit Hanoun"
+        }
+      },
+      {
+        "id": 87,
+        "date_entered_display": "20 May 2025",
+        "date_entered_sql": "2025-05-20",
+        "date_exited_display": "1 Jul 2025",
+        "date_exited_sql": "2025-05-20",
+        "enter_source": "https://www.idf.il/296191/",
+        "exit_source": "https://www.idf.il/296191/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 2,
+          "name": "Beit Lahia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/BVwVjgktOQyeCZIeTT6Asyz1Q2x7MAMNqXBznKsR.jpg",
+          "map_name": "Beit Lahia"
+        }
+      },
+      {
+        "id": 120,
+        "date_entered_display": "22 May 2025",
+        "date_entered_sql": "2025-05-22",
+        "date_exited_display": "13 Jun 2025",
+        "date_exited_sql": "2025-05-22",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%9E%D7%A8%D7%9B%D7%91%D7%95%D7%AA_%D7%92%D7%93%D7%A2%D7%95%D7%9F",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%9E%D7%91%D7%A6%D7%A2_%D7%9E%D7%A8%D7%9B%D7%91%D7%95%D7%AA_%D7%92%D7%93%D7%A2%D7%95%D7%9F",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 116,
+        "date_entered_display": "11 May 2024",
+        "date_entered_sql": "2024-05-11",
+        "date_exited_display": "31 May 2025",
+        "date_exited_sql": "2024-05-11",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%92%27%D7%91%D7%90%D7%9C%D7%99%D7%94_%D7%94%D7%A9%D7%A0%D7%99_(2024)",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%92%27%D7%91%D7%90%D7%9C%D7%99%D7%94_%D7%94%D7%A9%D7%A0%D7%99_(2024)",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 49,
+        "date_entered_display": "15 May 2025",
+        "date_entered_sql": "2025-05-15",
+        "date_exited_display": "28 May 2025",
+        "date_exited_sql": "2025-05-15",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 13,
+          "name": "Khuza'a",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/9nzHS6dgBNEHFLyerArCbcQXW1Sd8mGR7AkGBduE.jpg",
+          "map_name": "Khuza'a"
+        }
+      },
+      {
+        "id": 136,
+        "date_entered_display": "11 May 2025",
+        "date_entered_sql": "2025-05-11",
+        "date_exited_display": "26 May 2025",
+        "date_exited_sql": "2025-05-11",
+        "enter_source": "https://archive.is/Wdvon",
+        "exit_source": "https://archive.is/Wdvon",
+        "unit": {
+          "id": 66,
+          "name": "4 Armored Brigade - Kiryati (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 72,
+              "name": "7016 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 73,
+              "name": "7421 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 74,
+              "name": "9218 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 75,
+              "name": "7071 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 19,
+        "date_entered_display": "21 Mar 2025",
+        "date_entered_sql": "2025-03-21",
+        "date_exited_display": "21 May 2025",
+        "date_exited_sql": "2025-03-21",
+        "enter_source": "https://www.instagram.com/reel/DJkCG72IqNm/",
+        "exit_source": "https://www.instagram.com/reel/DJkCG72IqNm/",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 150,
+        "date_entered_display": "22 Mar 2025",
+        "date_entered_sql": "2025-03-22",
+        "date_exited_display": "17 May 2025",
+        "date_exited_sql": "2025-03-22",
+        "enter_source": "https://www.idf.il/279175/",
+        "exit_source": "https://www.idf.il/279175/",
+        "unit": {
+          "id": 30,
+          "name": "1 Infantry Brigade - Golani",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/xkmw5wzm7QV63uuD8xw1kN2jNCV6QqJHvWWtd907.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 35,
+              "name": "12 Infantry Battalion - Barak"
+            },
+            {
+              "id": 36,
+              "name": "13 Infantry Battalion - Gideon"
+            },
+            {
+              "id": 37,
+              "name": "51 Infantry Battalion - Ha Bok'im"
+            },
+            {
+              "id": 38,
+              "name": "631 Reconnaissance Battalion - Sayeret Golani"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 46,
+        "date_entered_display": "22 Mar 2025",
+        "date_entered_sql": "2025-03-22",
+        "date_exited_display": "14 May 2025",
+        "date_exited_sql": "2025-03-22",
+        "enter_source": "https://www.idf.il/279175/",
+        "exit_source": "https://www.idf.il/279175/",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 105,
+        "date_entered_display": "4 Apr 2025",
+        "date_entered_sql": "2025-04-04",
+        "date_exited_display": "1 May 2025",
+        "date_exited_sql": "2025-04-04",
+        "enter_source": "https://www.maariv.co.il/news/military/article-1187950",
+        "exit_source": "https://www.maariv.co.il/news/military/article-1187950",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 4,
+          "name": "Gaza City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/2xjyzW5ufEKW7zcBnSsKCxNG2F7tVwduMxpcbM0f.jpg",
+          "map_name": "Gaza City"
+        }
+      },
+      {
+        "id": 70,
+        "date_entered_display": "9 Apr 2025",
+        "date_entered_sql": "2025-04-09",
+        "date_exited_display": "20 Apr 2025",
+        "date_exited_sql": "2025-04-09",
+        "enter_source": "https://www.idf.il/%D7%90%D7%AA%D7%A8%D7%99-%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA/%D7%99%D7%95%D7%9E%D7%9F-%D7%94%D7%9E%D7%9C%D7%97%D7%9E%D7%94/%D7%9B%D7%9C-%D7%94%D7%9B%D7%AA%D7%91%D7%95%D7%AA/%D7%94%D7%A4%D7%A6%D7%95%D7%AA/%D7%AA%D7%99%D7%A2%D7%95%D7%93-%D7%9E%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%AA-%D7%9C%D7%95%D7%97%D7%9E%D7%99-%D7%92%D7%91%D7%A2%D7%AA%D7%99-%D7%9E%D7%A8%D7%A4%D7%99%D7%97/",
+        "exit_source": "https://www.idf.il/%D7%90%D7%AA%D7%A8%D7%99-%D7%99%D7%97%D7%99%D7%93%D7%95%D7%AA/%D7%99%D7%95%D7%9E%D7%9F-%D7%94%D7%9E%D7%9C%D7%97%D7%9E%D7%94/%D7%9B%D7%9C-%D7%94%D7%9B%D7%AA%D7%91%D7%95%D7%AA/%D7%94%D7%A4%D7%A6%D7%95%D7%AA/%D7%AA%D7%99%D7%A2%D7%95%D7%93-%D7%9E%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%AA-%D7%9C%D7%95%D7%97%D7%9E%D7%99-%D7%92%D7%91%D7%A2%D7%AA%D7%99-%D7%9E%D7%A8%D7%A4%D7%99%D7%97/",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 26,
+          "name": "Shaboura",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/XNJk5ZyegfsP61I1OFsz8JdeVGvs3g5di7MCPiOv.jpg",
+          "map_name": "Shaboura"
+        }
+      },
+      {
+        "id": 82,
+        "date_entered_display": "11 Apr 2024",
+        "date_entered_sql": "2024-04-11",
+        "date_exited_display": "15 Apr 2025",
+        "date_exited_sql": "2024-04-11",
+        "enter_source": "https://www.ynet.co.il/news/article/by1zhwrxa",
+        "exit_source": "https://www.ynet.co.il/news/article/by1zhwrxa",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 6,
+          "name": "Nuseirat",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/5LUHqzh4ntgewu1EkzV7S1qfErjHyaL5NjgCwRIo.jpg",
+          "map_name": "Nuseirat"
+        }
+      },
+      {
+        "id": 1,
+        "date_entered_display": "6 Oct 2024",
+        "date_entered_sql": "2024-10-06",
+        "date_exited_display": "23 Jan 2025",
+        "date_exited_sql": "2024-10-06",
+        "enter_source": "https://www.ynet.co.il/news/article/hk0pic1yje",
+        "exit_source": "https://www.ynet.co.il/news/article/hk0pic1yje",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 47,
+        "date_entered_display": "15 Jan 2025",
+        "date_entered_sql": "2025-01-15",
+        "date_exited_display": "20 Jan 2025",
+        "date_exited_sql": "2025-01-15",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 86,
+        "date_entered_display": "28 Dec 2024",
+        "date_entered_sql": "2024-12-28",
+        "date_exited_display": "19 Jan 2025",
+        "date_exited_sql": "2024-12-28",
+        "enter_source": "https://www.idf.il/260614/",
+        "exit_source": "https://www.idf.il/260614/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 1,
+          "name": "Beit Hanoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/YjP7WTZ3Z1c9P7UpwJybP7UzJytSfojBiK5BCUoI.jpg",
+          "map_name": "Beit Hanoun"
+        }
+      },
+      {
+        "id": 135,
+        "date_entered_display": "28 Dec 2024",
+        "date_entered_sql": "2024-12-28",
+        "date_exited_display": "19 Jan 2025",
+        "date_exited_sql": "2024-12-28",
+        "enter_source": "https://www.idf.il/260614/",
+        "exit_source": "https://www.idf.il/260614/",
+        "unit": {
+          "id": 66,
+          "name": "4 Armored Brigade - Kiryati (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 72,
+              "name": "7016 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 73,
+              "name": "7421 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 74,
+              "name": "9218 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 75,
+              "name": "7071 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 161,
+        "date_entered_display": "2 Nov 2024",
+        "date_entered_sql": "2024-11-02",
+        "date_exited_display": "7 Jan 2025",
+        "date_exited_sql": "2024-11-02",
+        "enter_source": "https://www.idf.il/244611/",
+        "exit_source": "https://www.idf.il/244611/",
+        "unit": {
+          "id": 129,
+          "name": "90 Infantry Battalion - Nachshon",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": []
+        },
+        "area": {
+          "id": 2,
+          "name": "Beit Lahia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/BVwVjgktOQyeCZIeTT6Asyz1Q2x7MAMNqXBznKsR.jpg",
+          "map_name": "Beit Lahia"
+        }
+      },
+      {
+        "id": 60,
+        "date_entered_display": "2 Nov 2024",
+        "date_entered_sql": "2024-11-02",
+        "date_exited_display": "5 Jan 2025",
+        "date_exited_sql": "2024-11-02",
+        "enter_source": "https://www.idf.il/244611/",
+        "exit_source": "https://www.idf.il/244611/",
+        "unit": {
+          "id": 115,
+          "name": "900 Infantry Brigade - Kfir",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": [
+            {
+              "id": 129,
+              "name": "90 Infantry Battalion - Nachshon"
+            },
+            {
+              "id": 130,
+              "name": "92 Infantry Battalion - Shimshon"
+            },
+            {
+              "id": 131,
+              "name": "94 Infantry Battalion - Duchifat"
+            },
+            {
+              "id": 132,
+              "name": "97 Infantry Battalion - Netzah Yehuda"
+            },
+            {
+              "id": 133,
+              "name": "93 Reconnaissance Battalion - Haruv"
+            }
+          ]
+        },
+        "area": {
+          "id": 2,
+          "name": "Beit Lahia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/BVwVjgktOQyeCZIeTT6Asyz1Q2x7MAMNqXBznKsR.jpg",
+          "map_name": "Beit Lahia"
+        }
+      },
+      {
+        "id": 84,
+        "date_entered_display": "23 Jul 2024",
+        "date_entered_sql": "2024-07-23",
+        "date_exited_display": "28 Dec 2024",
+        "date_exited_sql": "2024-07-23",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 85,
+        "date_entered_display": "6 Oct 2024",
+        "date_entered_sql": "2024-10-06",
+        "date_exited_display": "28 Dec 2024",
+        "date_exited_sql": "2024-10-06",
+        "enter_source": "https://www.ynet.co.il/news/article/bkolpnk1yg",
+        "exit_source": "https://www.ynet.co.il/news/article/bkolpnk1yg",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 138,
+        "date_entered_display": "9 Dec 2024",
+        "date_entered_sql": "2024-12-09",
+        "date_exited_display": "20 Dec 2024",
+        "date_exited_sql": "2024-12-09",
+        "enter_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "exit_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 19,
+          "name": "Shujaiya",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cskPF1qSijZhaY4FJ80epcfZYtAwn3zwpsfskZ4q.jpg",
+          "map_name": "Shujaiya"
+        }
+      },
+      {
+        "id": 137,
+        "date_entered_display": "29 Oct 2024",
+        "date_entered_sql": "2024-10-29",
+        "date_exited_display": "8 Dec 2024",
+        "date_exited_sql": "2024-10-29",
+        "enter_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "exit_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 152,
+        "date_entered_display": "8 Nov 2023",
+        "date_entered_sql": "2023-11-08",
+        "date_exited_display": "19 Nov 2024",
+        "date_exited_sql": "2023-11-08",
+        "enter_source": "https://www.instagram.com/reel/CzYRgpPCktUXwKXLbC8W6tsqMW2jumVDICdN3Q0/",
+        "exit_source": "https://www.instagram.com/reel/CzYRgpPCktUXwKXLbC8W6tsqMW2jumVDICdN3Q0/",
+        "unit": {
+          "id": 12,
+          "name": "261 Infantry Brigade - Ramon (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/vYBPKbeF6l7A2AEZyPty7XzIe04p2mFc46ypzdtT.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 15,
+              "name": "8167 Infantry Battalion - Geffen"
+            },
+            {
+              "id": 16,
+              "name": "6261 Reconnaissance Battalion (Reserves)"
+            },
+            {
+              "id": 17,
+              "name": "8208 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 18,
+              "name": "8717 Infantry Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 22,
+          "name": "Al Atatrah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/yrMqB7b1lw7xpzudGz46ipBHIiEAsJzpMOJWNUVm.jpg",
+          "map_name": "Al Atatrah"
+        }
+      },
+      {
+        "id": 143,
+        "date_entered_display": "1 Oct 2024",
+        "date_entered_sql": "2024-10-01",
+        "date_exited_display": "17 Oct 2024",
+        "date_exited_sql": "2024-10-01",
+        "enter_source": "https://t.me/idf_telegram/12306",
+        "exit_source": "https://t.me/idf_telegram/12306",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 69,
+        "date_entered_display": "6 May 2024",
+        "date_entered_sql": "2024-05-06",
+        "date_exited_display": "4 Oct 2024",
+        "date_exited_sql": "2024-05-06",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A8%D7%A4%D7%99%D7%97_(2024)",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A8%D7%A4%D7%99%D7%97_(2024)",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 101,
+        "date_entered_display": "1 Jun 2024",
+        "date_entered_sql": "2024-06-01",
+        "date_exited_display": "4 Oct 2024",
+        "date_exited_sql": "2024-06-01",
+        "enter_source": "https://www.maariv.co.il/news/military/article-1106785",
+        "exit_source": "https://www.maariv.co.il/news/military/article-1106785",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 18,
+          "name": "Tal Al-Sultan",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/Y4aorldTVTFlg8eCQtC3zvNQXATaNZNXZL9YSAzw.jpg",
+          "map_name": "Tal Al-Sultan"
+        }
+      },
+      {
+        "id": 102,
+        "date_entered_display": "1 Jun 2024",
+        "date_entered_sql": "2024-06-01",
+        "date_exited_display": "4 Oct 2024",
+        "date_exited_sql": "2024-06-01",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 58,
+        "date_entered_display": "8 Mar 2024",
+        "date_entered_sql": "2024-03-08",
+        "date_exited_display": "19 Sep 2024",
+        "date_exited_sql": "2024-03-08",
+        "enter_source": "https://www.idf.il/184540/",
+        "exit_source": "https://www.idf.il/184540/",
+        "unit": {
+          "id": 132,
+          "name": "97 Infantry Battalion - Netzah Yehuda",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": []
+        },
+        "area": {
+          "id": 1,
+          "name": "Beit Hanoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/YjP7WTZ3Z1c9P7UpwJybP7UzJytSfojBiK5BCUoI.jpg",
+          "map_name": "Beit Hanoun"
+        }
+      },
+      {
+        "id": 48,
+        "date_entered_display": "28 Jul 2024",
+        "date_entered_sql": "2024-07-28",
+        "date_exited_display": "28 Aug 2024",
+        "date_exited_sql": "2024-07-28",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 28,
+        "date_entered_display": "8 Aug 2024",
+        "date_entered_sql": "2024-08-08",
+        "date_exited_display": "27 Aug 2024",
+        "date_exited_sql": "2024-08-08",
+        "enter_source": "https://www.ynet.co.il/news/article/skpa2pvoc",
+        "exit_source": "https://www.ynet.co.il/news/article/skpa2pvoc",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 7,
+          "name": "Deir al-Balah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/FR045kTHwRq84DWkrfmfk1Fi7WMqckcy4r5NnbiR.jpg",
+          "map_name": "Deir al-Balah"
+        }
+      },
+      {
+        "id": 118,
+        "date_entered_display": "10 Aug 2024",
+        "date_entered_sql": "2024-08-10",
+        "date_exited_display": "19 Aug 2024",
+        "date_exited_sql": "2024-08-10",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 160,
+        "date_entered_display": "16 Jul 2024",
+        "date_entered_sql": "2024-07-16",
+        "date_exited_display": "7 Aug 2024",
+        "date_exited_sql": "2024-07-16",
+        "enter_source": "https://www.instagram.com/p/C9fPZ7HNOKr/",
+        "exit_source": "https://www.instagram.com/p/C9fPZ7HNOKr/",
+        "unit": {
+          "id": 61,
+          "name": "121 Armored Battalion",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Z0VhzDaEHX24z1wyfUuW0mmMls4KAbldIteUC48Q.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": []
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 130,
+        "date_entered_display": "30 Jul 2024",
+        "date_entered_sql": "2024-07-30",
+        "date_exited_display": "1 Aug 2024",
+        "date_exited_sql": "2024-07-30",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 27,
+        "date_entered_display": "22 Jul 2024",
+        "date_entered_sql": "2024-07-22",
+        "date_exited_display": "30 Jul 2024",
+        "date_exited_sql": "2024-07-22",
+        "enter_source": "https://www.idf.il/218138/",
+        "exit_source": "https://www.idf.il/218138/",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 129,
+        "date_entered_display": "19 Jul 2024",
+        "date_entered_sql": "2024-07-19",
+        "date_exited_display": "30 Jul 2024",
+        "date_exited_sql": "2024-07-19",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 9,
+          "name": "Bureij",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/JZgzcwg0J6MgJ1iblfxzJv0OSkhIK9VQsdDXRl2M.jpg",
+          "map_name": "Bureij"
+        }
+      },
+      {
+        "id": 83,
+        "date_entered_display": "22 May 2024",
+        "date_entered_sql": "2024-05-22",
+        "date_exited_display": "22 Jul 2024",
+        "date_exited_sql": "2024-05-22",
+        "enter_source": "https://www.idf.il/205612/",
+        "exit_source": "https://www.idf.il/205612/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 128,
+        "date_entered_display": "14 Jul 2024",
+        "date_entered_sql": "2024-07-14",
+        "date_exited_display": "18 Jul 2024",
+        "date_exited_sql": "2024-07-14",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 127,
+        "date_entered_display": "8 Jul 2024",
+        "date_entered_sql": "2024-07-08",
+        "date_exited_display": "13 Jul 2024",
+        "date_exited_sql": "2024-07-08",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 20,
+          "name": "Tal al-Hawa",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/NsiafDPrA9za6GRClEEcguYrfgEagpLzKM6H1H7Q.jpg",
+          "map_name": "Tal al-Hawa"
+        }
+      },
+      {
+        "id": 26,
+        "date_entered_display": "27 Jun 2024",
+        "date_entered_sql": "2024-06-27",
+        "date_exited_display": "10 Jul 2024",
+        "date_exited_sql": "2024-06-27",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A9%D7%92%27%D7%90%D7%A2%D7%99%D7%99%D7%94_(2024)",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A9%D7%92%27%D7%90%D7%A2%D7%99%D7%99%D7%94_(2024)",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 19,
+          "name": "Shujaiya",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cskPF1qSijZhaY4FJ80epcfZYtAwn3zwpsfskZ4q.jpg",
+          "map_name": "Shujaiya"
+        }
+      },
+      {
+        "id": 117,
+        "date_entered_display": "27 Jun 2024",
+        "date_entered_sql": "2024-06-27",
+        "date_exited_display": "9 Jul 2024",
+        "date_exited_sql": "2024-06-27",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A9%D7%92%27%D7%90%D7%A2%D7%99%D7%99%D7%94_(2024)",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%A7%D7%A8%D7%91_%D7%A9%D7%92%27%D7%90%D7%A2%D7%99%D7%99%D7%94_(2024)",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 19,
+          "name": "Shujaiya",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cskPF1qSijZhaY4FJ80epcfZYtAwn3zwpsfskZ4q.jpg",
+          "map_name": "Shujaiya"
+        }
+      },
+      {
+        "id": 126,
+        "date_entered_display": "1 Jul 2024",
+        "date_entered_sql": "2024-07-01",
+        "date_exited_display": "7 Jul 2024",
+        "date_exited_sql": "2024-07-01",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 125,
+        "date_entered_display": "26 Jun 2024",
+        "date_entered_sql": "2024-06-26",
+        "date_exited_display": "30 Jun 2024",
+        "date_exited_sql": "2024-06-26",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 30,
+          "name": "Sabra",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/nO5rPEn5jNQ9nL12zXIQsnwsBvsSAV4CiSMw3dQ4.jpg",
+          "map_name": "Sabra"
+        }
+      },
+      {
+        "id": 124,
+        "date_entered_display": "22 Jun 2024",
+        "date_entered_sql": "2024-06-22",
+        "date_exited_display": "25 Jun 2024",
+        "date_exited_sql": "2024-06-22",
+        "enter_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/books/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 123,
+        "date_entered_display": "11 Jun 2024",
+        "date_entered_sql": "2024-06-11",
+        "date_exited_display": "21 Jun 2024",
+        "date_exited_sql": "2024-06-11",
+        "enter_source": "https://www.calameo.com/read/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/read/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 25,
+        "date_entered_display": "4 Jun 2024",
+        "date_entered_sql": "2024-06-04",
+        "date_exited_display": "17 Jun 2024",
+        "date_exited_sql": "2024-06-04",
+        "enter_source": "https://www.instagram.com/p/C71nmajslWL/",
+        "exit_source": "https://www.instagram.com/p/C71nmajslWL/",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 9,
+          "name": "Bureij",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/JZgzcwg0J6MgJ1iblfxzJv0OSkhIK9VQsdDXRl2M.jpg",
+          "map_name": "Bureij"
+        }
+      },
+      {
+        "id": 154,
+        "date_entered_display": "16 Apr 2026",
+        "date_entered_sql": "2026-04-16",
+        "date_exited_display": "14 Jun 2024",
+        "date_exited_sql": "2026-04-16",
+        "enter_source": "8717 book",
+        "exit_source": "8717 book",
+        "unit": {
+          "id": 12,
+          "name": "261 Infantry Brigade - Ramon (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/vYBPKbeF6l7A2AEZyPty7XzIe04p2mFc46ypzdtT.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 15,
+              "name": "8167 Infantry Battalion - Geffen"
+            },
+            {
+              "id": 16,
+              "name": "6261 Reconnaissance Battalion (Reserves)"
+            },
+            {
+              "id": 17,
+              "name": "8208 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 18,
+              "name": "8717 Infantry Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 57,
+        "date_entered_display": "2 Jun 2024",
+        "date_entered_sql": "2024-06-02",
+        "date_exited_display": "9 Jun 2024",
+        "date_exited_sql": "2024-06-02",
+        "enter_source": "https://he.wikipedia.org/wiki/%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%9B%D7%A4%D7%99%D7%A8_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/wiki/%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%9B%D7%A4%D7%99%D7%A8_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 115,
+          "name": "900 Infantry Brigade - Kfir",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": [
+            {
+              "id": 129,
+              "name": "90 Infantry Battalion - Nachshon"
+            },
+            {
+              "id": 130,
+              "name": "92 Infantry Battalion - Shimshon"
+            },
+            {
+              "id": 131,
+              "name": "94 Infantry Battalion - Duchifat"
+            },
+            {
+              "id": 132,
+              "name": "97 Infantry Battalion - Netzah Yehuda"
+            },
+            {
+              "id": 133,
+              "name": "93 Reconnaissance Battalion - Haruv"
+            }
+          ]
+        },
+        "area": {
+          "id": 6,
+          "name": "Nuseirat",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/5LUHqzh4ntgewu1EkzV7S1qfErjHyaL5NjgCwRIo.jpg",
+          "map_name": "Nuseirat"
+        }
+      },
+      {
+        "id": 122,
+        "date_entered_display": "6 Jun 2024",
+        "date_entered_sql": "2024-06-06",
+        "date_exited_display": "9 Jun 2024",
+        "date_exited_sql": "2024-06-06",
+        "enter_source": "https://www.calameo.com/read/002620592b2e62eb49a6f",
+        "exit_source": "https://www.calameo.com/read/002620592b2e62eb49a6f",
+        "unit": {
+          "id": 52,
+          "name": "3 Infantry Brigade - Alexandroni",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/DJCWjDk7ZcWiVptrrwB86mWEtJ7vhSGw9yZE14xk.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": [
+            {
+              "id": 55,
+              "name": "7012 Infantry Battalion"
+            },
+            {
+              "id": 56,
+              "name": "8101 Infantry Battalion"
+            },
+            {
+              "id": 57,
+              "name": "9203 Infantry Battalion"
+            },
+            {
+              "id": 58,
+              "name": "6609 Reconnaissance Battalion - Alexandroni"
+            },
+            {
+              "id": 59,
+              "name": "5280 Combat Engineer Battalion"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 141,
+        "date_entered_display": "27 May 2024",
+        "date_entered_sql": "2024-05-27",
+        "date_exited_display": "6 Jun 2024",
+        "date_exited_sql": "2024-05-27",
+        "enter_source": "https://www.instagram.com/p/C7dvxEFsqp7/",
+        "exit_source": "https://www.instagram.com/p/C7dvxEFsqp7/",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 131,
+        "date_entered_display": "24 Apr 2024",
+        "date_entered_sql": "2024-04-24",
+        "date_exited_display": "5 Jun 2024",
+        "date_exited_sql": "2024-04-24",
+        "enter_source": "https://www.timesofisrael.com/idf-deploying-two-reserve-brigades-to-gaza-as-israel-girds-for-rafah-offensive/",
+        "exit_source": "https://www.timesofisrael.com/idf-deploying-two-reserve-brigades-to-gaza-as-israel-girds-for-rafah-offensive/",
+        "unit": {
+          "id": 65,
+          "name": "2 Infantry Brigade - Carmeli (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 68,
+              "name": "221 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 69,
+              "name": "222 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 70,
+              "name": "223 Infantry Battalion (Reserves)"
+            },
+            {
+              "id": 71,
+              "name": "224 Reconnaissance Battalion - Carmeli (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 15,
+        "date_entered_display": "11 May 2024",
+        "date_entered_sql": "2024-05-11",
+        "date_exited_display": "3 Jun 2024",
+        "date_exited_sql": "2024-05-11",
+        "enter_source": "https://www.instagram.com/p/C66agFqss73/",
+        "exit_source": "https://www.instagram.com/p/C66agFqss73/",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 100,
+        "date_entered_display": "6 May 2024",
+        "date_entered_sql": "2024-05-06",
+        "date_exited_display": "29 May 2024",
+        "date_exited_sql": "2024-05-06",
+        "enter_source": "https://www.ynet.co.il/news/article/bkxpqvvma",
+        "exit_source": "https://www.ynet.co.il/news/article/bkxpqvvma",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 14,
+          "name": "Rafah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/65jVQMiYePc6a8e2tUrdysR9PRDNGdtU8uNPQgVd.jpg",
+          "map_name": "Rafah"
+        }
+      },
+      {
+        "id": 78,
+        "date_entered_display": "21 Jan 2024",
+        "date_entered_sql": "2024-01-21",
+        "date_exited_display": "25 Apr 2024",
+        "date_exited_sql": "2024-01-21",
+        "enter_source": "https://www.makorrishon.co.il/opinion/734765/",
+        "exit_source": "https://www.makorrishon.co.il/opinion/734765/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 5,
+          "name": "Netzarim",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/CckdeArlAwhtrj7F94kI4OqhlZTINxlaDqnEYwwH.jpg",
+          "map_name": "Netzarim"
+        }
+      },
+      {
+        "id": 99,
+        "date_entered_display": "11 Apr 2024",
+        "date_entered_sql": "2024-04-11",
+        "date_exited_display": "14 Apr 2024",
+        "date_exited_sql": "2024-04-11",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 6,
+          "name": "Nuseirat",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/5LUHqzh4ntgewu1EkzV7S1qfErjHyaL5NjgCwRIo.jpg",
+          "map_name": "Nuseirat"
+        }
+      },
+      {
+        "id": 18,
+        "date_entered_display": "4 Mar 2024",
+        "date_entered_sql": "2024-03-04",
+        "date_exited_display": "7 Apr 2024",
+        "date_exited_sql": "2024-03-04",
+        "enter_source": "https://www.whatsapp.com/channel/0029Va8YFk705MUjeT247A2A/1829",
+        "exit_source": "https://www.whatsapp.com/channel/0029Va8YFk705MUjeT247A2A/1829",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 10,
+          "name": "Hamad City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/iJltPEDCWdxxofw0zP3BOE0P71RbV3ssaMl2ybUa.jpg",
+          "map_name": "Hamad City"
+        }
+      },
+      {
+        "id": 104,
+        "date_entered_display": "18 Mar 2024",
+        "date_entered_sql": "2024-03-18",
+        "date_exited_display": "1 Apr 2024",
+        "date_exited_sql": "2024-03-18",
+        "enter_source": "https://www.mako.co.il/news-military/2024_q1/Article-a64edb096b25e81027.htm",
+        "exit_source": "https://www.mako.co.il/news-military/2024_q1/Article-a64edb096b25e81027.htm",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 32,
+          "name": "Al-Shifa",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cYpluwdjuZF5NeqEndJF8U5DmRXdVH3SYkvHCwOW.jpg",
+          "map_name": "Al-Shifa"
+        }
+      },
+      {
+        "id": 81,
+        "date_entered_display": "18 Mar 2024",
+        "date_entered_sql": "2024-03-18",
+        "date_exited_display": "25 Mar 2024",
+        "date_exited_sql": "2024-03-18",
+        "enter_source": "https://www.idf.il/187782/",
+        "exit_source": "https://www.idf.il/187782/",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 4,
+          "name": "Gaza City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/2xjyzW5ufEKW7zcBnSsKCxNG2F7tVwduMxpcbM0f.jpg",
+          "map_name": "Gaza City"
+        }
+      },
+      {
+        "id": 159,
+        "date_entered_display": "20 Feb 2024",
+        "date_entered_sql": "2024-02-20",
+        "date_exited_display": "17 Mar 2024",
+        "date_exited_sql": "2024-02-20",
+        "enter_source": "https://www.instagram.com/p/C3k2W9Lt_Ta",
+        "exit_source": "https://www.instagram.com/p/C3k2W9Lt_Ta",
+        "unit": {
+          "id": 61,
+          "name": "121 Armored Battalion",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Z0VhzDaEHX24z1wyfUuW0mmMls4KAbldIteUC48Q.png",
+          "division": {
+            "name": "91 Division - Galilee",
+            "id": 51
+          },
+          "unit_includes": []
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 140,
+        "date_entered_display": "29 Feb 2024",
+        "date_entered_sql": "2024-02-29",
+        "date_exited_display": "13 Mar 2024",
+        "date_exited_sql": "2024-02-29",
+        "enter_source": "https://www.instagram.com/p/C37dC_8sMgg",
+        "exit_source": "https://www.instagram.com/p/C37dC_8sMgg",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 98,
+        "date_entered_display": "24 Feb 2024",
+        "date_entered_sql": "2024-02-24",
+        "date_exited_display": "10 Mar 2024",
+        "date_exited_sql": "2024-02-24",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 23,
+        "date_entered_display": "22 Jan 2024",
+        "date_entered_sql": "2024-01-22",
+        "date_exited_display": "3 Mar 2024",
+        "date_exited_sql": "2024-01-22",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_7_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_7_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 23,
+          "name": "West Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/9gN0PsMhZ3Sbj4uf49uxykcPbFgisWWJEtYzw11r.jpg",
+          "map_name": "West Khan Younis"
+        }
+      },
+      {
+        "id": 56,
+        "date_entered_display": "21 Dec 2023",
+        "date_entered_sql": "2023-12-21",
+        "date_exited_display": "1 Mar 2024",
+        "date_exited_sql": "2023-12-21",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 115,
+          "name": "900 Infantry Brigade - Kfir",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JA4YqMBLr2MZly2vJ7iLsYMVDTd5KAj0WTk9ZBR2.png",
+          "division": {
+            "name": "99 Division - Ha'Bazak",
+            "id": 111
+          },
+          "unit_includes": [
+            {
+              "id": 129,
+              "name": "90 Infantry Battalion - Nachshon"
+            },
+            {
+              "id": 130,
+              "name": "92 Infantry Battalion - Shimshon"
+            },
+            {
+              "id": 131,
+              "name": "94 Infantry Battalion - Duchifat"
+            },
+            {
+              "id": 132,
+              "name": "97 Infantry Battalion - Netzah Yehuda"
+            },
+            {
+              "id": 133,
+              "name": "93 Reconnaissance Battalion - Haruv"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 115,
+        "date_entered_display": "25 Jan 2024",
+        "date_entered_sql": "2024-01-25",
+        "date_exited_display": "29 Feb 2024",
+        "date_exited_sql": "2024-01-25",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A6%D7%A0%D7%97%D7%A0%D7%99%D7%9D_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 23,
+          "name": "West Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/9gN0PsMhZ3Sbj4uf49uxykcPbFgisWWJEtYzw11r.jpg",
+          "map_name": "West Khan Younis"
+        }
+      },
+      {
+        "id": 63,
+        "date_entered_display": "24 Feb 2024",
+        "date_entered_sql": "2024-02-24",
+        "date_exited_display": "28 Feb 2024",
+        "date_exited_sql": "2024-02-24",
+        "enter_source": "https://www.ynet.co.il/news/article/sk2cdnvn6",
+        "exit_source": "https://www.ynet.co.il/news/article/sk2cdnvn6",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 80,
+        "date_entered_display": "20 Feb 2024",
+        "date_entered_sql": "2024-02-20",
+        "date_exited_display": "26 Feb 2024",
+        "date_exited_sql": "2024-02-20",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A0%D7%97%22%D7%9C_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%94%D7%A0%D7%97%22%D7%9C_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 17,
+          "name": "Zaytoun",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/h9iyd75gs5npbdj9V5DQo59kHXfqsZXfaHPjiRzu.jpg",
+          "map_name": "Zaytoun"
+        }
+      },
+      {
+        "id": 68,
+        "date_entered_display": "9 Dec 2023",
+        "date_entered_sql": "2023-12-09",
+        "date_exited_display": "25 Feb 2024",
+        "date_exited_sql": "2023-12-09",
+        "enter_source": "https://www.idf.il/160258/",
+        "exit_source": "https://www.idf.il/160258/",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 97,
+        "date_entered_display": "6 Feb 2024",
+        "date_entered_sql": "2024-02-06",
+        "date_exited_display": "16 Feb 2024",
+        "date_exited_sql": "2024-02-06",
+        "enter_source": "https://www.mako.co.il/pzm-soldiers/Article-08e6b88a2997d81026.htm",
+        "exit_source": "https://www.mako.co.il/pzm-soldiers/Article-08e6b88a2997d81026.htm",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 15,
+          "name": "Al-Shati",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/FubaKCAlaJGZ7MRi54A6IJwOKLTX121L19XcqJgj.jpg",
+          "map_name": "Al-Shati"
+        }
+      },
+      {
+        "id": 96,
+        "date_entered_display": "2 Jan 2024",
+        "date_entered_sql": "2024-01-02",
+        "date_exited_display": "2 Feb 2024",
+        "date_exited_sql": "2024-01-02",
+        "enter_source": "https://www.idf.il/168736/",
+        "exit_source": "https://www.idf.il/168736/",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 4,
+          "name": "Gaza City",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/2xjyzW5ufEKW7zcBnSsKCxNG2F7tVwduMxpcbM0f.jpg",
+          "map_name": "Gaza City"
+        }
+      },
+      {
+        "id": 44,
+        "date_entered_display": "5 Dec 2023",
+        "date_entered_sql": "2023-12-05",
+        "date_exited_display": "28 Jan 2024",
+        "date_exited_sql": "2023-12-05",
+        "enter_source": "https://www.idf.il/159159/",
+        "exit_source": "https://www.idf.il/159159/",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 19,
+          "name": "Shujaiya",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/cskPF1qSijZhaY4FJ80epcfZYtAwn3zwpsfskZ4q.jpg",
+          "map_name": "Shujaiya"
+        }
+      },
+      {
+        "id": 134,
+        "date_entered_display": "6 Jan 2024",
+        "date_entered_sql": "2024-01-06",
+        "date_exited_display": "28 Jan 2024",
+        "date_exited_sql": "2024-01-06",
+        "enter_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "exit_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "unit": {
+          "id": 66,
+          "name": "4 Armored Brigade - Kiryati (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 72,
+              "name": "7016 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 73,
+              "name": "7421 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 74,
+              "name": "9218 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 75,
+              "name": "7071 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 12,
+          "name": "Abasan",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/S9Jyz0lyY8tj2UUjAV02rRCYoy56KdlaWBVvVnrx.jpg",
+          "map_name": "Abasan"
+        }
+      },
+      {
+        "id": 158,
+        "date_entered_display": "4 Dec 2023",
+        "date_entered_sql": "2023-12-04",
+        "date_exited_display": "28 Jan 2024",
+        "date_exited_sql": "2023-12-04",
+        "enter_source": "https://www.instagram.com/p/C2plmV1t4Xf/",
+        "exit_source": "https://www.instagram.com/p/C2plmV1t4Xf/",
+        "unit": {
+          "id": 94,
+          "name": "551 Paratroopers Brigade - Hetzei HaEsch (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/YAM7OZ5xyvSkmHPD2q1gwFw52OtIBY9SABzc9QjQ.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 99,
+              "name": "697 Paratroopers Battalion (Reserves)"
+            },
+            {
+              "id": 100,
+              "name": "699 Paratroopers Battalion (Reserves)"
+            },
+            {
+              "id": 101,
+              "name": "6551 Reconnaissance Battalion (Reserves)"
+            },
+            {
+              "id": 102,
+              "name": "8219 Combat Engineer Battalion (Reserves)"
+            },
+            {
+              "id": 103,
+              "name": "7008 Paratroopers Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 114,
+        "date_entered_display": "29 Dec 2023",
+        "date_entered_sql": "2023-12-29",
+        "date_exited_display": "24 Jan 2024",
+        "date_exited_sql": "2023-12-29",
+        "enter_source": "https://www.ynet.co.il/blogs/gazawar86mor/article/hjwdt3rpt",
+        "exit_source": "https://www.ynet.co.il/blogs/gazawar86mor/article/hjwdt3rpt",
+        "unit": {
+          "id": 92,
+          "name": "35 Paratroopers Brigade",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/Td6Y4GoAYS8bf8AQmRXRBlR1QBiLBgsS65Y2114M.png",
+          "division": {
+            "name": "98 Division - HaEsh",
+            "id": 91
+          },
+          "unit_includes": [
+            {
+              "id": 96,
+              "name": "101 Paratroopers Battalion"
+            },
+            {
+              "id": 97,
+              "name": "202 Paratroopers Battalion - Tzapa"
+            },
+            {
+              "id": 98,
+              "name": "890 Paratroopers Battalion - Ef'a"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 22,
+        "date_entered_display": "2 Dec 2023",
+        "date_entered_sql": "2023-12-02",
+        "date_exited_display": "21 Jan 2024",
+        "date_exited_sql": "2023-12-02",
+        "enter_source": "https://www.makorrishon.co.il/magazine/704709",
+        "exit_source": "https://www.makorrishon.co.il/magazine/704709",
+        "unit": {
+          "id": 32,
+          "name": "7 Armored Brigade - Saar me-Golan",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/JG8afTaaKuloBrss1wGeB3D6uYdKku8vuppkRrRc.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 43,
+              "name": "75 Armored Battalion - Romach/Lance"
+            },
+            {
+              "id": 44,
+              "name": "77 Armored Battalion - Oz/Courage"
+            },
+            {
+              "id": 45,
+              "name": "82 Armored Battalion - Gaash/Rage"
+            },
+            {
+              "id": 46,
+              "name": "603 Combat Engineer Battalion - Lahav/Blade"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 103,
+        "date_entered_display": "6 Oct 2024",
+        "date_entered_sql": "2024-10-06",
+        "date_exited_display": "19 Jan 2024",
+        "date_exited_sql": "2024-10-06",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%94_401_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 136,
+          "name": "401 Armored Brigade - K'vot ha-Barzel",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/jdv680YKVXfv8de0PKTpkD4pCAgTrOPj0BGA1fut.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 172,
+              "name": "9 Armored Battalion - Eshet"
+            },
+            {
+              "id": 173,
+              "name": "46 Armored Battalion - Shelah"
+            },
+            {
+              "id": 174,
+              "name": "52 Armored Battalion - Ha-Bok'im'"
+            },
+            {
+              "id": 175,
+              "name": "601 Armored Battalion - Asaf"
+            }
+          ]
+        },
+        "area": {
+          "id": 3,
+          "name": "Jabalia",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/D2OTjhHU8XvBIrAdZI51rcsmc412JK4R7nfDNnp2.jpg",
+          "map_name": "Jabalia"
+        }
+      },
+      {
+        "id": 45,
+        "date_entered_display": "29 Dec 2023",
+        "date_entered_sql": "2023-12-29",
+        "date_exited_display": "15 Jan 2024",
+        "date_exited_sql": "2023-12-29",
+        "enter_source": "",
+        "exit_source": "",
+        "unit": {
+          "id": 33,
+          "name": "188 Armored Brigade - Barak",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/CS8FdClVOKZyjwhnj88R1oo0tr2I5lOq5Y8faM4z.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 47,
+              "name": "53 Armored Battalion - Sufa/Tempest"
+            },
+            {
+              "id": 48,
+              "name": "71 Armored Battalion - Reshef/Flash"
+            },
+            {
+              "id": 49,
+              "name": "74 Armored Battalion - Saar/Storm"
+            },
+            {
+              "id": 50,
+              "name": "605 Combat Engineer Battalion - Ha-Mahatz"
+            }
+          ]
+        },
+        "area": {
+          "id": 9,
+          "name": "Bureij",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/JZgzcwg0J6MgJ1iblfxzJv0OSkhIK9VQsdDXRl2M.jpg",
+          "map_name": "Bureij"
+        }
+      },
+      {
+        "id": 149,
+        "date_entered_display": "26 Dec 2023",
+        "date_entered_sql": "2023-12-26",
+        "date_exited_display": "15 Jan 2024",
+        "date_exited_sql": "2023-12-26",
+        "enter_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%92%D7%95%D7%9C%D7%A0%D7%99_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "exit_source": "https://he.wikipedia.org/w/index.php?title=%D7%97%D7%98%D7%99%D7%91%D7%AA_%D7%92%D7%95%D7%9C%D7%A0%D7%99_%D7%91%D7%9E%D7%9C%D7%97%D7%9E%D7%AA_%D7%97%D7%A8%D7%91%D7%95%D7%AA_%D7%91%D7%A8%D7%96%D7%9C",
+        "unit": {
+          "id": 30,
+          "name": "1 Infantry Brigade - Golani",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/xkmw5wzm7QV63uuD8xw1kN2jNCV6QqJHvWWtd907.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 35,
+              "name": "12 Infantry Battalion - Barak"
+            },
+            {
+              "id": 36,
+              "name": "13 Infantry Battalion - Gideon"
+            },
+            {
+              "id": 37,
+              "name": "51 Infantry Battalion - Ha Bok'im"
+            },
+            {
+              "id": 38,
+              "name": "631 Reconnaissance Battalion - Sayeret Golani"
+            }
+          ]
+        },
+        "area": {
+          "id": 9,
+          "name": "Bureij",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/JZgzcwg0J6MgJ1iblfxzJv0OSkhIK9VQsdDXRl2M.jpg",
+          "map_name": "Bureij"
+        }
+      },
+      {
+        "id": 148,
+        "date_entered_display": "8 Dec 2023",
+        "date_entered_sql": "2023-12-08",
+        "date_exited_display": "13 Jan 2024",
+        "date_exited_sql": "2023-12-08",
+        "enter_source": "book עברו הכשרה בגדוד 51 של חטיבת גולני",
+        "exit_source": "book עברו הכשרה בגדוד 51 של חטיבת גולני",
+        "unit": {
+          "id": 30,
+          "name": "1 Infantry Brigade - Golani",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/xkmw5wzm7QV63uuD8xw1kN2jNCV6QqJHvWWtd907.png",
+          "division": {
+            "name": "36 Division - Ga'ash/Fire",
+            "id": 29
+          },
+          "unit_includes": [
+            {
+              "id": 35,
+              "name": "12 Infantry Battalion - Barak"
+            },
+            {
+              "id": 36,
+              "name": "13 Infantry Battalion - Gideon"
+            },
+            {
+              "id": 37,
+              "name": "51 Infantry Battalion - Ha Bok'im"
+            },
+            {
+              "id": 38,
+              "name": "631 Reconnaissance Battalion - Sayeret Golani"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 139,
+        "date_entered_display": "24 Dec 2024",
+        "date_entered_sql": "2024-12-24",
+        "date_exited_display": "11 Jan 2024",
+        "date_exited_sql": "2024-12-24",
+        "enter_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "exit_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "unit": {
+          "id": 231,
+          "name": "828 Infantry Brigade - Bislmach",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/od5PCHPgFkVImLeagdj7jPyFV1J6babSbDZFnS7P.png",
+          "division": {
+            "name": "143 Division - Firefox Gaza",
+            "id": 11
+          },
+          "unit_includes": [
+            {
+              "id": 232,
+              "name": "906 Infantry Battalion - Shuali Negev"
+            },
+            {
+              "id": 234,
+              "name": "17 Infantry Battalion - Aryot Hagolan"
+            },
+            {
+              "id": 235,
+              "name": "450 Infantry Battalion - Bislach"
+            },
+            {
+              "id": 236,
+              "name": "6828 Reconnaissance Battalion - Recon"
+            }
+          ]
+        },
+        "area": {
+          "id": 9,
+          "name": "Bureij",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/JZgzcwg0J6MgJ1iblfxzJv0OSkhIK9VQsdDXRl2M.jpg",
+          "map_name": "Bureij"
+        }
+      },
+      {
+        "id": 77,
+        "date_entered_display": "30 Dec 2023",
+        "date_entered_sql": "2023-12-30",
+        "date_exited_display": "6 Jan 2024",
+        "date_exited_sql": "2023-12-30",
+        "enter_source": "https://www.israelhayom.co.il/news/defense/article/15024022",
+        "exit_source": "https://www.israelhayom.co.il/news/defense/article/15024022",
+        "unit": {
+          "id": 138,
+          "name": "933 Infantry Brigade - Nahal",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/S9c4VgrIW7CI3MxPa5yGg1z7A3AHfpfA6DS8JTBB.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 204,
+              "name": "50 Infantry Battalion - Bazelet"
+            },
+            {
+              "id": 205,
+              "name": "931 Infantry Battalion - Shaham"
+            },
+            {
+              "id": 206,
+              "name": "932 Infantry Battalion - Granit"
+            },
+            {
+              "id": 207,
+              "name": "934 Reconnaissance Battalion - Sayeret Nahal"
+            },
+            {
+              "id": 208,
+              "name": "7107 Infantry Battalion - Raz"
+            }
+          ]
+        },
+        "area": {
+          "id": 21,
+          "name": "Tuffah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/WT1TuoheYl8feC38k74EmmtpDz5zVsMnl4yT4XUF.jpg",
+          "map_name": "Tuffah"
+        }
+      },
+      {
+        "id": 133,
+        "date_entered_display": "2 Dec 2023",
+        "date_entered_sql": "2023-12-02",
+        "date_exited_display": "6 Jan 2024",
+        "date_exited_sql": "2023-12-02",
+        "enter_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "exit_source": "https://www.calameo.com/read/0026205927e6350868733",
+        "unit": {
+          "id": 66,
+          "name": "4 Armored Brigade - Kiryati (Reserves)",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/LXyPryhjo0IBSNg31mKFqqDpr55xjlhRe7eXCS9i.png",
+          "division": {
+            "name": "146 Division - HaMapatz/Bang (Reserves)",
+            "id": 64
+          },
+          "unit_includes": [
+            {
+              "id": 72,
+              "name": "7016 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 73,
+              "name": "7421 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 74,
+              "name": "9218 Armored Battalion (Reserves)"
+            },
+            {
+              "id": 75,
+              "name": "7071 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 11,
+          "name": "Khan Younis",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/EY2CkppmrRvahPDDxugYVRGxwTkVGcxA1GijwjRd.jpg",
+          "map_name": "Khan Younis"
+        }
+      },
+      {
+        "id": 67,
+        "date_entered_display": "26 Dec 2023",
+        "date_entered_sql": "2023-12-26",
+        "date_exited_display": "1 Jan 2024",
+        "date_exited_sql": "2023-12-26",
+        "enter_source": "https://www.ynet.co.il/news/article/bkeb4i00wa",
+        "exit_source": "https://www.ynet.co.il/news/article/bkeb4i00wa",
+        "unit": {
+          "id": 135,
+          "name": "84 Infantry Brigade - Givati",
+          "insignia": "https://movements.genocide.live/storage/idf/unit/insignia/HaFgIR8DDhWetlNAvYrheXH56OtUKa94UacOdCjs.png",
+          "division": {
+            "name": "162 Division - Ha-Plada",
+            "id": 134
+          },
+          "unit_includes": [
+            {
+              "id": 140,
+              "name": "424 Infantry Battalion - Shaked"
+            },
+            {
+              "id": 141,
+              "name": "432 Infantry Battalion - Tzabar"
+            },
+            {
+              "id": 142,
+              "name": "435 Infantry Battalion - Rotem"
+            },
+            {
+              "id": 143,
+              "name": "846 Reconnaissance Battalion - Sayeret Givati"
+            },
+            {
+              "id": 144,
+              "name": "607 Combat Engineer Battalion"
+            },
+            {
+              "id": 145,
+              "name": "8170 Combat Engineer Battalion (Reserves)"
+            }
+          ]
+        },
+        "area": {
+          "id": 21,
+          "name": "Tuffah",
+          "map_display": "https://movements.genocide.live/storage/idf/areas/map/WT1TuoheYl8feC38k74EmmtpDz5zVsMnl4yT4XUF.jpg",
+          "map_name": "Tuffah"
+        }
+      }
+    ],
+    "first_page_url": "/?page=1",
+    "from": 1,
+    "last_page": 2,
+    "last_page_url": "/?page=2",
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "page": null,
+        "active": false
+      },
+      {
+        "url": "/?page=1",
+        "label": "1",
+        "page": 1,
+        "active": true
+      },
+      {
+        "url": "/?page=2",
+        "label": "2",
+        "page": 2,
+        "active": false
+      },
+      {
+        "url": "/?page=2",
+        "label": "Next &raquo;",
+        "page": 2,
+        "active": false
+      }
+    ],
+    "next_page_url": "/?page=2",
+    "path": "/",
+    "per_page": 100,
+    "prev_page_url": null,
+    "to": 100,
+    "total": 161
+  }
+]
